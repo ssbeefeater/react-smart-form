@@ -2743,8 +2743,8 @@ var Form = function (_Component) {
             }
         }
     }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
+        key: 'componentWillMount',
+        value: function componentWillMount() {
             var formRef = this.props.formRef;
 
             if (formRef) {
