@@ -1,6 +1,6 @@
 {
   "name": "react-smart-form",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A form component that containes all the functionality you will need.",
   "main": "dist/react-smart-form.js",
   "scripts": {
