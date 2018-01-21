@@ -194,6 +194,31 @@ render(
 
 ```
 
+Reset form
+```javascript
+import React,{ Component } from 'react';
+import { render } from 'react-dom';
+import {Form, Input, Submit} from 'react-smart-form';
+
+class MyComponent extends Component {
+    render() {
+        return (
+            <div>
+                <Form formRef={(form)=>{ this.form=form; }}>
+                    <Input name="username"/>
+                </Form>
+                <button onClick={()=>{this.form.reset('username')}}></button>
+            </div>
+        );
+    }
+}
+
+render(
+    <MyComponent/>,
+    document.getElementById('app'),
+);
+
+```
 
 #### Documentation
 
