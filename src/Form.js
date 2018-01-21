@@ -154,7 +154,7 @@ class Form extends Component {
         }
         return child;
     };
-    componentDidMount() {
+    componentWillMount() {
         const { formRef } = this.props;
         if (formRef) {
             formRef({
