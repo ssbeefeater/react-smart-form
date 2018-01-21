@@ -38,7 +38,7 @@ const defaults = {
     passwordRequiredError:'Please add a password',
     passwordLengthError:'Password length must be between 5 and 8 characters',
 };
-
+let formInstance;
 storiesOf('react-smart-form', module)
     .add('Basic Example', withInfo()(() =>
         <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
@@ -114,6 +114,24 @@ storiesOf('react-smart-form', module)
                     <CustomField/>
                 </Input>
             </Form>
+        </div>
+    </div>}
+)).add('Reset fields', withInfo(descriptions.errorHandling)(() =>{
+    return <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
+        <div style={{width:400}}>
+            <Form formRef={(form)=>{
+                formInstance=form;
+                console.log(formInstance)
+
+            }}>
+                <Input name="username" label="email" type="email" />
+                <Input name="password" label="Password" type="password"  />
+            </Form>
+            <button onClick={()=>{
+                formInstance.reset('username');
+            }}>
+                Reset
+            </button>
         </div>
     </div>}
 ));
