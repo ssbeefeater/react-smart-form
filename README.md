@@ -224,6 +224,8 @@ render(
 
 
 #####Form
+
+
 | propType  | required | default  | description |
 | ------------- | ------------- | ------------- | ------------- |
 | onValidate(func(hasError)) | no | - | A function that runs every time the overall validation status change |
@@ -233,7 +235,11 @@ render(
 | loading(bool) | no | - | set the form in a loading state |
 | formRef(func) | no | - | returns the Form instance |
 
+
+
 #####Input
+
+
 | propType  | required | default  | description |
 | ------------- | ------------- | ------------- | ------------- |
 | type(input type or 'textarea') | no | - | The type of the Input. Takes all the valid Input type except file and submit. |
@@ -250,7 +256,10 @@ render(
 | debounce(number) | no | 300 | set the input's debounce for validation|
 | disabled:readOnly (bool) | no | - | set the input in a readOnly state |
 
+
 #####Submit
+
+
 | propType  | required | default  | description |
 | ------------- | ------------- | ------------- | ------------- |
 | size(number) | no | 18 | - |sets size of the button|
