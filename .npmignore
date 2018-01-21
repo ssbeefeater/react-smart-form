@@ -3,3 +3,5 @@ test/
 src
 example
 stories
+.out
+.storybook
