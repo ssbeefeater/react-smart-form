@@ -131,7 +131,6 @@ class Form extends Component {
             errorMessage: this.state.requestError || this.state.errors[child.props.name],
             value: this.state.values[child.props.name],
             formProps: {
-                loading: this.props.loading || this.state.loading,
                 onValidate: (error) => { this.onValidate(error, child.props.name); },
                 onChangeValue: this.onChangeInput(child.props.name),
                 hasError: this.state.errors[child.props.name],
@@ -144,6 +143,7 @@ class Form extends Component {
         if (child.type.displayName === 'Submit') {
             return (React.cloneElement(child, {
                 formProps: {
+                    loading: this.props.loading || this.state.loading,
                     disabled: (this.props.disabled && hasError) ||
                 (!hasError && this.props.disabled) || (hasError && !this.props.disabled),
                 },
