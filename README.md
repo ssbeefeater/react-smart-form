@@ -223,7 +223,7 @@ render(
 #### Documentation
 
 
-#####Form
+##### Form
 
 
 | propType  | required | default  | description |
@@ -233,11 +233,11 @@ render(
 | onChange(func(FieldValues)) | no | - | A function that runs every time a field changes |
 | disabled(bool) | no | - | set the form in a disabled state |
 | loading(bool) | no | - | set the form in a loading state |
-| formRef(func) | no | - | returns the Form instance |
+| formRef(func) | no | - | returns the Form instance. With form instance you can user reset, setErrors and setValue functions|
 
 
 
-#####Input
+##### Input
 
 
 | propType  | required | default  | description |
@@ -257,7 +257,7 @@ render(
 | disabled:readOnly (bool) | no | - | set the input in a readOnly state |
 
 
-#####Submit
+##### Submit
 
 
 | propType  | required | default  | description |
@@ -267,3 +267,22 @@ render(
 | loading(bool) | no | - | set the button in a loading state|
 | disabled(bool) | no | - | set the form in a disabled state |
 | children(string) | no | - | The button label |
+
+
+##### Validators
+
+
+| name  | description |
+| ------------- | ------------- |
+| email(errorMessage) | checks if the input value is valid email |
+| length(errorMessage,{min:number,max:number}) | validates the value length |
+| required(errorMessage) | checks if a has been set |
+
+##### Form instance function
+
+
+| name  | description |
+| ------------- | ------------- |
+| reset('fieldName') | reset the specified field. If no field name, all fields will be reset. |
+| setValues({inputName:value}) | Sets values to the specified fields |
+| setErrors({inputName:errorMessage}) | Sets errors to the specified fields |
