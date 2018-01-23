@@ -134,4 +134,23 @@ storiesOf('react-smart-form', module)
             </button>
         </div>
     </div>}
+)).add('Match Password', withInfo(descriptions.errorHandling)(() =>{
+
+    const samePasswordValidator = (message)=>(value)=>{
+        if(value!==formInstance.getValues('password')){
+            return message||true;
+        }
+        return false
+    };
+    return <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
+        <div style={{width:400}}>
+            <Form formRef={(form)=>{
+                formInstance=form;
+            }}>
+                <Input showPassword={false} name="password" label="Enter Password" type="password"  validators={required()}/>
+                <Input showPassword={false} name="rePassword" label="Enter Password again" type="password"  validators={[required(),samePasswordValidator('Passwords does not match')]}/>
+                <Submit>Register</Submit>
+            </Form>
+        </div>
+    </div>}
 ));
