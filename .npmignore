@@ -5,3 +5,10 @@ example
 stories
 .out
 .storybook
+.babelrc
+.eslintignore
+.eslintrc
+.gitingore
+webpack.config.js
+yarn.lock
+.idea
