@@ -258,7 +258,7 @@ class Input extends PureComponent {
 
         const hasError = typeof errorMessage === 'string';
         let { icon } = this.props;
-        if (!icon && type === 'password' && type === 'password') {
+        if (!icon && type === 'password' && showPassword) {
             const ValidIcon = this.state.type === 'password' ? Eye : EyeOff;
             icon = <ValidIcon className="inputIcon" onClick={this.togglePassword} />;
         }
