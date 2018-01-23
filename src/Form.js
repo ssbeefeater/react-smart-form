@@ -154,6 +154,7 @@ class Form extends Component {
         }
         return child;
     };
+    getValues=fieldName => (fieldName ? this.state.values[fieldName] : this.state.values);
     componentWillMount() {
         const { formRef } = this.props;
         if (formRef) {
@@ -161,6 +162,7 @@ class Form extends Component {
                 reset: this.reset,
                 setErrors: this.setErrors,
                 setValues: this.setValues,
+                getValues: this.getValues,
             });
         }
     }
