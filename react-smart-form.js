@@ -2751,7 +2751,8 @@ var Form = function (_Component) {
                 formRef({
                     reset: this.reset,
                     setErrors: this.setErrors,
-                    setValues: this.setValues
+                    setValues: this.setValues,
+                    getValues: this.getValues
                 });
             }
         }
@@ -2903,6 +2904,10 @@ var _initialiseProps = function _initialiseProps() {
             return _react2.default.Children.map(child.props.children, _this3.modifyChildren);
         }
         return child;
+    };
+
+    this.getValues = function (fieldName) {
+        return fieldName ? _this3.state.values[fieldName] : _this3.state.values;
     };
 };
 
@@ -5704,7 +5709,7 @@ var Input = function (_PureComponent) {
             var hasError = typeof errorMessage === 'string';
             var icon = this.props.icon;
 
-            if (!icon && type === 'password' && type === 'password') {
+            if (!icon && type === 'password' && showPassword) {
                 var ValidIcon = this.state.type === 'password' ? _EyeIcon2.default : _EyeOffIcon2.default;
                 icon = _react2.default.createElement(ValidIcon, { className: 'inputIcon', onClick: this.togglePassword });
             }
