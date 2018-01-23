@@ -283,6 +283,6 @@ render(
 
 | name  | description |
 | ------------- | ------------- |
-| reset('fieldName') | reset the specified field. If no field name, all fields will be reset. |
+| reset('fieldName') | reset the specified field. If no field name, all fields will be reseted. |
 | setValues({inputName:value}) | Sets values to the specified fields |
 | setErrors({inputName:errorMessage}) | Sets errors to the specified fields |
