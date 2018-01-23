@@ -220,6 +220,67 @@ render(
 
 ```
 
+
+
+Match password
+
+```javascript
+import React,{ Component } from 'react';
+import { render } from 'react-dom';
+import {Form, Input, Submit} from 'react-smart-form';
+import {required} from 'react-smart-form/validators';
+
+
+class MyComponent extends Component {
+    onSubmit=(values)=>{
+           console.log(`Username: ${values.username}`);
+           console.log(`Password: ${values.password}`);
+    }
+    matchPasswordValidator = message=>(value)=>{
+        if(value !== this.form.getValues('password')){
+            return message || true;
+        }
+        return false;
+    }
+    render() {
+        return (
+            <Form 
+            formRef={(form)=>{this.form=form}}
+            onSubmit={this.onSubmit}
+            >
+                <Input 
+                    showPassword={false}
+                    name="password" 
+                    label="Password" 
+                    type="password" 
+                    // silent validation
+                    validator={[required()]}
+                    />
+                <Input 
+                    showPassword={false}
+                    name="repassword" 
+                    label="Re enter password" 
+                    type="password" 
+                    validator={[required(),this.matchPasswordValidator('Password does not match')]}
+                    />
+                    
+                <Submit>
+                    Register
+                </Submit>
+            </Form>
+        );
+    }
+}
+
+render(
+    <MyComponent/>,
+    document.getElementById('app'),
+);
+
+```
+
+
+
 #### Documentation
 
 
@@ -283,6 +344,7 @@ render(
 
 | name  | description |
 | ------------- | ------------- |
-| reset('fieldName') | reset the specified field. If no field name, all fields will be reseted. |
+| reset('fieldName') | reset the specified field. If no field name, all fields will be reset. |
+| getValues({inputName:value}) | Returns the requested value. If no input name an object with all values will be returned|
 | setValues({inputName:value}) | Sets values to the specified fields |
 | setErrors({inputName:errorMessage}) | Sets errors to the specified fields |
