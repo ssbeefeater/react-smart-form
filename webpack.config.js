@@ -6,7 +6,7 @@ const { UglifyJsPlugin } = webpack.optimize;
 module.exports = {
     entry: {
         'react-smart-form': './src/index.js',
-        'react-smart-form.min': './src/index.js',
+        validators: './src/lib/validators.js',
     },
     externals: {
         react: {
@@ -26,7 +26,7 @@ module.exports = {
     output: {
         filename: '[name].js',
         chunkFilename: '[id].chunk.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: __dirname,
         publicPath: '/',
         libraryTarget: 'umd',
         library: 'react-smart-form',

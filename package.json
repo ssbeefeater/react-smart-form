@@ -2,9 +2,9 @@
   "name": "react-smart-form",
   "version": "1.0.1",
   "description": "A form component that containes all the functionality you will need.",
-  "main": "dist/react-smart-form.js",
+  "main": "./react-smart-form.js",
   "scripts": {
-    "build": "webpack --config webpack.dist.config.js",
+    "build": "webpack",
     "start": "start-storybook -p 6006",
     "test": "jest --coverage",
     "export-storybook": "build-storybook -c .storybook -o .out"

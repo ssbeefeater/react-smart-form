@@ -2880,7 +2880,6 @@ var _initialiseProps = function _initialiseProps() {
             errorMessage: _this3.state.requestError || _this3.state.errors[child.props.name],
             value: _this3.state.values[child.props.name],
             formProps: {
-                loading: _this3.props.loading || _this3.state.loading,
                 onValidate: function onValidate(error) {
                     _this3.onValidate(error, child.props.name);
                 },
@@ -2895,6 +2894,7 @@ var _initialiseProps = function _initialiseProps() {
         if (child.type.displayName === 'Submit') {
             return _react2.default.cloneElement(child, {
                 formProps: {
+                    loading: _this3.props.loading || _this3.state.loading,
                     disabled: _this3.props.disabled && hasError || !hasError && _this3.props.disabled || hasError && !_this3.props.disabled
                 }
             });
