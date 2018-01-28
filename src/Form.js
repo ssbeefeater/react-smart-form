@@ -15,9 +15,13 @@ const FormWrapper = styled.div`
 
 class Form extends Component {
     render() {
+        const {
+            smartForm,
+            ...formProps
+        } = this.props;
         return (
             <FormWrapper>
-                <form {...this.props}>
+                <form {...formProps}>
                     {this.props.children}
                 </form>
             </FormWrapper>
@@ -34,7 +38,6 @@ Form.propTypes = {
     disabled: PropTypes.bool,
     loading: PropTypes.bool,
     onChange: PropTypes.func,
-    id: PropTypes.string,
     formRef: PropTypes.func,
 };
 export default smartForm(Form);

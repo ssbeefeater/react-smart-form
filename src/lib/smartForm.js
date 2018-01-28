@@ -108,16 +108,22 @@ const smartForm = (CustomForm) => {
                     return (typeof error === 'string' || error === true);
                 }));
         };
+        getFormStates = () => {
+            const hasError = this.hasError();
+            return ({
+                loading: this.props.loading || this.state.loading,
+                disabled: (this.props.disabled && hasError) ||
+            (!hasError && this.props.disabled) || (hasError && !this.props.disabled),
+            });
+        };
         formHasChange = () => (true);
         modifyChildren = (child) => {
             const childName = child.props.name;
-            const hasError = this.hasError();
             const error = this.state.errors[childName];
+            const formState = this.getFormStates();
             const states = {
                 error: this.state.errors[childName],
-                loading: this.props.loading || this.state.loading,
-                disabled: (this.props.disabled && hasError) ||
-                (!hasError && this.props.disabled) || (hasError && !this.props.disabled),
+                ...formState,
             };
             const props = {
                 error: typeof error === 'undefined' ? false : error,
@@ -160,6 +166,7 @@ const smartForm = (CustomForm) => {
             } = this.props;
             return (
                 <CustomForm
+                    smartForm={this.getFormStates()}
                     {...restProps}
                     onSubmit={this.onSubmit}
                 >{children}</CustomForm>
