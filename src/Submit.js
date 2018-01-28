@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Spinner from './Spinner';
 import colors from './lib/theme/colors';
+import smartButton from './lib/smartButton';
 
 const ButtonWrapper = styled.button`
     font-size: ${props => (props.size)}px;
@@ -59,7 +60,6 @@ const Submit = (props) => {
     );
 };
 
-Submit.displayName = 'Submit';
 
 Submit.defaultProps = {
     color: colors.main,
@@ -79,4 +79,4 @@ Submit.propTypes = {
         disabled: PropTypes.bool,
     }),
 };
-export default Submit;
+export default smartButton(Submit);
