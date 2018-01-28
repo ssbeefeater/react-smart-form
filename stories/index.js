@@ -121,6 +121,7 @@ storiesOf('react-smart-form', module)
         class Forma extends React.Component{
             render(){
                 const {
+                    smartForm,
                     ...restProps
                 } = this.props;
                 return         <div>
