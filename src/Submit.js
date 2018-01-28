@@ -43,17 +43,17 @@ const Submit = (props) => {
         color,
         size,
         disabled,
-        formProps,
+        smartForm,
         loading,
     } = props;
     return (
         <ButtonWrapper
             size={size}
             color={color}
-            disabled={formProps.disabled || disabled || loading}
+            disabled={smartForm.disabled || disabled || loading}
             className="button submitButton">
             <ButtonContent>
-                {loading || formProps.loading ? <Spinner className="spinner" size={size} /> : children}
+                {loading || smartForm.loading ? <Spinner className="spinner" size={size} /> : children}
             </ButtonContent>
         </ButtonWrapper>
     );
@@ -75,7 +75,7 @@ Submit.propTypes = {
         PropTypes.object,
         PropTypes.string,
     ]),
-    formProps: PropTypes.shape({
+    smartForm: PropTypes.shape({
         disabled: PropTypes.bool,
     }),
 };
