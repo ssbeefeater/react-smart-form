@@ -50,7 +50,7 @@ storiesOf('react-smart-form', module)
                     <Input name="username" label="Email" type="email"
                            validators={[required(defaults.emailRequiredError), email(defaults.emailError)]} />
                     <Input name="password" label="Password" type="password" validators={[required(),length(defaults.passwordLengthError,{min:5,max:8})]} />
-                    <Input onChange={()=>{console.log('das')}} name="notes" label="Notes" type="textarea"/>
+                    <Input name="notes" label="Notes" type="textarea"/>
                     <Submit>Login</Submit>
                 </Form>
             </div>
@@ -142,7 +142,6 @@ storiesOf('react-smart-form', module)
         <div style={{width:400}}>
             <Form formRef={(form)=>{
                 formInstance=form;
-                console.log(formInstance)
 
             }}>
                 <Input name="username" label="Email" type="email" />
