@@ -85,6 +85,11 @@ const InputOuter = styled.div`
         }
     }
     &.withError{
+    .smart-form-inputField.hasValue,.smart-form-inputField:focus {
+        ~.control-label {
+        color:${colors.error};
+        }
+    }
         .smart-form-bar{
             border-bottom: 1px solid ${colors.error};
             &::before {
