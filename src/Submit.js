@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Spinner from './Spinner';
 import colors from './lib/theme/colors';
+import smartButton from './lib/withFormState';
 
 const ButtonWrapper = styled.button`
     font-size: ${props => (props.size)}px;
@@ -43,23 +44,22 @@ const Submit = (props) => {
         color,
         size,
         disabled,
-        formProps,
+        smartForm,
         loading,
     } = props;
     return (
         <ButtonWrapper
             size={size}
             color={color}
-            disabled={formProps.disabled || disabled || loading}
+            disabled={smartForm.disabled || disabled || loading}
             className="button submitButton">
             <ButtonContent>
-                {loading || formProps.loading ? <Spinner className="spinner" size={size} /> : children}
+                {loading || smartForm.loading ? <Spinner className="spinner" size={size} /> : children}
             </ButtonContent>
         </ButtonWrapper>
     );
 };
 
-Submit.displayName = 'Submit';
 
 Submit.defaultProps = {
     color: colors.main,
@@ -75,8 +75,8 @@ Submit.propTypes = {
         PropTypes.object,
         PropTypes.string,
     ]),
-    formProps: PropTypes.shape({
+    smartForm: PropTypes.shape({
         disabled: PropTypes.bool,
     }),
 };
-export default Submit;
+export default smartButton()(Submit);

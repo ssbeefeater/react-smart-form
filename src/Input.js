@@ -1,12 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import castArray from 'lodash.castarray';
-import debounce from 'lodash.debounce';
 import Eye from 'mdi-react/EyeIcon';
 import EyeOff from 'mdi-react/EyeOffIcon';
 import classNames from 'classnames';
 import colors from './lib/theme/colors';
+import smartInput from './lib/smartInput';
 
 const InputOuter = styled.div`
     font-family: 'Roboto', sans-serif;
@@ -86,6 +85,11 @@ const InputOuter = styled.div`
         }
     }
     &.withError{
+    .smart-form-inputField.hasValue,.smart-form-inputField:focus {
+        ~.control-label {
+        color:${colors.error};
+        }
+    }
         .smart-form-bar{
             border-bottom: 1px solid ${colors.error};
             &::before {
@@ -134,53 +138,15 @@ const Label = styled.label`
         }
 `;
 
-class Input extends PureComponent {
-   static displayName='Input';
-   constructor(props) {
-       super(props);
-       this.state = {
-           label: this.props.label,
-           type: props.type,
-       };
-       this.validate = debounce(this.validate, props.debounce);
-   }
+class Input extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            label: this.props.label,
+            type: props.type,
+        };
+    }
 
-    setError = (errorMessage) => {
-        const { onValidate } = this.props.formProps;
-        if (errorMessage !== this.props.errorMessage && onValidate) {
-            onValidate(errorMessage);
-        }
-    };
-    validateValues = (value, initial) => {
-        let errorMessage = false;
-        const propValidators = castArray(this.props.validators);
-        propValidators.every((validator) => {
-            if (!validator) return true;
-            const validate = validator(value, this);
-            if (typeof validate === 'string' || validate === true) {
-                errorMessage = initial ? true : validate;
-                return false;
-            }
-            return true;
-        });
-        return errorMessage;
-    };
-
-    validate = (value) => {
-        this.setError(this.validateValues(value));
-    };
-    setValue = (value) => {
-        if (this.props.formProps.onChangeValue) {
-            this.props.formProps.onChangeValue(value);
-        }
-    };
-    onChange = (e) => {
-        const { value } = e.target;
-        this.setValue(value);
-        if (this.props.onChange) {
-            this.props.onChange(value);
-        }
-    };
     togglePassword = (e, r, value) => {
         if (this.props.type === 'password') {
             this.setState({
@@ -189,13 +155,11 @@ class Input extends PureComponent {
         }
     };
     onBlur = (e) => {
-        this.validate(e.target.value);
         if (this.props.focusedLabel) {
             this.setState({
                 label: this.props.label,
             });
         }
-
         if (this.props.onBlur) this.props.onBlur(e);
     };
     onFocus = (e) => {
@@ -206,57 +170,22 @@ class Input extends PureComponent {
         }
         if (this.props.onFocus) this.props.onFocus(e);
     };
-    componentDidMount() {
-        if (this.props.focused) {
-            this.input.focus();
-        }
-        if (this.props.inputRef) {
-            this.props.inputRef();
-        }
-    }
-    componentWillMount() {
-        const { value, formProps, defaultValue } = this.props;
-        const { onValidate } = formProps;
-        const valueToSet = defaultValue || value;
-        this.setValue(valueToSet);
-        if (onValidate) {
-            onValidate(this.validateValues(valueToSet, true));
-        }
-    }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.formProps.beforeSubmit && this.props.type === 'password' && this.state.type !== 'password') {
-            this.togglePassword(null, null, 'password');
-            return false;
-        }
-        if (!nextProps.value && this.props.defaultValue !== nextProps.defaultValue) {
-            this.setValue(nextProps.defaultValue);
-        } else if (this.props.value !== nextProps.value) {
-            this.validate(nextProps.value);
-            return false;
-        }
-        return true;
-    }
     render() {
         const {
-            focused,
             children,
             type,
             label,
-            validators,
             icon: inputIcon,
-            onChange,
             focusedLabel,
             formProps,
-            errorMessage,
-            defaultValue,
+            smartForm,
             showPassword,
             debounce: dbnc,
-            inputRef,
             ...inputOptions
         } = this.props;
 
-        const hasError = typeof errorMessage === 'string';
+        const showError = typeof smartForm.error === 'string';
         let { icon } = this.props;
         if (!icon && type === 'password' && showPassword) {
             const ValidIcon = this.state.type === 'password' ? Eye : EyeOff;
@@ -264,25 +193,21 @@ class Input extends PureComponent {
         }
         const Field = type === 'textarea' ? 'textarea' : 'input';
         const inputClassName = classNames({
-            hasError,
+            hasError: showError,
             hasValue: !!this.props.value || children,
-            focusedElement: focused,
             widthIcon: !!icon,
         });
         const inputProps = {
             ...inputOptions,
-            value: this.props.value,
-            onInput: this.onInput,
             onFocus: this.onFocus,
-            onChange: this.onChange,
             type: this.state.type,
             onBlur: this.onBlur,
             readOnly: this.props.readOnly || this.props.disabled,
             className: `${inputClassName} smart-form-inputField`,
             ref: (input) => {
                 this.input = input;
-                if (inputRef) {
-                    inputRef(input);
+                if (inputOptions.ref) {
+                    inputOptions.ref(input);
                 }
             },
         };
@@ -293,7 +218,7 @@ class Input extends PureComponent {
             : <Field {...inputProps} />;
         return (
             <InputOuter className={classNames({
-                withError: hasError,
+                withError: showError,
             }, type, 'input')}>
                 {
                     children ?
@@ -311,7 +236,7 @@ class Input extends PureComponent {
                             <i className="smart-form-bar" />
                         </div>
                 }
-                <ErrorWrapper className="smart-form-errorMessage">{errorMessage || formProps.requestError}</ErrorWrapper>
+                <ErrorWrapper className="smart-form-errorMessage">{smartForm.error}</ErrorWrapper>
             </InputOuter>
         );
     }
@@ -362,4 +287,4 @@ Input.propTypes = {
     }),
 };
 
-export default Input;
+export default smartInput()(Input);

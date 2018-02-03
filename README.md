@@ -166,23 +166,105 @@ Custom input custom errors and loading state
 ```javascript
 import React,{ Component } from 'react';
 import { render } from 'react-dom';
-import {Form, Input, Submit} from 'react-smart-form';
+import {smartForm, smartInput, withFormState} from 'react-smart-form';
 
-const CustomField = (props)=>(
-    <div>
-         <label>Custom field: </label>
-         <input {...props} />
-    </div>
-  );
+
+let CustomForm = (props)=>{
+    const {
+        smartForm, // include loading(bool):the loading state of the form, disabled(bool):the disabled state of the form
+        children,
+        ...formPros
+    } = props;
+    return (
+        <div>
+            <form {...formPros}>
+            {children}
+            </form>
+        </div>
+  )};
+
+CustomForm=smartForm()(CustomForm); 
+
+let CustomField = (props)=>{
+    const {
+        smartForm, // include error(string || bool): the error of the field
+        label,
+        ...inputProps
+    }=props;
+    return (
+        <div>
+             <label>Custom field: {label}</label>
+             <input {...inputProps} />
+             <div>{smartForm.error}</div>
+        </div>
+  )};
+
+CustomField=smartInput()(CustomField);
+
+
+let CustomButton = (props)=>{
+    const {
+        smartForm, // include loading(bool):the loading state of the form, disabled(bool):the disabled state of the form
+        ...buttonProps
+    } = props;
+    return (
+        <div>
+            <button {...buttonProps} disabled={smartForm.disabled}>
+            {smartForm.loading ? 'loading...':children}
+            </button>
+        </div>
+  )};
+
+CustomButton=withFormState(CustomButton);
 
 class MyComponent extends Component {
     render() {
         return (
-            <Form onSubmit={this.onSubmit}>
-                <Input name="custom">
-                    <CustomField />
-                </Input>
-            </Form>
+            <CustomForm onSubmit={this.onSubmit}>
+                <CustomField name="email" label="Email" validators={[required('This is required')]}/>
+                <CustomButton>Press</CustomButton>
+            </CustomForm>
+        );
+    }
+}
+
+render(
+    <MyComponent/>,
+    document.getElementById('app'),
+);
+
+```
+
+
+withValidator only
+```javascript
+import React,{ Component } from 'react';
+import { render } from 'react-dom';
+import {withValidator} from 'react-smart-form';
+import {required} from 'react-smart-form/validators';
+
+let CustomField = (props)=>{
+    const {
+        error
+        label,
+        ...inputProps
+    }
+    return (
+        <div>
+             <label>Custom field: {label}</label>
+             <input {...inputProps} />
+             <div>{smartForm.error}</div>
+        </div>
+  )};
+
+CustomField=withValidator(CustomField);
+
+class MyComponent extends Component {
+    render() {
+        return (
+            <form>
+                 <CustomField name="email" label="Email" validators={[required('This is required')]}/>
+            </form>
         );
     }
 }
@@ -207,7 +289,8 @@ class MyComponent extends Component {
                 <Form formRef={(form)=>{ this.form=form; }}>
                     <Input name="username"/>
                 </Form>
-                <button onClick={()=>{this.form.reset('username')}}></button>
+                <button onClick={()=>{this.form.reset('username')}}>Reset Username</button>
+                <button onClick={()=>{this.form.reset()}}>Reset All</button>
             </div>
         );
     }

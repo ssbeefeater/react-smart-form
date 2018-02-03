@@ -2,7 +2,9 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import '@storybook/addon-knobs/register';
-import {Form,Input,Submit,Wrapper} from '../src/';
+import {Form,Input,Submit} from '../src/';
+import makeMeSmart from '../src/lib/smartInput'
+import smartForm from '../src/lib/smartForm'
 import { email, required,length } from '../src/lib/validators';
 import { withInfo } from '@storybook/addon-info';
 
@@ -38,16 +40,17 @@ const defaults = {
     passwordRequiredError:'Please add a password',
     passwordLengthError:'Password length must be between 5 and 8 characters',
 };
+
 let formInstance;
 storiesOf('react-smart-form', module)
     .add('Basic Example', withInfo()(() =>
         <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
             <div style={{width:400}}>
                 <Form>
-                    <Input name="username" label="email" type="email"
+                    <Input name="username" label="Email" type="email"
                            validators={[required(defaults.emailRequiredError), email(defaults.emailError)]} />
                     <Input name="password" label="Password" type="password" validators={[required(),length(defaults.passwordLengthError,{min:5,max:8})]} />
-                    <Input onChange={()=>{console.log('das')}} name="notes" label="Notes" type="textarea"/>
+                    <Input name="notes" label="Notes" type="textarea"/>
                     <Submit>Login</Submit>
                 </Form>
             </div>
@@ -63,7 +66,7 @@ storiesOf('react-smart-form', module)
             <Form onSubmit={()=>{
                 return fakeRequest()
             }}>
-                <Input  name="username" label="email" type="email"
+                <Input  name="username" label="Email" type="email"
                        validators={[required(defaults.emailRequiredError), email(defaults.emailError)]} />
                 <Input name="password" label="Password" type="password" validators={[required(),length(defaults.passwordLengthError,{min:5,max:8})]} />
                 <Submit>Login</Submit>
@@ -85,7 +88,7 @@ storiesOf('react-smart-form', module)
                     }
                 });
             }}>
-                <Input name="username" label="email" type="email"
+                <Input name="username" label="Email" type="email"
                        validators={[required(defaults.emailRequiredError), email(defaults.emailError)]} />
                 <Input name="password" label="Password" type="password" validators={[required(),length(defaults.passwordLengthError,{min:5,max:8})]} />
                 <Submit>Login</Submit>
@@ -101,19 +104,38 @@ storiesOf('react-smart-form', module)
 
 
     // className: hasError, hasValue, focusedElement
-    const CustomField = (props)=>(
-        <div>
-            <label>Custom field: </label>
-            <input {...props} />
-        </div>
-    );
+    class Field extends React.Component{
+        render(){
+            const {
+                smartForm,
+                ...restProps
+            } = this.props;
+            return         <div>
+                <label>Custom field: </label>
+                <input {...restProps}/>
+                <div>{smartForm.error}</div>
+            </div>
+        }
+    }
+        class Forma extends React.Component{
+            render(){
+                const {
+                    smartForm,
+                    ...restProps
+                } = this.props;
+                console.log(smartForm)
+                return         <div>
+                    <form {...restProps} />
+                </div>
+            }
+        }
+    const CustomForm = smartForm()(Forma);
+    const CustomField = makeMeSmart()(Field);
     return <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
         <div style={{width:400}}>
-            <Form>
-                <Input name="username" validators={[required('Required field')]} >
-                    <CustomField/>
-                </Input>
-            </Form>
+            <CustomForm>
+                    <CustomField type="text" name="test" validators={[required('required'),email('not email')]}/>
+            </CustomForm>
         </div>
     </div>}
 )).add('Reset fields', withInfo(descriptions.errorHandling)(() =>{
@@ -121,16 +143,20 @@ storiesOf('react-smart-form', module)
         <div style={{width:400}}>
             <Form formRef={(form)=>{
                 formInstance=form;
-                console.log(formInstance)
 
             }}>
-                <Input name="username" label="email" type="email" />
+                <Input name="username" label="Email" type="email" />
                 <Input name="password" label="Password" type="password"  />
             </Form>
             <button onClick={()=>{
+                formInstance.reset();
+            }}>
+                Reset All
+            </button><br/>
+            <button onClick={()=>{
                 formInstance.reset('username');
             }}>
-                Reset
+                Reset Email
             </button>
         </div>
     </div>}
@@ -153,4 +179,4 @@ storiesOf('react-smart-form', module)
             </Form>
         </div>
     </div>}
-));
+))
