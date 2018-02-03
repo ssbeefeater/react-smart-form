@@ -253,7 +253,7 @@ let CustomField = (props)=>{
         <div>
              <label>Custom field: {label}</label>
              <input {...inputProps} />
-             <div>{smartForm.error}</div>
+             <div>{error}</div>
         </div>
   )};
 
