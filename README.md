@@ -166,7 +166,7 @@ Custom input custom errors and loading state
 ```javascript
 import React,{ Component } from 'react';
 import { render } from 'react-dom';
-import {smartForm, smartInput, smartButton} from 'react-smart-form';
+import {smartForm, smartInput, withFormState} from 'react-smart-form';
 
 
 let CustomForm = (props)=>{
@@ -183,11 +183,11 @@ let CustomForm = (props)=>{
         </div>
   )};
 
-CustomForm=smartForm(CustomForm); 
+CustomForm=smartForm()(CustomForm); 
 
 let CustomField = (props)=>{
     const {
-        smartForm, // include error(string || bool): the error of the field, loading(bool):the loading state of the form, disabled(bool):the disabled state of the form
+        smartForm, // include error(string || bool): the error of the field
         label,
         ...inputProps
     }=props;
@@ -199,7 +199,7 @@ let CustomField = (props)=>{
         </div>
   )};
 
-CustomField=smartInput(CustomField);
+CustomField=smartInput()(CustomField);
 
 
 let CustomButton = (props)=>{
@@ -215,7 +215,7 @@ let CustomButton = (props)=>{
         </div>
   )};
 
-CustomButton=smartButton(CustomButton);
+CustomButton=withFormState(CustomButton);
 
 class MyComponent extends Component {
     render() {
