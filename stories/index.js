@@ -2,7 +2,7 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import '@storybook/addon-knobs/register';
-import {Form,Input,Submit,Wrapper} from '../src/';
+import {Form,Input,Submit} from '../src/';
 import makeMeSmart from '../src/lib/smartInput'
 import smartForm from '../src/lib/smartForm'
 import { email, required,length } from '../src/lib/validators';
@@ -110,7 +110,6 @@ storiesOf('react-smart-form', module)
                 smartForm,
                 ...restProps
             } = this.props;
-            console.log(smartForm);
             return         <div>
                 <label>Custom field: </label>
                 <input {...restProps}/>
@@ -124,13 +123,14 @@ storiesOf('react-smart-form', module)
                     smartForm,
                     ...restProps
                 } = this.props;
+                console.log(smartForm)
                 return         <div>
                     <form {...restProps} />
                 </div>
             }
         }
-    const CustomForm = smartForm(Forma);
-    const CustomField = makeMeSmart(Field);
+    const CustomForm = smartForm()(Forma);
+    const CustomField = makeMeSmart()(Field);
     return <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
         <div style={{width:400}}>
             <CustomForm>
@@ -179,4 +179,4 @@ storiesOf('react-smart-form', module)
             </Form>
         </div>
     </div>}
-));
+))
