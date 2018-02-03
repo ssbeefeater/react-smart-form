@@ -40,5 +40,5 @@ Form.propTypes = {
     onChange: PropTypes.func,
     formRef: PropTypes.func,
 };
-export default smartForm(Form);
+export default smartForm()(Form);
 

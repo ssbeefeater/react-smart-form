@@ -287,4 +287,4 @@ Input.propTypes = {
     }),
 };
 
-export default smartInput(Input);
+export default smartInput()(Input);

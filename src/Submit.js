@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Spinner from './Spinner';
 import colors from './lib/theme/colors';
-import smartButton from './lib/smartButton';
+import smartButton from './lib/withFormState';
 
 const ButtonWrapper = styled.button`
     font-size: ${props => (props.size)}px;
@@ -79,4 +79,4 @@ Submit.propTypes = {
         disabled: PropTypes.bool,
     }),
 };
-export default smartButton(Submit);
+export default smartButton()(Submit);
