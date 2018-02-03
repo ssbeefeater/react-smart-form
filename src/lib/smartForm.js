@@ -1,65 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import defaultFormStorage from './formStorage';
+import withSmartForm from './withFormState';
 
-const smartForm = (CustomForm) => {
+const smartForm = (formStorage = defaultFormStorage) => (CustomForm) => {
     class SmartForm extends Component {
-        constructor() {
-            super();
-            const values = {};
-            const errors = {};
-            this.state = {
-                values,
-                errors,
-                loading: null,
-            };
-            this.defaultErrors = {};
-        }
-        setValues = (newValues) => {
-            const { values } = this.state;
-            Object.assign(values, newValues);
-            this.setState({ values: Object.assign({}, values) });
-        };
-        setErrors = (fieldErrorMap = {}) => {
-            const { errors } = this.state;
-            Object.assign(errors, fieldErrorMap);
-            this.setState({
-                errors: Object.assign({}, errors),
-            });
-        };
-        reset = (inputName) => {
-            const { values, errors } = this.state;
-            const newState = {};
-            if (inputName) {
-                newState.values = Object.assign({}, values, {
-                    [inputName]: '',
-                });
-                newState.errors = Object.assign({}, errors, {
-                    [inputName]: this.defaultErrors[inputName],
-                });
-            } else {
-                newState.values = Object.keys(values).reduce((accu, val) => {
-                    accu[val] = '';
-                    return accu;
-                }, {});
-                newState.errors = Object.keys(errors).reduce((accu, val) => {
-                    accu[val] = this.defaultErrors[val];
-                    return accu;
-                }, {});
-            }
-            this.setState(newState);
-        };
         onSubmit = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (!this.props.disabled && !this.hasError() && !this.state.loading) {
+            if (!formStorage.disabled && !formStorage.hasError() && !formStorage.loading) {
                 if (this.props.onSubmit) {
-                    const onSubmitValue = this.props.onSubmit(this.state.values);
+                    const onSubmitValue = this.props.onSubmit(formStorage.getValues());
                     if (onSubmitValue instanceof Promise) {
-                        this.setState({
+                        formStorage.setProps({
                             loading: true,
                         });
                         onSubmitValue.then(() => {
-                            this.setState({
+                            formStorage.setProps({
                                 loading: false,
                             });
                         }).catch(this.handleRequestError);
@@ -67,109 +24,57 @@ const smartForm = (CustomForm) => {
                 }
             }
         };
-
+        componentWillReceiveProps(nextProps) {
+            const { loading, disabled } = nextProps;
+            if (loading !== this.props.loading || disabled !== this.props.disabled) {
+                formStorage.setProps({
+                    loading,
+                    disabled,
+                });
+            }
+        }
         handleRequestError = (error) => {
             if (!error) {
                 return;
             }
-            const state = {
-                loading: false,
-            };
+            let errors;
             if (error instanceof Error) {
-                state.errors = error.message;
+                errors = error.message;
             } else if (typeof error === 'string') {
-                state.errors = error;
+                errors = error;
             } else if (typeof error === 'object') {
-                const { errors } = this.state;
-                state.errors = Object.assign({}, errors, error);
+                errors = error;
             }
-            this.setState(state);
-        };
-        onValidate = name => (error) => {
-            this.setErrors({ [name]: error });
-            if (this.props.onValidate) {
-                this.props.onValidate(this.hasError());
+            formStorage.setProps({ loading: false });
+            if (errors) {
+                formStorage.setErrors(errors);
             }
         };
-        onChangeInput = name => (inputValue) => {
-            this.setValues({ [name]: inputValue });
-            if (this.props.onChange) {
-                this.props.onChange(this.state.values, this.formHasChange());
-            }
-        };
-        hasError = () => {
-            const errorKeys = Object.keys(this.state.errors);
-            if (!errorKeys.length) {
-                return true;
-            }
-            return (
-                errorKeys.some((name) => {
-                    const error = this.state.errors[name];
-                    return (typeof error === 'string' || error === true);
-                }));
-        };
-        getFormStates = () => {
-            const hasError = this.hasError();
-            return ({
-                loading: this.props.loading || this.state.loading,
-                disabled: (this.props.disabled && hasError) ||
-            (!hasError && this.props.disabled) || (hasError && !this.props.disabled),
-            });
-        };
-        formHasChange = () => (true);
-        modifyChildren = (child) => {
-            const childName = child.props.name;
-            const error = this.state.errors[childName];
-            const formState = this.getFormStates();
-            const states = {
-                error: this.state.errors[childName],
-                ...formState,
-            };
-            const props = {
-                error: typeof error === 'undefined' ? false : error,
-                value: this.state.values[childName],
-                onChangeValue: this.onChangeInput(childName),
-                onValidate: this.onValidate(childName),
-                smartForm: states,
-            };
-
-            if (child.type.displayName === 'Input') {
-                return (React.cloneElement(child, props));
-            }
-            if (child.type.displayName === 'Submit') {
-                return (React.cloneElement(child, {
-                    smartForm: states,
-                }));
-            }
-            if ((!child.type || !child.type.displayName) && child.props.children instanceof Array) {
-                return React.Children.map(child.props.children, this.modifyChildren);
-            }
-            return child;
-        };
-        getValues=fieldName => (fieldName ? this.state.values[fieldName] : this.state.values);
+        componentWillUnmount() {
+            formStorage.restore();
+        }
         componentWillMount() {
             const { formRef } = this.props;
             if (formRef) {
                 formRef({
-                    reset: this.reset,
-                    setErrors: this.setErrors,
-                    setValues: this.setValues,
-                    getValues: this.getValues,
+                    reset: formStorage.reset,
+                    setErrors: formStorage.setErrors,
+                    setValues: formStorage.setValues,
+                    getValues: formStorage.getValues,
+                    getErrors: formStorage.getErrors,
                 });
             }
         }
         render() {
-            const children = React.Children.map(this.props.children, this.modifyChildren);
             const {
                 formRef,
                 ...restProps
             } = this.props;
             return (
                 <CustomForm
-                    smartForm={this.getFormStates()}
                     {...restProps}
                     onSubmit={this.onSubmit}
-                >{children}</CustomForm>
+                />
             );
         }
     }
@@ -187,7 +92,7 @@ const smartForm = (CustomForm) => {
         id: PropTypes.string,
         formRef: PropTypes.func,
     };
-    return SmartForm;
+    return withSmartForm()(SmartForm);
 };
 
 
