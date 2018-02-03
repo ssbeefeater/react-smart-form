@@ -1,82 +1,79 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import defaultFormStorage from './formStorage';
 import withValidator from './withValidator';
-
-export const smartInputProps = {
-    validators: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.func),
-        PropTypes.func,
-    ]),
-    onChange: PropTypes.func,
-    focused: PropTypes.bool,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    name: PropTypes.string,
-    defaultValue: PropTypes.string,
-    debounce: PropTypes.number,
-};
 
 const Validator = withValidator('input');
 
-const smartInput = (CustomComponent) => {
+const makeMeSmart = (formStorage = defaultFormStorage) => (CustomComponent) => {
     class SmartInput extends Validator {
-        static displayName='Input';
-        setValue = (value) => {
-            if (this.props.onChangeValue) {
-                this.props.onChangeValue(value);
+        constructor(props) {
+            super(props);
+            this.state = {
+                value: props.defaultValue,
+                error: this.generateErrorMessage(props.defaultValue),
+            };
+            this.subscription = formStorage.onChange.subscribe(() => {
+                const value = formStorage.getValues(this.props.name);
+                const error = formStorage.getErrors(this.props.name);
+
+                if (value !== this.state.value || error !== this.state.error) {
+                    this.setState({
+                        value,
+                        error,
+                    });
+                }
+            });
+        }
+        setError = (errorMessage) => {
+            if (errorMessage !== this.state.error) {
+                formStorage.setErrors({ [this.props.name]: errorMessage });
             }
         };
+
+        setValue = (value) => {
+            const currentValue = formStorage.getValues(this.props.name);
+            if (value !== currentValue) {
+                formStorage.setValues({ [this.props.name]: value });
+            }
+        };
+
         onChange = (e) => {
             const { value } = e.target;
             this.setValue(value);
             if (this.props.onChange) {
-                this.props.onChange(e);
+                this.props.onChange(value);
             }
         };
-        onFocus = (e) => {
-            if (this.props.onFocus) {
-                this.props.onFocus(e);
-            }
-        };
+        componentWillUnmount() {
+            this.subscription.unsubscribe();
+        }
         componentWillMount() {
-            const { defaultValue, value } = this.props;
-            const valueToSet = defaultValue || value;
-            this.setValue(valueToSet);
+            const { defaultValue } = this.props;
+            const valueToSet = defaultValue || '';
+            formStorage.setValues({ [this.props.name]: valueToSet });
+            formStorage.setErrors({ [this.props.name]: this.generateErrorMessage(valueToSet, true) });
         }
         componentDidMount() {
             if (this.props.focused) {
                 this.input.focus();
             }
         }
-        shouldComponentUpdate(nextProps) {
-            if (!nextProps.value && this.props.defaultValue !== nextProps.defaultValue) {
-                this.setValue(nextProps.defaultValue);
-                return false;
-            } else if (this.props.value !== nextProps.value) {
-                this.validate(nextProps.value);
-            }
-            return true;
-        }
-
         render() {
             const {
                 validators,
                 defaultValue,
-                smartForm,
                 onValidate,
-                onChangeValue,
-                error,
-                value,
                 ...restProps
             } = this.props;
             const props = {
                 ...restProps,
-                value,
+                value: this.state.value,
                 onFocus: this.onFocus,
                 onChange: this.onChange,
                 onBlur: this.onBlur,
                 smartForm: {
-                    ...smartForm,
+                    error: this.state.error,
                 },
                 ref: (input) => {
                     this.input = input;
@@ -90,17 +87,25 @@ const smartInput = (CustomComponent) => {
     }
 
     SmartInput.defaultProps = {
-        value: '',
         defaultValue: '',
-        smartForm: {},
         debounce: 300,
     };
-
-    SmartInput.propTypes = smartInputProps;
-
+    SmartInput.propTypes = {
+        validators: PropTypes.oneOfType([
+            PropTypes.arrayOf(PropTypes.func),
+            PropTypes.func,
+        ]),
+        onChange: PropTypes.func,
+        focused: PropTypes.bool,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
+        name: PropTypes.string,
+        defaultValue: PropTypes.string,
+        debounce: PropTypes.number,
+    };
     return SmartInput;
 };
 
 
-export default smartInput;
+export default makeMeSmart;
 
