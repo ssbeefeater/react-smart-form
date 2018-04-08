@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -105,11 +105,11 @@ if (undefined !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(11)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(25)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(14)();
+  module.exports = __webpack_require__(28)();
 }
 
 
@@ -126,17 +126,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withTheme", function() { return wrapWithTheme; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServerStyleSheet", function() { return ServerStyleSheet; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StyleSheetManager", function() { return StyleSheetManager; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_is_plain_object__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_is_plain_object__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_is_plain_object___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_is_plain_object__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stylis__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stylis__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stylis___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_stylis__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_is_function__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_is_function__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_is_function___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_is_function__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics__);
 
 
@@ -2364,10 +2364,38 @@ var styled = _styled(StyledComponent, constructWithOptions);
 
 /* harmony default export */ __webpack_exports__["default"] = (styled);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(15)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(29)(module)))
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.smartInputShape = exports.formStateShape = undefined;
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var formStateShape = exports.formStateShape = _propTypes2.default.shape({
+    loading: _propTypes2.default.boolean,
+    disabled: _propTypes2.default.boolean
+});
+
+var smartInputShape = exports.smartInputShape = _propTypes2.default.shape({
+    error: _propTypes2.default.oneOfType([_propTypes2.default.bool, _propTypes2.default.string]),
+    disabled: _propTypes2.default.boolean
+});
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2409,7 +2437,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2468,7 +2496,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2487,7 +2515,339 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _FormStorage = __webpack_require__(35);
+
+var _FormStorage2 = _interopRequireDefault(_FormStorage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = new _FormStorage2.default();
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+// CommonJS / Node have global context exposed as "global" variable.
+// We don't want to include the whole node.d.ts this this compilation unit so we'll just fake
+// the global "global" var for now.
+var __window = typeof window !== 'undefined' && window;
+var __self = typeof self !== 'undefined' && typeof WorkerGlobalScope !== 'undefined' &&
+    self instanceof WorkerGlobalScope && self;
+var __global = typeof global !== 'undefined' && global;
+var _root = __window || __global || __self;
+exports.root = _root;
+// Workaround Closure Compiler restriction: The body of a goog.module cannot use throw.
+// This is needed when used with angular/tsickle which inserts a goog.module statement.
+// Wrap in IIFE
+(function () {
+    if (!_root) {
+        throw new Error('RxJS could not find any global context (window, self, global)');
+    }
+})();
+//# sourceMappingURL=root.js.map
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var isArray_1 = __webpack_require__(39);
+var isObject_1 = __webpack_require__(40);
+var isFunction_1 = __webpack_require__(17);
+var tryCatch_1 = __webpack_require__(41);
+var errorObject_1 = __webpack_require__(18);
+var UnsubscriptionError_1 = __webpack_require__(42);
+/**
+ * Represents a disposable resource, such as the execution of an Observable. A
+ * Subscription has one important method, `unsubscribe`, that takes no argument
+ * and just disposes the resource held by the subscription.
+ *
+ * Additionally, subscriptions may be grouped together through the `add()`
+ * method, which will attach a child Subscription to the current Subscription.
+ * When a Subscription is unsubscribed, all its children (and its grandchildren)
+ * will be unsubscribed as well.
+ *
+ * @class Subscription
+ */
+var Subscription = (function () {
+    /**
+     * @param {function(): void} [unsubscribe] A function describing how to
+     * perform the disposal of resources when the `unsubscribe` method is called.
+     */
+    function Subscription(unsubscribe) {
+        /**
+         * A flag to indicate whether this Subscription has already been unsubscribed.
+         * @type {boolean}
+         */
+        this.closed = false;
+        this._parent = null;
+        this._parents = null;
+        this._subscriptions = null;
+        if (unsubscribe) {
+            this._unsubscribe = unsubscribe;
+        }
+    }
+    /**
+     * Disposes the resources held by the subscription. May, for instance, cancel
+     * an ongoing Observable execution or cancel any other type of work that
+     * started when the Subscription was created.
+     * @return {void}
+     */
+    Subscription.prototype.unsubscribe = function () {
+        var hasErrors = false;
+        var errors;
+        if (this.closed) {
+            return;
+        }
+        var _a = this, _parent = _a._parent, _parents = _a._parents, _unsubscribe = _a._unsubscribe, _subscriptions = _a._subscriptions;
+        this.closed = true;
+        this._parent = null;
+        this._parents = null;
+        // null out _subscriptions first so any child subscriptions that attempt
+        // to remove themselves from this subscription will noop
+        this._subscriptions = null;
+        var index = -1;
+        var len = _parents ? _parents.length : 0;
+        // if this._parent is null, then so is this._parents, and we
+        // don't have to remove ourselves from any parent subscriptions.
+        while (_parent) {
+            _parent.remove(this);
+            // if this._parents is null or index >= len,
+            // then _parent is set to null, and the loop exits
+            _parent = ++index < len && _parents[index] || null;
+        }
+        if (isFunction_1.isFunction(_unsubscribe)) {
+            var trial = tryCatch_1.tryCatch(_unsubscribe).call(this);
+            if (trial === errorObject_1.errorObject) {
+                hasErrors = true;
+                errors = errors || (errorObject_1.errorObject.e instanceof UnsubscriptionError_1.UnsubscriptionError ?
+                    flattenUnsubscriptionErrors(errorObject_1.errorObject.e.errors) : [errorObject_1.errorObject.e]);
+            }
+        }
+        if (isArray_1.isArray(_subscriptions)) {
+            index = -1;
+            len = _subscriptions.length;
+            while (++index < len) {
+                var sub = _subscriptions[index];
+                if (isObject_1.isObject(sub)) {
+                    var trial = tryCatch_1.tryCatch(sub.unsubscribe).call(sub);
+                    if (trial === errorObject_1.errorObject) {
+                        hasErrors = true;
+                        errors = errors || [];
+                        var err = errorObject_1.errorObject.e;
+                        if (err instanceof UnsubscriptionError_1.UnsubscriptionError) {
+                            errors = errors.concat(flattenUnsubscriptionErrors(err.errors));
+                        }
+                        else {
+                            errors.push(err);
+                        }
+                    }
+                }
+            }
+        }
+        if (hasErrors) {
+            throw new UnsubscriptionError_1.UnsubscriptionError(errors);
+        }
+    };
+    /**
+     * Adds a tear down to be called during the unsubscribe() of this
+     * Subscription.
+     *
+     * If the tear down being added is a subscription that is already
+     * unsubscribed, is the same reference `add` is being called on, or is
+     * `Subscription.EMPTY`, it will not be added.
+     *
+     * If this subscription is already in an `closed` state, the passed
+     * tear down logic will be executed immediately.
+     *
+     * @param {TeardownLogic} teardown The additional logic to execute on
+     * teardown.
+     * @return {Subscription} Returns the Subscription used or created to be
+     * added to the inner subscriptions list. This Subscription can be used with
+     * `remove()` to remove the passed teardown logic from the inner subscriptions
+     * list.
+     */
+    Subscription.prototype.add = function (teardown) {
+        if (!teardown || (teardown === Subscription.EMPTY)) {
+            return Subscription.EMPTY;
+        }
+        if (teardown === this) {
+            return this;
+        }
+        var subscription = teardown;
+        switch (typeof teardown) {
+            case 'function':
+                subscription = new Subscription(teardown);
+            case 'object':
+                if (subscription.closed || typeof subscription.unsubscribe !== 'function') {
+                    return subscription;
+                }
+                else if (this.closed) {
+                    subscription.unsubscribe();
+                    return subscription;
+                }
+                else if (typeof subscription._addParent !== 'function' /* quack quack */) {
+                    var tmp = subscription;
+                    subscription = new Subscription();
+                    subscription._subscriptions = [tmp];
+                }
+                break;
+            default:
+                throw new Error('unrecognized teardown ' + teardown + ' added to Subscription.');
+        }
+        var subscriptions = this._subscriptions || (this._subscriptions = []);
+        subscriptions.push(subscription);
+        subscription._addParent(this);
+        return subscription;
+    };
+    /**
+     * Removes a Subscription from the internal list of subscriptions that will
+     * unsubscribe during the unsubscribe process of this Subscription.
+     * @param {Subscription} subscription The subscription to remove.
+     * @return {void}
+     */
+    Subscription.prototype.remove = function (subscription) {
+        var subscriptions = this._subscriptions;
+        if (subscriptions) {
+            var subscriptionIndex = subscriptions.indexOf(subscription);
+            if (subscriptionIndex !== -1) {
+                subscriptions.splice(subscriptionIndex, 1);
+            }
+        }
+    };
+    Subscription.prototype._addParent = function (parent) {
+        var _a = this, _parent = _a._parent, _parents = _a._parents;
+        if (!_parent || _parent === parent) {
+            // If we don't have a parent, or the new parent is the same as the
+            // current parent, then set this._parent to the new parent.
+            this._parent = parent;
+        }
+        else if (!_parents) {
+            // If there's already one parent, but not multiple, allocate an Array to
+            // store the rest of the parent Subscriptions.
+            this._parents = [parent];
+        }
+        else if (_parents.indexOf(parent) === -1) {
+            // Only add the new parent to the _parents list if it's not already there.
+            _parents.push(parent);
+        }
+    };
+    Subscription.EMPTY = (function (empty) {
+        empty.closed = true;
+        return empty;
+    }(new Subscription()));
+    return Subscription;
+}());
+exports.Subscription = Subscription;
+function flattenUnsubscriptionErrors(errors) {
+    return errors.reduce(function (errs, err) { return errs.concat((err instanceof UnsubscriptionError_1.UnsubscriptionError) ? err.errors : err); }, []);
+}
+//# sourceMappingURL=Subscription.js.map
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var root_1 = __webpack_require__(8);
+var Symbol = root_1.root.Symbol;
+exports.rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
+    Symbol.for('rxSubscriber') : '@@rxSubscriber';
+/**
+ * @deprecated use rxSubscriber instead
+ */
+exports.$$rxSubscriber = exports.rxSubscriber;
+//# sourceMappingURL=rxSubscriber.js.map
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _formStorage = __webpack_require__(7);
+
+var _formStorage2 = _interopRequireDefault(_formStorage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var withFormStates = function withFormStates() {
+    var formStorage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _formStorage2.default;
+    return function (CustomButton) {
+        var SmartButton = function (_Component) {
+            _inherits(SmartButton, _Component);
+
+            function SmartButton() {
+                _classCallCheck(this, SmartButton);
+
+                var _this = _possibleConstructorReturn(this, (SmartButton.__proto__ || Object.getPrototypeOf(SmartButton)).call(this));
+
+                _this.subscription = formStorage.onChangeProps.subscribe(function () {
+                    _this.forceUpdate();
+                });
+                return _this;
+            }
+
+            _createClass(SmartButton, [{
+                key: 'componentWillUnmount',
+                value: function componentWillUnmount() {
+                    this.subscription.unsubscribe();
+                }
+            }, {
+                key: 'render',
+                value: function render() {
+                    var disabled = formStorage.disabled,
+                        loading = formStorage.loading;
+
+                    return _react2.default.createElement(CustomButton, _extends({}, this.props, { smartForm: { disabled: disabled, loading: loading } }));
+                }
+            }]);
+
+            return SmartButton;
+        }(_react.Component);
+
+        return SmartButton;
+    };
+};
+
+exports.default = withFormStates;
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2503,7 +2863,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 7 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2517,7 +2877,7 @@ exports.default = {
 
 
 
-var emptyFunction = __webpack_require__(3);
+var emptyFunction = __webpack_require__(4);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -2571,7 +2931,503 @@ if (undefined !== 'production') {
 module.exports = warning;
 
 /***/ }),
-/* 8 */
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _formStorage = __webpack_require__(7);
+
+var _formStorage2 = _interopRequireDefault(_formStorage);
+
+var _withFormState = __webpack_require__(11);
+
+var _withFormState2 = _interopRequireDefault(_withFormState);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var smartForm = function smartForm() {
+    var formStorage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _formStorage2.default;
+    return function (CustomForm) {
+        var SmartForm = function (_Component) {
+            _inherits(SmartForm, _Component);
+
+            function SmartForm() {
+                var _ref;
+
+                var _temp, _this, _ret;
+
+                _classCallCheck(this, SmartForm);
+
+                for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+                    args[_key] = arguments[_key];
+                }
+
+                return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = SmartForm.__proto__ || Object.getPrototypeOf(SmartForm)).call.apply(_ref, [this].concat(args))), _this), _this.onSubmit = function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (!formStorage.disabled && !formStorage.hasError() && !formStorage.loading) {
+                        if (_this.props.onSubmit) {
+                            var onSubmitValue = _this.props.onSubmit(formStorage.getValues());
+                            if (onSubmitValue instanceof Promise) {
+                                formStorage.setProps({
+                                    loading: true
+                                });
+                                onSubmitValue.then(function () {
+                                    formStorage.setProps({
+                                        loading: false
+                                    });
+                                }).catch(_this.handleRequestError);
+                            }
+                        }
+                    }
+                }, _this.handleRequestError = function (error) {
+                    if (!error) {
+                        return;
+                    }
+                    var errors = void 0;
+                    if (error instanceof Error) {
+                        errors = error.message;
+                    } else if (typeof error === 'string') {
+                        errors = error;
+                    } else if ((typeof error === 'undefined' ? 'undefined' : _typeof(error)) === 'object') {
+                        errors = error;
+                    }
+                    formStorage.setProps({ loading: false });
+                    if (errors) {
+                        formStorage.setErrors(errors);
+                    }
+                }, _temp), _possibleConstructorReturn(_this, _ret);
+            }
+
+            _createClass(SmartForm, [{
+                key: 'componentWillReceiveProps',
+                value: function componentWillReceiveProps(nextProps) {
+                    var loading = nextProps.loading,
+                        disabled = nextProps.disabled;
+
+                    if (loading !== this.props.loading || disabled !== this.props.disabled) {
+                        formStorage.setProps({
+                            loading: loading,
+                            disabled: disabled
+                        });
+                    }
+                }
+            }, {
+                key: 'componentWillUnmount',
+                value: function componentWillUnmount() {
+                    formStorage.restore();
+                }
+            }, {
+                key: 'componentWillMount',
+                value: function componentWillMount() {
+                    var formRef = this.props.formRef;
+
+                    if (formRef) {
+                        formRef({
+                            reset: formStorage.reset,
+                            setErrors: formStorage.setErrors,
+                            setValues: formStorage.setValues,
+                            getValues: formStorage.getValues,
+                            getErrors: formStorage.getErrors
+                        });
+                    }
+                }
+            }, {
+                key: 'render',
+                value: function render() {
+                    var _props = this.props,
+                        formRef = _props.formRef,
+                        restProps = _objectWithoutProperties(_props, ['formRef']);
+
+                    return _react2.default.createElement(CustomForm, _extends({}, restProps, {
+                        onSubmit: this.onSubmit
+                    }));
+                }
+            }]);
+
+            return SmartForm;
+        }(_react.Component);
+
+        SmartForm.propTypes = {
+            onValidate: _propTypes2.default.func,
+            children: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]),
+            onSubmit: _propTypes2.default.func,
+            disabled: _propTypes2.default.bool,
+            loading: _propTypes2.default.bool,
+            onChange: _propTypes2.default.func,
+            id: _propTypes2.default.string,
+            formRef: _propTypes2.default.func
+        };
+        return (0, _withFormState2.default)()(SmartForm);
+    };
+};
+
+exports.default = smartForm;
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var isFunction_1 = __webpack_require__(17);
+var Subscription_1 = __webpack_require__(9);
+var Observer_1 = __webpack_require__(19);
+var rxSubscriber_1 = __webpack_require__(10);
+/**
+ * Implements the {@link Observer} interface and extends the
+ * {@link Subscription} class. While the {@link Observer} is the public API for
+ * consuming the values of an {@link Observable}, all Observers get converted to
+ * a Subscriber, in order to provide Subscription-like capabilities such as
+ * `unsubscribe`. Subscriber is a common type in RxJS, and crucial for
+ * implementing operators, but it is rarely used as a public API.
+ *
+ * @class Subscriber<T>
+ */
+var Subscriber = (function (_super) {
+    __extends(Subscriber, _super);
+    /**
+     * @param {Observer|function(value: T): void} [destinationOrNext] A partially
+     * defined Observer or a `next` callback function.
+     * @param {function(e: ?any): void} [error] The `error` callback of an
+     * Observer.
+     * @param {function(): void} [complete] The `complete` callback of an
+     * Observer.
+     */
+    function Subscriber(destinationOrNext, error, complete) {
+        _super.call(this);
+        this.syncErrorValue = null;
+        this.syncErrorThrown = false;
+        this.syncErrorThrowable = false;
+        this.isStopped = false;
+        switch (arguments.length) {
+            case 0:
+                this.destination = Observer_1.empty;
+                break;
+            case 1:
+                if (!destinationOrNext) {
+                    this.destination = Observer_1.empty;
+                    break;
+                }
+                if (typeof destinationOrNext === 'object') {
+                    if (destinationOrNext instanceof Subscriber) {
+                        this.syncErrorThrowable = destinationOrNext.syncErrorThrowable;
+                        this.destination = destinationOrNext;
+                        this.destination.add(this);
+                    }
+                    else {
+                        this.syncErrorThrowable = true;
+                        this.destination = new SafeSubscriber(this, destinationOrNext);
+                    }
+                    break;
+                }
+            default:
+                this.syncErrorThrowable = true;
+                this.destination = new SafeSubscriber(this, destinationOrNext, error, complete);
+                break;
+        }
+    }
+    Subscriber.prototype[rxSubscriber_1.rxSubscriber] = function () { return this; };
+    /**
+     * A static factory for a Subscriber, given a (potentially partial) definition
+     * of an Observer.
+     * @param {function(x: ?T): void} [next] The `next` callback of an Observer.
+     * @param {function(e: ?any): void} [error] The `error` callback of an
+     * Observer.
+     * @param {function(): void} [complete] The `complete` callback of an
+     * Observer.
+     * @return {Subscriber<T>} A Subscriber wrapping the (partially defined)
+     * Observer represented by the given arguments.
+     */
+    Subscriber.create = function (next, error, complete) {
+        var subscriber = new Subscriber(next, error, complete);
+        subscriber.syncErrorThrowable = false;
+        return subscriber;
+    };
+    /**
+     * The {@link Observer} callback to receive notifications of type `next` from
+     * the Observable, with a value. The Observable may call this method 0 or more
+     * times.
+     * @param {T} [value] The `next` value.
+     * @return {void}
+     */
+    Subscriber.prototype.next = function (value) {
+        if (!this.isStopped) {
+            this._next(value);
+        }
+    };
+    /**
+     * The {@link Observer} callback to receive notifications of type `error` from
+     * the Observable, with an attached {@link Error}. Notifies the Observer that
+     * the Observable has experienced an error condition.
+     * @param {any} [err] The `error` exception.
+     * @return {void}
+     */
+    Subscriber.prototype.error = function (err) {
+        if (!this.isStopped) {
+            this.isStopped = true;
+            this._error(err);
+        }
+    };
+    /**
+     * The {@link Observer} callback to receive a valueless notification of type
+     * `complete` from the Observable. Notifies the Observer that the Observable
+     * has finished sending push-based notifications.
+     * @return {void}
+     */
+    Subscriber.prototype.complete = function () {
+        if (!this.isStopped) {
+            this.isStopped = true;
+            this._complete();
+        }
+    };
+    Subscriber.prototype.unsubscribe = function () {
+        if (this.closed) {
+            return;
+        }
+        this.isStopped = true;
+        _super.prototype.unsubscribe.call(this);
+    };
+    Subscriber.prototype._next = function (value) {
+        this.destination.next(value);
+    };
+    Subscriber.prototype._error = function (err) {
+        this.destination.error(err);
+        this.unsubscribe();
+    };
+    Subscriber.prototype._complete = function () {
+        this.destination.complete();
+        this.unsubscribe();
+    };
+    Subscriber.prototype._unsubscribeAndRecycle = function () {
+        var _a = this, _parent = _a._parent, _parents = _a._parents;
+        this._parent = null;
+        this._parents = null;
+        this.unsubscribe();
+        this.closed = false;
+        this.isStopped = false;
+        this._parent = _parent;
+        this._parents = _parents;
+        return this;
+    };
+    return Subscriber;
+}(Subscription_1.Subscription));
+exports.Subscriber = Subscriber;
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var SafeSubscriber = (function (_super) {
+    __extends(SafeSubscriber, _super);
+    function SafeSubscriber(_parentSubscriber, observerOrNext, error, complete) {
+        _super.call(this);
+        this._parentSubscriber = _parentSubscriber;
+        var next;
+        var context = this;
+        if (isFunction_1.isFunction(observerOrNext)) {
+            next = observerOrNext;
+        }
+        else if (observerOrNext) {
+            next = observerOrNext.next;
+            error = observerOrNext.error;
+            complete = observerOrNext.complete;
+            if (observerOrNext !== Observer_1.empty) {
+                context = Object.create(observerOrNext);
+                if (isFunction_1.isFunction(context.unsubscribe)) {
+                    this.add(context.unsubscribe.bind(context));
+                }
+                context.unsubscribe = this.unsubscribe.bind(this);
+            }
+        }
+        this._context = context;
+        this._next = next;
+        this._error = error;
+        this._complete = complete;
+    }
+    SafeSubscriber.prototype.next = function (value) {
+        if (!this.isStopped && this._next) {
+            var _parentSubscriber = this._parentSubscriber;
+            if (!_parentSubscriber.syncErrorThrowable) {
+                this.__tryOrUnsub(this._next, value);
+            }
+            else if (this.__tryOrSetError(_parentSubscriber, this._next, value)) {
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.error = function (err) {
+        if (!this.isStopped) {
+            var _parentSubscriber = this._parentSubscriber;
+            if (this._error) {
+                if (!_parentSubscriber.syncErrorThrowable) {
+                    this.__tryOrUnsub(this._error, err);
+                    this.unsubscribe();
+                }
+                else {
+                    this.__tryOrSetError(_parentSubscriber, this._error, err);
+                    this.unsubscribe();
+                }
+            }
+            else if (!_parentSubscriber.syncErrorThrowable) {
+                this.unsubscribe();
+                throw err;
+            }
+            else {
+                _parentSubscriber.syncErrorValue = err;
+                _parentSubscriber.syncErrorThrown = true;
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.complete = function () {
+        var _this = this;
+        if (!this.isStopped) {
+            var _parentSubscriber = this._parentSubscriber;
+            if (this._complete) {
+                var wrappedComplete = function () { return _this._complete.call(_this._context); };
+                if (!_parentSubscriber.syncErrorThrowable) {
+                    this.__tryOrUnsub(wrappedComplete);
+                    this.unsubscribe();
+                }
+                else {
+                    this.__tryOrSetError(_parentSubscriber, wrappedComplete);
+                    this.unsubscribe();
+                }
+            }
+            else {
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.__tryOrUnsub = function (fn, value) {
+        try {
+            fn.call(this._context, value);
+        }
+        catch (err) {
+            this.unsubscribe();
+            throw err;
+        }
+    };
+    SafeSubscriber.prototype.__tryOrSetError = function (parent, fn, value) {
+        try {
+            fn.call(this._context, value);
+        }
+        catch (err) {
+            parent.syncErrorValue = err;
+            parent.syncErrorThrown = true;
+            return true;
+        }
+        return false;
+    };
+    SafeSubscriber.prototype._unsubscribe = function () {
+        var _parentSubscriber = this._parentSubscriber;
+        this._context = null;
+        this._parentSubscriber = null;
+        _parentSubscriber.unsubscribe();
+    };
+    return SafeSubscriber;
+}(Subscriber));
+//# sourceMappingURL=Subscriber.js.map
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function isFunction(x) {
+    return typeof x === 'function';
+}
+exports.isFunction = isFunction;
+//# sourceMappingURL=isFunction.js.map
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// typeof any so that it we don't have to cast when comparing a result to the error object
+exports.errorObject = { e: {} };
+//# sourceMappingURL=errorObject.js.map
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.empty = {
+    closed: true,
+    next: function (value) { },
+    error: function (err) { throw err; },
+    complete: function () { }
+};
+//# sourceMappingURL=Observer.js.map
+
+/***/ }),
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -2626,7 +3482,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 9 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2635,28 +3491,409 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Submit = exports.Input = exports.Form = undefined;
 
-var _Form = __webpack_require__(10);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _formStorage = __webpack_require__(7);
+
+var _formStorage2 = _interopRequireDefault(_formStorage);
+
+var _withValidator = __webpack_require__(22);
+
+var _withValidator2 = _interopRequireDefault(_withValidator);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Validator = (0, _withValidator2.default)('input');
+
+var makeMeSmart = function makeMeSmart() {
+    var formStorage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _formStorage2.default;
+    return function (CustomComponent) {
+        var SmartInput = function (_Validator) {
+            _inherits(SmartInput, _Validator);
+
+            function SmartInput(props) {
+                _classCallCheck(this, SmartInput);
+
+                var _this = _possibleConstructorReturn(this, (SmartInput.__proto__ || Object.getPrototypeOf(SmartInput)).call(this, props));
+
+                _this.setError = function (errorMessage) {
+                    if (errorMessage !== _this.state.error) {
+                        formStorage.setErrors(_defineProperty({}, _this.props.name, errorMessage));
+                    }
+                };
+
+                _this.setValue = function (value) {
+                    var currentValue = formStorage.getValues(_this.props.name);
+                    if (value !== currentValue) {
+                        formStorage.setValues(_defineProperty({}, _this.props.name, value));
+                    }
+                };
+
+                _this.onChange = function (e) {
+                    var value = e.target.value;
+
+                    _this.setValue(value);
+                    if (_this.props.onChange) {
+                        _this.props.onChange(value);
+                    }
+                };
+
+                _this.state = {
+                    value: props.defaultValue,
+                    error: _this.generateErrorMessage(props.defaultValue)
+                };
+                _this.subscription = formStorage.onChange.subscribe(function () {
+                    var value = formStorage.getValues(_this.props.name);
+                    var error = formStorage.getErrors(_this.props.name);
+
+                    if (value !== _this.state.value || error !== _this.state.error) {
+                        _this.setState({
+                            value: value,
+                            error: error
+                        });
+                    }
+                });
+                return _this;
+            }
+
+            _createClass(SmartInput, [{
+                key: 'componentWillUnmount',
+                value: function componentWillUnmount() {
+                    this.subscription.unsubscribe();
+                }
+            }, {
+                key: 'componentWillMount',
+                value: function componentWillMount() {
+                    var defaultValue = this.props.defaultValue;
+
+                    var valueToSet = defaultValue || '';
+                    formStorage.setValues(_defineProperty({}, this.props.name, valueToSet));
+                    formStorage.setErrors(_defineProperty({}, this.props.name, this.generateErrorMessage(valueToSet, true)));
+                }
+            }, {
+                key: 'componentDidMount',
+                value: function componentDidMount() {
+                    if (this.props.focused) {
+                        this.input.focus();
+                    }
+                }
+            }, {
+                key: 'render',
+                value: function render() {
+                    var _this2 = this;
+
+                    var _props = this.props,
+                        validators = _props.validators,
+                        defaultValue = _props.defaultValue,
+                        onValidate = _props.onValidate,
+                        restProps = _objectWithoutProperties(_props, ['validators', 'defaultValue', 'onValidate']);
+
+                    var props = _extends({}, restProps, {
+                        value: this.state.value,
+                        onFocus: this.onFocus,
+                        onChange: this.onChange,
+                        onBlur: this.onBlur,
+                        smartForm: {
+                            error: this.state.error
+                        },
+                        ref: function ref(input) {
+                            _this2.input = input;
+                            if (restProps.ref) {
+                                restProps.ref(input);
+                            }
+                        }
+                    });
+                    return _react2.default.createElement(CustomComponent, props);
+                }
+            }]);
+
+            return SmartInput;
+        }(Validator);
+
+        SmartInput.defaultProps = {
+            defaultValue: '',
+            debounce: 300
+        };
+        SmartInput.propTypes = {
+            validators: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.func), _propTypes2.default.func]),
+            onChange: _propTypes2.default.func,
+            focused: _propTypes2.default.bool,
+            onFocus: _propTypes2.default.func,
+            onBlur: _propTypes2.default.func,
+            name: _propTypes2.default.string,
+            defaultValue: _propTypes2.default.string,
+            debounce: _propTypes2.default.number
+        };
+        return SmartInput;
+    };
+};
+
+exports.default = makeMeSmart;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _lodash = __webpack_require__(51);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _lodash3 = __webpack_require__(52);
+
+var _lodash4 = _interopRequireDefault(_lodash3);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var withValidator = function withValidator(CustomComponent) {
+    var SmartInput = function (_Component) {
+        _inherits(SmartInput, _Component);
+
+        function SmartInput(props) {
+            _classCallCheck(this, SmartInput);
+
+            var _this = _possibleConstructorReturn(this, (SmartInput.__proto__ || Object.getPrototypeOf(SmartInput)).call(this, props));
+
+            _this.setError = function (errorMessage) {
+                var error = _this.props.error;
+
+                var undefinedPropError = typeof error === 'undefined';
+                var currentError = undefinedPropError ? _this.state.error : error;
+                if (errorMessage !== currentError) {
+                    if (undefinedPropError) {
+                        _this.setState({
+                            error: errorMessage
+                        });
+                    }
+                    _this.onValidate(errorMessage);
+                }
+            };
+
+            _this.generateErrorMessage = function (value, initial) {
+                var errorMessage = false;
+                var propValidators = (0, _lodash2.default)(_this.props.validators);
+                propValidators.every(function (validator) {
+                    if (!validator) return true;
+                    var validate = validator(value);
+                    if (validate !== false) {
+                        errorMessage = initial ? true : validate;
+                        return false;
+                    }
+                    return true;
+                });
+                return errorMessage;
+            };
+
+            _this.validate = function (value, initial) {
+                _this.setError(_this.generateErrorMessage(value, initial));
+            };
+
+            _this.setValue = function (value) {
+                if (value !== _this.state.value) {
+                    _this.setState({ value: value });
+                }
+            };
+
+            _this.onChange = function (e) {
+                if (typeof _this.props.value !== 'string') {
+                    var value = e.target.value;
+
+                    _this.setValue(value);
+                }
+                if (_this.props.onChange) {
+                    _this.props.onChange(e);
+                }
+            };
+
+            _this.onBlur = function (e) {
+                _this.validate(e.target.value);
+                if (_this.props.onBlur) {
+                    _this.props.onBlur(e);
+                }
+            };
+
+            _this.onValidate = function (error) {
+                var onValidate = _this.props.onValidate;
+
+                if (onValidate) {
+                    onValidate(error);
+                }
+            };
+
+            _this.validate = (0, _lodash4.default)(_this.validate, props.debounce);
+            _this.state = {
+                value: props.defaultValue || props.value,
+                error: _this.generateErrorMessage(props.defaultValue, true)
+            };
+            _this.onValidate(_this.state.error);
+            return _this;
+        }
+
+        _createClass(SmartInput, [{
+            key: 'shouldComponentUpdate',
+            value: function shouldComponentUpdate(nextProps, nextState) {
+                var nextValue = nextProps.value || nextState.value;
+                var currentValue = this.props.value || this.state.value;
+                if (!nextValue && this.props.defaultValue !== nextProps.defaultValue) {
+                    this.setValue(nextProps.defaultValue);
+                    return false;
+                } else if (currentValue !== nextValue) {
+                    this.validate(nextValue);
+                }
+                return nextProps !== this.props || nextState !== this.state;
+            }
+        }, {
+            key: 'render',
+            value: function render() {
+                var _this2 = this;
+
+                var _props = this.props,
+                    validators = _props.validators,
+                    defaultValue = _props.defaultValue,
+                    onValidate = _props.onValidate,
+                    restProps = _objectWithoutProperties(_props, ['validators', 'defaultValue', 'onValidate']);
+
+                var props = _extends({}, restProps, {
+                    onChange: this.onChange,
+                    onBlur: this.onBlur,
+                    error: this.props.error || this.state.error,
+                    ref: function ref(input) {
+                        _this2.input = input;
+                        if (restProps.ref) {
+                            restProps.ref(input);
+                        }
+                    }
+                });
+                return _react2.default.createElement(CustomComponent, props);
+            }
+        }]);
+
+        return SmartInput;
+    }(_react.Component);
+
+    SmartInput.defaultProps = {
+        defaultValue: '',
+        debounce: 300
+    };
+    SmartInput.propTypes = {
+        value: _propTypes2.default.string,
+        validators: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.func), _propTypes2.default.func]),
+        onChange: _propTypes2.default.func,
+        onBlur: _propTypes2.default.func,
+        defaultValue: _propTypes2.default.string,
+        debounce: _propTypes2.default.number,
+        onValidate: _propTypes2.default.func,
+        error: _propTypes2.default.oneOf([_propTypes2.default.string, _propTypes2.default.bool])
+    };
+
+    return SmartInput;
+};
+
+exports.default = withValidator;
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.smartInputShape = exports.formStateShape = exports.withFormState = exports.withValidator = exports.smartInput = exports.smartForm = exports.Submit = exports.Input = exports.Form = undefined;
+
+var _Form = __webpack_require__(24);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _Input = __webpack_require__(21);
+var _Input = __webpack_require__(48);
 
 var _Input2 = _interopRequireDefault(_Input);
 
-var _Submit = __webpack_require__(27);
+var _Submit = __webpack_require__(53);
 
 var _Submit2 = _interopRequireDefault(_Submit);
+
+var _withValidator = __webpack_require__(22);
+
+var _withValidator2 = _interopRequireDefault(_withValidator);
+
+var _smartForm = __webpack_require__(14);
+
+var _smartForm2 = _interopRequireDefault(_smartForm);
+
+var _smartInput = __webpack_require__(21);
+
+var _smartInput2 = _interopRequireDefault(_smartInput);
+
+var _withFormState = __webpack_require__(11);
+
+var _withFormState2 = _interopRequireDefault(_withFormState);
+
+var _propTypes = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Form = _Form2.default;
 exports.Input = _Input2.default;
 exports.Submit = _Submit2.default;
+exports.smartForm = _smartForm2.default;
+exports.smartInput = _smartInput2.default;
+exports.withValidator = _withValidator2.default;
+exports.withFormState = _withFormState2.default;
+exports.formStateShape = _propTypes.formStateShape;
+exports.smartInputShape = _propTypes.smartInputShape;
 
 /***/ }),
-/* 10 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2665,8 +3902,6 @@ exports.Submit = _Submit2.default;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -2684,9 +3919,15 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
+var _smartForm = __webpack_require__(14);
+
+var _smartForm2 = _interopRequireDefault(_smartForm);
+
+var _propTypes3 = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2701,72 +3942,26 @@ var FormWrapper = _styledComponents2.default.div(_templateObject);
 var Form = function (_Component) {
     _inherits(Form, _Component);
 
-    function Form(props) {
+    function Form() {
         _classCallCheck(this, Form);
 
-        var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
-
-        _initialiseProps.call(_this);
-
-        var values = {};
-        var errors = {};
-        _this.state = {
-            values: values,
-            errors: errors,
-            loading: null,
-            requestError: null
-        };
-        _this.defaultErrors = {};
-        return _this;
+        return _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).apply(this, arguments));
     }
 
     _createClass(Form, [{
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            var _this2 = this;
-
-            if (this.beforeSubmit) {
-                this.beforeSubmit = false;
-                if (this.props.onSubmit) {
-                    var onSubmitValue = this.props.onSubmit(this.state.values);
-                    if (onSubmitValue instanceof Promise) {
-                        this.setState({
-                            loading: true
-                        });
-                        onSubmitValue.then(function () {
-                            _this2.setState({
-                                loading: false
-                            });
-                        }).catch(this.handleRequestError);
-                    }
-                }
-            }
-        }
-    }, {
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            var formRef = this.props.formRef;
-
-            if (formRef) {
-                formRef({
-                    reset: this.reset,
-                    setErrors: this.setErrors,
-                    setValues: this.setValues,
-                    getValues: this.getValues
-                });
-            }
-        }
-    }, {
         key: 'render',
         value: function render() {
-            var children = _react2.default.Children.map(this.props.children, this.modifyChildren);
+            var _props = this.props,
+                smartForm = _props.smartForm,
+                formProps = _objectWithoutProperties(_props, ['smartForm']);
+
             return _react2.default.createElement(
                 FormWrapper,
                 null,
                 _react2.default.createElement(
                     'form',
-                    { id: this.props.id, onSubmit: this.onSubmit },
-                    children
+                    formProps,
+                    this.props.children
                 )
             );
         }
@@ -2775,142 +3970,6 @@ var Form = function (_Component) {
     return Form;
 }(_react.Component);
 
-var _initialiseProps = function _initialiseProps() {
-    var _this3 = this;
-
-    this.setValues = function (newValues) {
-        var values = _this3.state.values;
-
-        Object.assign(values, newValues);
-        _this3.setState({ values: Object.assign({}, values) });
-    };
-
-    this.setErrors = function () {
-        var fieldErrorMap = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-        var errors = _this3.state.errors;
-
-        Object.assign(errors, fieldErrorMap);
-        _this3.setState({
-            errors: Object.assign({}, errors),
-            requestError: null
-        });
-    };
-
-    this.reset = function (inputName) {
-        var _state = _this3.state,
-            values = _state.values,
-            errors = _state.errors;
-
-        var newState = {};
-        if (inputName) {
-            newState.values = Object.assign({}, values, _defineProperty({}, inputName, ''));
-            newState.errors = Object.assign({}, errors, _defineProperty({}, inputName, _this3.defaultErrors[inputName]));
-        } else {
-            newState.values = Object.keys(values).reduce(function (accu, val) {
-                accu[val] = '';
-                return accu;
-            }, {});
-            newState.errors = Object.keys(errors).reduce(function (accu, val) {
-                accu[val] = _this3.defaultErrors[val];
-                return accu;
-            }, {});
-        }
-        _this3.setState(newState);
-    };
-
-    this.onSubmit = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (!_this3.props.disabled && !_this3.hasError() && !_this3.state.loading) {
-            _this3.beforeSubmit = true;
-            _this3.forceUpdate();
-        }
-    };
-
-    this.handleRequestError = function (error) {
-        if (!error) {
-            return;
-        }
-        var state = {
-            loading: false
-        };
-
-        if (error instanceof Error) {
-            state.requestError = error.message;
-        } else if (typeof error === 'string') {
-            state.requestError = error;
-        } else if ((typeof error === 'undefined' ? 'undefined' : _typeof(error)) === 'object') {
-            var errors = _this3.state.errors;
-
-            state.errors = Object.assign({}, errors, error);
-        }
-        _this3.setState(state);
-    };
-
-    this.onValidate = function (error, name) {
-        _this3.setErrors(_defineProperty({}, name, error));
-        if (typeof _this3.defaultErrors[name] === 'undefined') {
-            _this3.defaultErrors[name] = error;
-        }
-        if (_this3.props.onValidate) _this3.props.onValidate(_this3.hasError());
-    };
-
-    this.onChangeInput = function (name) {
-        return function (inputValue) {
-            _this3.setValues(_defineProperty({}, name, inputValue));
-            if (_this3.props.onChange) {
-                _this3.props.onChange(_this3.state.values, _this3.formHasChange());
-            }
-        };
-    };
-
-    this.hasError = function () {
-        return !!_this3.state.requestError || Object.keys(_this3.state.errors).some(function (name) {
-            var error = _this3.state.errors[name];
-            return typeof error === 'string' || error === true;
-        });
-    };
-
-    this.formHasChange = function () {
-        return true;
-    };
-
-    this.modifyChildren = function (child) {
-        var hasError = _this3.hasError();
-        var props = {
-            errorMessage: _this3.state.requestError || _this3.state.errors[child.props.name],
-            value: _this3.state.values[child.props.name],
-            formProps: {
-                onValidate: function onValidate(error) {
-                    _this3.onValidate(error, child.props.name);
-                },
-                onChangeValue: _this3.onChangeInput(child.props.name),
-                hasError: _this3.state.errors[child.props.name],
-                beforeSubmit: _this3.beforeSubmit
-            }
-        };
-        if (child.type.displayName === 'Input') {
-            return _react2.default.cloneElement(child, props);
-        }
-        if (child.type.displayName === 'Submit') {
-            return _react2.default.cloneElement(child, {
-                formProps: {
-                    loading: _this3.props.loading || _this3.state.loading,
-                    disabled: _this3.props.disabled && hasError || !hasError && _this3.props.disabled || hasError && !_this3.props.disabled
-                }
-            });
-        }
-        if ((!child.type || !child.type.displayName) && child.props.children instanceof Array) {
-            return _react2.default.Children.map(child.props.children, _this3.modifyChildren);
-        }
-        return child;
-    };
-
-    this.getValues = function (fieldName) {
-        return fieldName ? _this3.state.values[fieldName] : _this3.state.values;
-    };
-};
-
 Form.propTypes = {
     onValidate: _propTypes2.default.func,
     children: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]),
@@ -2918,13 +3977,13 @@ Form.propTypes = {
     disabled: _propTypes2.default.bool,
     loading: _propTypes2.default.bool,
     onChange: _propTypes2.default.func,
-    id: _propTypes2.default.string,
-    formRef: _propTypes2.default.func
+    formRef: _propTypes2.default.func,
+    smartForm: _propTypes3.formStateShape
 };
-exports.default = Form;
+exports.default = (0, _smartForm2.default)()(Form);
 
 /***/ }),
-/* 11 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2937,13 +3996,13 @@ exports.default = Form;
 
 
 
-var emptyFunction = __webpack_require__(3);
-var invariant = __webpack_require__(4);
-var warning = __webpack_require__(7);
-var assign = __webpack_require__(12);
+var emptyFunction = __webpack_require__(4);
+var invariant = __webpack_require__(5);
+var warning = __webpack_require__(13);
+var assign = __webpack_require__(26);
 
-var ReactPropTypesSecret = __webpack_require__(5);
-var checkPropTypes = __webpack_require__(13);
+var ReactPropTypesSecret = __webpack_require__(6);
+var checkPropTypes = __webpack_require__(27);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -3473,7 +4532,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 /***/ }),
-/* 12 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3570,7 +4629,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 13 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3584,9 +4643,9 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 if (undefined !== 'production') {
-  var invariant = __webpack_require__(4);
-  var warning = __webpack_require__(7);
-  var ReactPropTypesSecret = __webpack_require__(5);
+  var invariant = __webpack_require__(5);
+  var warning = __webpack_require__(13);
+  var ReactPropTypesSecret = __webpack_require__(6);
   var loggedTypeFailures = {};
 }
 
@@ -3636,7 +4695,7 @@ module.exports = checkPropTypes;
 
 
 /***/ }),
-/* 14 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3649,9 +4708,9 @@ module.exports = checkPropTypes;
 
 
 
-var emptyFunction = __webpack_require__(3);
-var invariant = __webpack_require__(4);
-var ReactPropTypesSecret = __webpack_require__(5);
+var emptyFunction = __webpack_require__(4);
+var invariant = __webpack_require__(5);
+var ReactPropTypesSecret = __webpack_require__(6);
 
 module.exports = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -3701,7 +4760,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 15 */
+/* 29 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -3731,7 +4790,7 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 16 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3744,7 +4803,7 @@ module.exports = function(originalModule) {
 
 
 
-var isObject = __webpack_require__(17);
+var isObject = __webpack_require__(31);
 
 function isObjectObject(o) {
   return isObject(o) === true
@@ -3775,7 +4834,7 @@ module.exports = function isPlainObject(o) {
 
 
 /***/ }),
-/* 17 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3794,7 +4853,7 @@ module.exports = function isObject(val) {
 
 
 /***/ }),
-/* 18 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -5408,7 +6467,7 @@ module.exports = function isObject(val) {
 
 
 /***/ }),
-/* 19 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = isFunction
@@ -5429,7 +6488,7 @@ function isFunction (fn) {
 
 
 /***/ }),
-/* 20 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5486,7 +6545,872 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 
 /***/ }),
-/* 21 */
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _Subject = __webpack_require__(36);
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var FormStorage = function FormStorage() {
+    var _this = this;
+
+    _classCallCheck(this, FormStorage);
+
+    this.disabled = true;
+    this.loading = false;
+    this.values = {};
+    this.errors = {};
+    this.onChange = new _Subject.Subject();
+    this.onChangeProps = new _Subject.Subject();
+
+    this.triggerChange = function () {
+        _this.onChange.next();
+    };
+
+    this.triggerChangeProps = function () {
+        _this.onChangeProps.next();
+    };
+
+    this.setValues = function () {
+        var newValues = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+        Object.assign(_this.values, newValues);
+        _this.triggerChange();
+        return _this;
+    };
+
+    this.setErrors = function () {
+        var newErrors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+        Object.assign(_this.errors, newErrors);
+        _this.triggerChange();
+        return _this;
+    };
+
+    this.getValues = function (fieldName) {
+        return fieldName ? _this.values[fieldName] : _this.values;
+    };
+
+    this.getErrors = function (fieldName) {
+        return fieldName ? _this.errors[fieldName] : _this.values;
+    };
+
+    this.hasError = function () {
+        var errorKeys = Object.keys(_this.errors);
+        if (!errorKeys.length) {
+            return true;
+        }
+        return errorKeys.some(function (name) {
+            var error = _this.errors[name];
+            return typeof error === 'string' || error === true;
+        });
+    };
+
+    this.setProps = function (newProps) {
+        var loading = newProps.loading,
+            disabled = newProps.disabled;
+
+        if (loading !== _this.loading || disabled !== _this.disabled) {
+            if (typeof loading !== 'undefined') {
+                _this.loading = loading;
+            }
+            if (typeof disabled !== 'undefined') {
+                _this.disabled = disabled;
+            }
+            _this.triggerChangeProps();
+        }
+    };
+
+    this.restore = function () {
+        _this.values = {};
+        _this.errors = {};
+        _this.defaultValues = {};
+        _this.defaultErrors = {};
+    };
+
+    this.reset = function (inputName) {
+        var values = _this.values,
+            errors = _this.errors;
+
+        var newState = { values: {}, errors: {} };
+        if (inputName) {
+            newState.values = Object.assign({}, values, _defineProperty({}, inputName, ''));
+            newState.errors = Object.assign({}, errors, _defineProperty({}, inputName, _this.defaultErrors[inputName]));
+        } else {
+            newState.values = Object.keys(values).reduce(function (accu, val) {
+                accu[val] = '';
+                return accu;
+            }, {});
+            newState.errors = Object.keys(errors).reduce(function (accu, val) {
+                accu[val] = _this.defaultErrors[val];
+                return accu;
+            }, {});
+        }
+        _this.setValues(newState.values);
+    };
+
+    this.onChange.subscribe(function () {
+        _this.setProps({
+            disabled: _this.hasError()
+        });
+    });
+};
+
+exports.default = FormStorage;
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Observable_1 = __webpack_require__(37);
+var Subscriber_1 = __webpack_require__(16);
+var Subscription_1 = __webpack_require__(9);
+var ObjectUnsubscribedError_1 = __webpack_require__(46);
+var SubjectSubscription_1 = __webpack_require__(47);
+var rxSubscriber_1 = __webpack_require__(10);
+/**
+ * @class SubjectSubscriber<T>
+ */
+var SubjectSubscriber = (function (_super) {
+    __extends(SubjectSubscriber, _super);
+    function SubjectSubscriber(destination) {
+        _super.call(this, destination);
+        this.destination = destination;
+    }
+    return SubjectSubscriber;
+}(Subscriber_1.Subscriber));
+exports.SubjectSubscriber = SubjectSubscriber;
+/**
+ * @class Subject<T>
+ */
+var Subject = (function (_super) {
+    __extends(Subject, _super);
+    function Subject() {
+        _super.call(this);
+        this.observers = [];
+        this.closed = false;
+        this.isStopped = false;
+        this.hasError = false;
+        this.thrownError = null;
+    }
+    Subject.prototype[rxSubscriber_1.rxSubscriber] = function () {
+        return new SubjectSubscriber(this);
+    };
+    Subject.prototype.lift = function (operator) {
+        var subject = new AnonymousSubject(this, this);
+        subject.operator = operator;
+        return subject;
+    };
+    Subject.prototype.next = function (value) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        if (!this.isStopped) {
+            var observers = this.observers;
+            var len = observers.length;
+            var copy = observers.slice();
+            for (var i = 0; i < len; i++) {
+                copy[i].next(value);
+            }
+        }
+    };
+    Subject.prototype.error = function (err) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        this.hasError = true;
+        this.thrownError = err;
+        this.isStopped = true;
+        var observers = this.observers;
+        var len = observers.length;
+        var copy = observers.slice();
+        for (var i = 0; i < len; i++) {
+            copy[i].error(err);
+        }
+        this.observers.length = 0;
+    };
+    Subject.prototype.complete = function () {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        this.isStopped = true;
+        var observers = this.observers;
+        var len = observers.length;
+        var copy = observers.slice();
+        for (var i = 0; i < len; i++) {
+            copy[i].complete();
+        }
+        this.observers.length = 0;
+    };
+    Subject.prototype.unsubscribe = function () {
+        this.isStopped = true;
+        this.closed = true;
+        this.observers = null;
+    };
+    Subject.prototype._trySubscribe = function (subscriber) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        else {
+            return _super.prototype._trySubscribe.call(this, subscriber);
+        }
+    };
+    Subject.prototype._subscribe = function (subscriber) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        else if (this.hasError) {
+            subscriber.error(this.thrownError);
+            return Subscription_1.Subscription.EMPTY;
+        }
+        else if (this.isStopped) {
+            subscriber.complete();
+            return Subscription_1.Subscription.EMPTY;
+        }
+        else {
+            this.observers.push(subscriber);
+            return new SubjectSubscription_1.SubjectSubscription(this, subscriber);
+        }
+    };
+    Subject.prototype.asObservable = function () {
+        var observable = new Observable_1.Observable();
+        observable.source = this;
+        return observable;
+    };
+    Subject.create = function (destination, source) {
+        return new AnonymousSubject(destination, source);
+    };
+    return Subject;
+}(Observable_1.Observable));
+exports.Subject = Subject;
+/**
+ * @class AnonymousSubject<T>
+ */
+var AnonymousSubject = (function (_super) {
+    __extends(AnonymousSubject, _super);
+    function AnonymousSubject(destination, source) {
+        _super.call(this);
+        this.destination = destination;
+        this.source = source;
+    }
+    AnonymousSubject.prototype.next = function (value) {
+        var destination = this.destination;
+        if (destination && destination.next) {
+            destination.next(value);
+        }
+    };
+    AnonymousSubject.prototype.error = function (err) {
+        var destination = this.destination;
+        if (destination && destination.error) {
+            this.destination.error(err);
+        }
+    };
+    AnonymousSubject.prototype.complete = function () {
+        var destination = this.destination;
+        if (destination && destination.complete) {
+            this.destination.complete();
+        }
+    };
+    AnonymousSubject.prototype._subscribe = function (subscriber) {
+        var source = this.source;
+        if (source) {
+            return this.source.subscribe(subscriber);
+        }
+        else {
+            return Subscription_1.Subscription.EMPTY;
+        }
+    };
+    return AnonymousSubject;
+}(Subject));
+exports.AnonymousSubject = AnonymousSubject;
+//# sourceMappingURL=Subject.js.map
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var root_1 = __webpack_require__(8);
+var toSubscriber_1 = __webpack_require__(38);
+var observable_1 = __webpack_require__(43);
+var pipe_1 = __webpack_require__(44);
+/**
+ * A representation of any set of values over any amount of time. This is the most basic building block
+ * of RxJS.
+ *
+ * @class Observable<T>
+ */
+var Observable = (function () {
+    /**
+     * @constructor
+     * @param {Function} subscribe the function that is called when the Observable is
+     * initially subscribed to. This function is given a Subscriber, to which new values
+     * can be `next`ed, or an `error` method can be called to raise an error, or
+     * `complete` can be called to notify of a successful completion.
+     */
+    function Observable(subscribe) {
+        this._isScalar = false;
+        if (subscribe) {
+            this._subscribe = subscribe;
+        }
+    }
+    /**
+     * Creates a new Observable, with this Observable as the source, and the passed
+     * operator defined as the new observable's operator.
+     * @method lift
+     * @param {Operator} operator the operator defining the operation to take on the observable
+     * @return {Observable} a new observable with the Operator applied
+     */
+    Observable.prototype.lift = function (operator) {
+        var observable = new Observable();
+        observable.source = this;
+        observable.operator = operator;
+        return observable;
+    };
+    /**
+     * Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.
+     *
+     * <span class="informal">Use it when you have all these Observables, but still nothing is happening.</span>
+     *
+     * `subscribe` is not a regular operator, but a method that calls Observable's internal `subscribe` function. It
+     * might be for example a function that you passed to a {@link create} static factory, but most of the time it is
+     * a library implementation, which defines what and when will be emitted by an Observable. This means that calling
+     * `subscribe` is actually the moment when Observable starts its work, not when it is created, as it is often
+     * thought.
+     *
+     * Apart from starting the execution of an Observable, this method allows you to listen for values
+     * that an Observable emits, as well as for when it completes or errors. You can achieve this in two
+     * following ways.
+     *
+     * The first way is creating an object that implements {@link Observer} interface. It should have methods
+     * defined by that interface, but note that it should be just a regular JavaScript object, which you can create
+     * yourself in any way you want (ES6 class, classic function constructor, object literal etc.). In particular do
+     * not attempt to use any RxJS implementation details to create Observers - you don't need them. Remember also
+     * that your object does not have to implement all methods. If you find yourself creating a method that doesn't
+     * do anything, you can simply omit it. Note however, that if `error` method is not provided, all errors will
+     * be left uncaught.
+     *
+     * The second way is to give up on Observer object altogether and simply provide callback functions in place of its methods.
+     * This means you can provide three functions as arguments to `subscribe`, where first function is equivalent
+     * of a `next` method, second of an `error` method and third of a `complete` method. Just as in case of Observer,
+     * if you do not need to listen for something, you can omit a function, preferably by passing `undefined` or `null`,
+     * since `subscribe` recognizes these functions by where they were placed in function call. When it comes
+     * to `error` function, just as before, if not provided, errors emitted by an Observable will be thrown.
+     *
+     * Whatever style of calling `subscribe` you use, in both cases it returns a Subscription object.
+     * This object allows you to call `unsubscribe` on it, which in turn will stop work that an Observable does and will clean
+     * up all resources that an Observable used. Note that cancelling a subscription will not call `complete` callback
+     * provided to `subscribe` function, which is reserved for a regular completion signal that comes from an Observable.
+     *
+     * Remember that callbacks provided to `subscribe` are not guaranteed to be called asynchronously.
+     * It is an Observable itself that decides when these functions will be called. For example {@link of}
+     * by default emits all its values synchronously. Always check documentation for how given Observable
+     * will behave when subscribed and if its default behavior can be modified with a {@link Scheduler}.
+     *
+     * @example <caption>Subscribe with an Observer</caption>
+     * const sumObserver = {
+     *   sum: 0,
+     *   next(value) {
+     *     console.log('Adding: ' + value);
+     *     this.sum = this.sum + value;
+     *   },
+     *   error() { // We actually could just remove this method,
+     *   },        // since we do not really care about errors right now.
+     *   complete() {
+     *     console.log('Sum equals: ' + this.sum);
+     *   }
+     * };
+     *
+     * Rx.Observable.of(1, 2, 3) // Synchronously emits 1, 2, 3 and then completes.
+     * .subscribe(sumObserver);
+     *
+     * // Logs:
+     * // "Adding: 1"
+     * // "Adding: 2"
+     * // "Adding: 3"
+     * // "Sum equals: 6"
+     *
+     *
+     * @example <caption>Subscribe with functions</caption>
+     * let sum = 0;
+     *
+     * Rx.Observable.of(1, 2, 3)
+     * .subscribe(
+     *   function(value) {
+     *     console.log('Adding: ' + value);
+     *     sum = sum + value;
+     *   },
+     *   undefined,
+     *   function() {
+     *     console.log('Sum equals: ' + sum);
+     *   }
+     * );
+     *
+     * // Logs:
+     * // "Adding: 1"
+     * // "Adding: 2"
+     * // "Adding: 3"
+     * // "Sum equals: 6"
+     *
+     *
+     * @example <caption>Cancel a subscription</caption>
+     * const subscription = Rx.Observable.interval(1000).subscribe(
+     *   num => console.log(num),
+     *   undefined,
+     *   () => console.log('completed!') // Will not be called, even
+     * );                                // when cancelling subscription
+     *
+     *
+     * setTimeout(() => {
+     *   subscription.unsubscribe();
+     *   console.log('unsubscribed!');
+     * }, 2500);
+     *
+     * // Logs:
+     * // 0 after 1s
+     * // 1 after 2s
+     * // "unsubscribed!" after 2.5s
+     *
+     *
+     * @param {Observer|Function} observerOrNext (optional) Either an observer with methods to be called,
+     *  or the first of three possible handlers, which is the handler for each value emitted from the subscribed
+     *  Observable.
+     * @param {Function} error (optional) A handler for a terminal event resulting from an error. If no error handler is provided,
+     *  the error will be thrown as unhandled.
+     * @param {Function} complete (optional) A handler for a terminal event resulting from successful completion.
+     * @return {ISubscription} a subscription reference to the registered handlers
+     * @method subscribe
+     */
+    Observable.prototype.subscribe = function (observerOrNext, error, complete) {
+        var operator = this.operator;
+        var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
+        if (operator) {
+            operator.call(sink, this.source);
+        }
+        else {
+            sink.add(this.source || !sink.syncErrorThrowable ? this._subscribe(sink) : this._trySubscribe(sink));
+        }
+        if (sink.syncErrorThrowable) {
+            sink.syncErrorThrowable = false;
+            if (sink.syncErrorThrown) {
+                throw sink.syncErrorValue;
+            }
+        }
+        return sink;
+    };
+    Observable.prototype._trySubscribe = function (sink) {
+        try {
+            return this._subscribe(sink);
+        }
+        catch (err) {
+            sink.syncErrorThrown = true;
+            sink.syncErrorValue = err;
+            sink.error(err);
+        }
+    };
+    /**
+     * @method forEach
+     * @param {Function} next a handler for each value emitted by the observable
+     * @param {PromiseConstructor} [PromiseCtor] a constructor function used to instantiate the Promise
+     * @return {Promise} a promise that either resolves on observable completion or
+     *  rejects with the handled error
+     */
+    Observable.prototype.forEach = function (next, PromiseCtor) {
+        var _this = this;
+        if (!PromiseCtor) {
+            if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+                PromiseCtor = root_1.root.Rx.config.Promise;
+            }
+            else if (root_1.root.Promise) {
+                PromiseCtor = root_1.root.Promise;
+            }
+        }
+        if (!PromiseCtor) {
+            throw new Error('no Promise impl found');
+        }
+        return new PromiseCtor(function (resolve, reject) {
+            // Must be declared in a separate statement to avoid a RefernceError when
+            // accessing subscription below in the closure due to Temporal Dead Zone.
+            var subscription;
+            subscription = _this.subscribe(function (value) {
+                if (subscription) {
+                    // if there is a subscription, then we can surmise
+                    // the next handling is asynchronous. Any errors thrown
+                    // need to be rejected explicitly and unsubscribe must be
+                    // called manually
+                    try {
+                        next(value);
+                    }
+                    catch (err) {
+                        reject(err);
+                        subscription.unsubscribe();
+                    }
+                }
+                else {
+                    // if there is NO subscription, then we're getting a nexted
+                    // value synchronously during subscription. We can just call it.
+                    // If it errors, Observable's `subscribe` will ensure the
+                    // unsubscription logic is called, then synchronously rethrow the error.
+                    // After that, Promise will trap the error and send it
+                    // down the rejection path.
+                    next(value);
+                }
+            }, reject, resolve);
+        });
+    };
+    Observable.prototype._subscribe = function (subscriber) {
+        return this.source.subscribe(subscriber);
+    };
+    /**
+     * An interop point defined by the es7-observable spec https://github.com/zenparsing/es-observable
+     * @method Symbol.observable
+     * @return {Observable} this instance of the observable
+     */
+    Observable.prototype[observable_1.observable] = function () {
+        return this;
+    };
+    /* tslint:enable:max-line-length */
+    /**
+     * Used to stitch together functional operators into a chain.
+     * @method pipe
+     * @return {Observable} the Observable result of all of the operators having
+     * been called in the order they were passed in.
+     *
+     * @example
+     *
+     * import { map, filter, scan } from 'rxjs/operators';
+     *
+     * Rx.Observable.interval(1000)
+     *   .pipe(
+     *     filter(x => x % 2 === 0),
+     *     map(x => x + x),
+     *     scan((acc, x) => acc + x)
+     *   )
+     *   .subscribe(x => console.log(x))
+     */
+    Observable.prototype.pipe = function () {
+        var operations = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            operations[_i - 0] = arguments[_i];
+        }
+        if (operations.length === 0) {
+            return this;
+        }
+        return pipe_1.pipeFromArray(operations)(this);
+    };
+    /* tslint:enable:max-line-length */
+    Observable.prototype.toPromise = function (PromiseCtor) {
+        var _this = this;
+        if (!PromiseCtor) {
+            if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+                PromiseCtor = root_1.root.Rx.config.Promise;
+            }
+            else if (root_1.root.Promise) {
+                PromiseCtor = root_1.root.Promise;
+            }
+        }
+        if (!PromiseCtor) {
+            throw new Error('no Promise impl found');
+        }
+        return new PromiseCtor(function (resolve, reject) {
+            var value;
+            _this.subscribe(function (x) { return value = x; }, function (err) { return reject(err); }, function () { return resolve(value); });
+        });
+    };
+    // HACK: Since TypeScript inherits static properties too, we have to
+    // fight against TypeScript here so Subject can have a different static create signature
+    /**
+     * Creates a new cold Observable by calling the Observable constructor
+     * @static true
+     * @owner Observable
+     * @method create
+     * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
+     * @return {Observable} a new cold observable
+     */
+    Observable.create = function (subscribe) {
+        return new Observable(subscribe);
+    };
+    return Observable;
+}());
+exports.Observable = Observable;
+//# sourceMappingURL=Observable.js.map
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Subscriber_1 = __webpack_require__(16);
+var rxSubscriber_1 = __webpack_require__(10);
+var Observer_1 = __webpack_require__(19);
+function toSubscriber(nextOrObserver, error, complete) {
+    if (nextOrObserver) {
+        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
+            return nextOrObserver;
+        }
+        if (nextOrObserver[rxSubscriber_1.rxSubscriber]) {
+            return nextOrObserver[rxSubscriber_1.rxSubscriber]();
+        }
+    }
+    if (!nextOrObserver && !error && !complete) {
+        return new Subscriber_1.Subscriber(Observer_1.empty);
+    }
+    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
+}
+exports.toSubscriber = toSubscriber;
+//# sourceMappingURL=toSubscriber.js.map
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
+//# sourceMappingURL=isArray.js.map
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function isObject(x) {
+    return x != null && typeof x === 'object';
+}
+exports.isObject = isObject;
+//# sourceMappingURL=isObject.js.map
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var errorObject_1 = __webpack_require__(18);
+var tryCatchTarget;
+function tryCatcher() {
+    try {
+        return tryCatchTarget.apply(this, arguments);
+    }
+    catch (e) {
+        errorObject_1.errorObject.e = e;
+        return errorObject_1.errorObject;
+    }
+}
+function tryCatch(fn) {
+    tryCatchTarget = fn;
+    return tryCatcher;
+}
+exports.tryCatch = tryCatch;
+;
+//# sourceMappingURL=tryCatch.js.map
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+/**
+ * An error thrown when one or more errors have occurred during the
+ * `unsubscribe` of a {@link Subscription}.
+ */
+var UnsubscriptionError = (function (_super) {
+    __extends(UnsubscriptionError, _super);
+    function UnsubscriptionError(errors) {
+        _super.call(this);
+        this.errors = errors;
+        var err = Error.call(this, errors ?
+            errors.length + " errors occurred during unsubscription:\n  " + errors.map(function (err, i) { return ((i + 1) + ") " + err.toString()); }).join('\n  ') : '');
+        this.name = err.name = 'UnsubscriptionError';
+        this.stack = err.stack;
+        this.message = err.message;
+    }
+    return UnsubscriptionError;
+}(Error));
+exports.UnsubscriptionError = UnsubscriptionError;
+//# sourceMappingURL=UnsubscriptionError.js.map
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var root_1 = __webpack_require__(8);
+function getSymbolObservable(context) {
+    var $$observable;
+    var Symbol = context.Symbol;
+    if (typeof Symbol === 'function') {
+        if (Symbol.observable) {
+            $$observable = Symbol.observable;
+        }
+        else {
+            $$observable = Symbol('observable');
+            Symbol.observable = $$observable;
+        }
+    }
+    else {
+        $$observable = '@@observable';
+    }
+    return $$observable;
+}
+exports.getSymbolObservable = getSymbolObservable;
+exports.observable = getSymbolObservable(root_1.root);
+/**
+ * @deprecated use observable instead
+ */
+exports.$$observable = exports.observable;
+//# sourceMappingURL=observable.js.map
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var noop_1 = __webpack_require__(45);
+/* tslint:enable:max-line-length */
+function pipe() {
+    var fns = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        fns[_i - 0] = arguments[_i];
+    }
+    return pipeFromArray(fns);
+}
+exports.pipe = pipe;
+/* @internal */
+function pipeFromArray(fns) {
+    if (!fns) {
+        return noop_1.noop;
+    }
+    if (fns.length === 1) {
+        return fns[0];
+    }
+    return function piped(input) {
+        return fns.reduce(function (prev, fn) { return fn(prev); }, input);
+    };
+}
+exports.pipeFromArray = pipeFromArray;
+//# sourceMappingURL=pipe.js.map
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/* tslint:disable:no-empty */
+function noop() { }
+exports.noop = noop;
+//# sourceMappingURL=noop.js.map
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+/**
+ * An error thrown when an action is invalid because the object has been
+ * unsubscribed.
+ *
+ * @see {@link Subject}
+ * @see {@link BehaviorSubject}
+ *
+ * @class ObjectUnsubscribedError
+ */
+var ObjectUnsubscribedError = (function (_super) {
+    __extends(ObjectUnsubscribedError, _super);
+    function ObjectUnsubscribedError() {
+        var err = _super.call(this, 'object unsubscribed');
+        this.name = err.name = 'ObjectUnsubscribedError';
+        this.stack = err.stack;
+        this.message = err.message;
+    }
+    return ObjectUnsubscribedError;
+}(Error));
+exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
+//# sourceMappingURL=ObjectUnsubscribedError.js.map
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscription_1 = __webpack_require__(9);
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var SubjectSubscription = (function (_super) {
+    __extends(SubjectSubscription, _super);
+    function SubjectSubscription(subject, subscriber) {
+        _super.call(this);
+        this.subject = subject;
+        this.subscriber = subscriber;
+        this.closed = false;
+    }
+    SubjectSubscription.prototype.unsubscribe = function () {
+        if (this.closed) {
+            return;
+        }
+        this.closed = true;
+        var subject = this.subject;
+        var observers = subject.observers;
+        this.subject = null;
+        if (!observers || observers.length === 0 || subject.isStopped || subject.closed) {
+            return;
+        }
+        var subscriberIndex = observers.indexOf(this.subscriber);
+        if (subscriberIndex !== -1) {
+            observers.splice(subscriberIndex, 1);
+        }
+    };
+    return SubjectSubscription;
+}(Subscription_1.Subscription));
+exports.SubjectSubscription = SubjectSubscription;
+//# sourceMappingURL=SubjectSubscription.js.map
+
+/***/ }),
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5500,7 +7424,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n    font-family: \'Roboto\', sans-serif;\n    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */\n      font-size: 12px;\n    }\n    ::-moz-placeholder { /* Firefox 19+ */\n      font-size: 12px;\n    }\n    :-ms-input-placeholder { /* IE 10+ */\n      font-size: 12px;\n    }\n    :-moz-placeholder { /* Firefox 18- */\n      font-size: 12px;\n    }\n    position: relative;\n    width:100%;\n    margin:4px 0;\n    padding:20px 0;\n    .smart-form-bar {\n        position: relative;\n        border-bottom: 1px solid ', ';\n        display: block;\n        &::before {\n            content: \'\';\n            height: 2px;\n            width: 0;\n            left: 50%;\n            bottom: -1px;\n            position: absolute;\n            background: ', ';\n            transition: left 0.28s ease, width 0.28s ease;\n            z-index: 2;\n        }\n    }\n    .smart-form-inputField {\n        font-family: \'Roboto\', sans-serif;\n        display: block;\n        background: none;\n        padding: 4px 0;\n        font-size: 16px;\n        border-width: 0;\n        border-color: transparent;\n        width: calc(100%);\n        &.widthIcon{\n            width: calc(100% - 24px);\n        }\n        color: transparent;\n        transition: all 0.28s ease;\n        box-shadow: none;\n        ~.control-label {\n            color: ', ';\n        }\n    }\n    .smart-form-inputField:focus,\n    .smart-form-inputField.hasValue{\n        color: ', ';\n        ~.control-label {\n            font-size: 12px;\n            color: ', ';\n            top: 4px;\n            left: 0;\n        }\n    }\n    .smart-form-inputField {\n        &:focus,&.focusedElement {\n            outline: none;\n            ~.control-label {\n                color:  ', ';\n            }\n            ~.smart-form-bar {\n                &::before {\n                    width: 100%;\n                    left: 0;\n                }\n            }\n        }\n    }\n    &.withError{\n        .smart-form-bar{\n            border-bottom: 1px solid ', ';\n            &::before {\n                background: ', ';\n            }\n        }\n    }\n    .inputIcon{\n        position:absolute;\n        right:0;\n        top:24px;\n        width:18px;\n        height:18px;\n        fill:#bebebe;\n        cursor:pointer;\n    }\n    &.textarea{\n        textarea {\n            resize: none;\n            background:', ';\n        }\n    }\n'], ['\n    font-family: \'Roboto\', sans-serif;\n    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */\n      font-size: 12px;\n    }\n    ::-moz-placeholder { /* Firefox 19+ */\n      font-size: 12px;\n    }\n    :-ms-input-placeholder { /* IE 10+ */\n      font-size: 12px;\n    }\n    :-moz-placeholder { /* Firefox 18- */\n      font-size: 12px;\n    }\n    position: relative;\n    width:100%;\n    margin:4px 0;\n    padding:20px 0;\n    .smart-form-bar {\n        position: relative;\n        border-bottom: 1px solid ', ';\n        display: block;\n        &::before {\n            content: \'\';\n            height: 2px;\n            width: 0;\n            left: 50%;\n            bottom: -1px;\n            position: absolute;\n            background: ', ';\n            transition: left 0.28s ease, width 0.28s ease;\n            z-index: 2;\n        }\n    }\n    .smart-form-inputField {\n        font-family: \'Roboto\', sans-serif;\n        display: block;\n        background: none;\n        padding: 4px 0;\n        font-size: 16px;\n        border-width: 0;\n        border-color: transparent;\n        width: calc(100%);\n        &.widthIcon{\n            width: calc(100% - 24px);\n        }\n        color: transparent;\n        transition: all 0.28s ease;\n        box-shadow: none;\n        ~.control-label {\n            color: ', ';\n        }\n    }\n    .smart-form-inputField:focus,\n    .smart-form-inputField.hasValue{\n        color: ', ';\n        ~.control-label {\n            font-size: 12px;\n            color: ', ';\n            top: 4px;\n            left: 0;\n        }\n    }\n    .smart-form-inputField {\n        &:focus,&.focusedElement {\n            outline: none;\n            ~.control-label {\n                color:  ', ';\n            }\n            ~.smart-form-bar {\n                &::before {\n                    width: 100%;\n                    left: 0;\n                }\n            }\n        }\n    }\n    &.withError{\n        .smart-form-bar{\n            border-bottom: 1px solid ', ';\n            &::before {\n                background: ', ';\n            }\n        }\n    }\n    .inputIcon{\n        position:absolute;\n        right:0;\n        top:24px;\n        width:18px;\n        height:18px;\n        fill:#bebebe;\n        cursor:pointer;\n    }\n    &.textarea{\n        textarea {\n            resize: none;\n            background:', ';\n        }\n    }\n']),
+var _templateObject = _taggedTemplateLiteral(['\n    font-family: \'Roboto\', sans-serif;\n    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */\n      font-size: 12px;\n    }\n    ::-moz-placeholder { /* Firefox 19+ */\n      font-size: 12px;\n    }\n    :-ms-input-placeholder { /* IE 10+ */\n      font-size: 12px;\n    }\n    :-moz-placeholder { /* Firefox 18- */\n      font-size: 12px;\n    }\n    position: relative;\n    width:100%;\n    margin:4px 0;\n    padding:20px 0;\n    .smart-form-bar {\n        position: relative;\n        border-bottom: 1px solid ', ';\n        display: block;\n        &::before {\n            content: \'\';\n            height: 2px;\n            width: 0;\n            left: 50%;\n            bottom: -1px;\n            position: absolute;\n            background: ', ';\n            transition: left 0.28s ease, width 0.28s ease;\n            z-index: 2;\n        }\n    }\n    .smart-form-inputField {\n        font-family: \'Roboto\', sans-serif;\n        display: block;\n        background: none;\n        padding: 4px 0;\n        font-size: 16px;\n        border-width: 0;\n        border-color: transparent;\n        width: calc(100%);\n        &.widthIcon{\n            width: calc(100% - 24px);\n        }\n        color: transparent;\n        transition: all 0.28s ease;\n        box-shadow: none;\n        ~.control-label {\n            color: ', ';\n        }\n    }\n    .smart-form-inputField:focus,\n    .smart-form-inputField.hasValue{\n        color: ', ';\n        ~.control-label {\n            font-size: 12px;\n            color: ', ';\n            top: 4px;\n            left: 0;\n        }\n    }\n    .smart-form-inputField {\n        &:focus,&.focusedElement {\n            outline: none;\n            ~.control-label {\n                color:  ', ';\n            }\n            ~.smart-form-bar {\n                &::before {\n                    width: 100%;\n                    left: 0;\n                }\n            }\n        }\n    }\n    &.withError{\n    .smart-form-inputField.hasValue,.smart-form-inputField:focus {\n        ~.control-label {\n        color:', ';\n        }\n    }\n        .smart-form-bar{\n            border-bottom: 1px solid ', ';\n            &::before {\n                background: ', ';\n            }\n        }\n    }\n    .inputIcon{\n        position:absolute;\n        right:0;\n        top:24px;\n        width:18px;\n        height:18px;\n        fill:#bebebe;\n        cursor:pointer;\n    }\n    &.textarea{\n        textarea {\n            resize: none;\n            background:', ';\n        }\n    }\n'], ['\n    font-family: \'Roboto\', sans-serif;\n    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */\n      font-size: 12px;\n    }\n    ::-moz-placeholder { /* Firefox 19+ */\n      font-size: 12px;\n    }\n    :-ms-input-placeholder { /* IE 10+ */\n      font-size: 12px;\n    }\n    :-moz-placeholder { /* Firefox 18- */\n      font-size: 12px;\n    }\n    position: relative;\n    width:100%;\n    margin:4px 0;\n    padding:20px 0;\n    .smart-form-bar {\n        position: relative;\n        border-bottom: 1px solid ', ';\n        display: block;\n        &::before {\n            content: \'\';\n            height: 2px;\n            width: 0;\n            left: 50%;\n            bottom: -1px;\n            position: absolute;\n            background: ', ';\n            transition: left 0.28s ease, width 0.28s ease;\n            z-index: 2;\n        }\n    }\n    .smart-form-inputField {\n        font-family: \'Roboto\', sans-serif;\n        display: block;\n        background: none;\n        padding: 4px 0;\n        font-size: 16px;\n        border-width: 0;\n        border-color: transparent;\n        width: calc(100%);\n        &.widthIcon{\n            width: calc(100% - 24px);\n        }\n        color: transparent;\n        transition: all 0.28s ease;\n        box-shadow: none;\n        ~.control-label {\n            color: ', ';\n        }\n    }\n    .smart-form-inputField:focus,\n    .smart-form-inputField.hasValue{\n        color: ', ';\n        ~.control-label {\n            font-size: 12px;\n            color: ', ';\n            top: 4px;\n            left: 0;\n        }\n    }\n    .smart-form-inputField {\n        &:focus,&.focusedElement {\n            outline: none;\n            ~.control-label {\n                color:  ', ';\n            }\n            ~.smart-form-bar {\n                &::before {\n                    width: 100%;\n                    left: 0;\n                }\n            }\n        }\n    }\n    &.withError{\n    .smart-form-inputField.hasValue,.smart-form-inputField:focus {\n        ~.control-label {\n        color:', ';\n        }\n    }\n        .smart-form-bar{\n            border-bottom: 1px solid ', ';\n            &::before {\n                background: ', ';\n            }\n        }\n    }\n    .inputIcon{\n        position:absolute;\n        right:0;\n        top:24px;\n        width:18px;\n        height:18px;\n        fill:#bebebe;\n        cursor:pointer;\n    }\n    &.textarea{\n        textarea {\n            resize: none;\n            background:', ';\n        }\n    }\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n    position: absolute;\n    color:', ';\n    font-size:12px;\n    line-height:20px;\n    margin-top:3px;\n'], ['\n    position: absolute;\n    color:', ';\n    font-size:12px;\n    line-height:20px;\n    margin-top:3px;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n        position: absolute;\n        top: 24px;\n        pointer-events: none;\n        z-index: 1;\n        color: ', ';\n        font-size: 14px;\n        font-weight: normal;\n        transition: all 0.28s ease;\n        &.required{\n            &::after{\n                content:\' *\';\n            }\n        }\n'], ['\n        position: absolute;\n        top: 24px;\n        pointer-events: none;\n        z-index: 1;\n        color: ', ';\n        font-size: 14px;\n        font-weight: normal;\n        transition: all 0.28s ease;\n        &.required{\n            &::after{\n                content:\' *\';\n            }\n        }\n']);
 
@@ -5516,29 +7440,27 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _lodash = __webpack_require__(22);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _lodash3 = __webpack_require__(23);
-
-var _lodash4 = _interopRequireDefault(_lodash3);
-
-var _EyeIcon = __webpack_require__(25);
+var _EyeIcon = __webpack_require__(49);
 
 var _EyeIcon2 = _interopRequireDefault(_EyeIcon);
 
-var _EyeOffIcon = __webpack_require__(26);
+var _EyeOffIcon = __webpack_require__(50);
 
 var _EyeOffIcon2 = _interopRequireDefault(_EyeOffIcon);
 
-var _classnames = __webpack_require__(8);
+var _classnames = __webpack_require__(20);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _colors = __webpack_require__(6);
+var _colors = __webpack_require__(12);
 
 var _colors2 = _interopRequireDefault(_colors);
+
+var _smartInput = __webpack_require__(21);
+
+var _smartInput2 = _interopRequireDefault(_smartInput);
+
+var _propTypes3 = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5552,61 +7474,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var InputOuter = _styledComponents2.default.div(_templateObject, _colors2.default.shadesOfGray[3], _colors2.default.main, _colors2.default.shadesOfGray[2], _colors2.default.shadesOfGray[0], _colors2.default.shadesOfGray[1], _colors2.default.main, _colors2.default.error, _colors2.default.error, _colors2.default.shadesOfGray[4]);
+var InputOuter = _styledComponents2.default.div(_templateObject, _colors2.default.shadesOfGray[3], _colors2.default.main, _colors2.default.shadesOfGray[2], _colors2.default.shadesOfGray[0], _colors2.default.shadesOfGray[1], _colors2.default.main, _colors2.default.error, _colors2.default.error, _colors2.default.error, _colors2.default.shadesOfGray[4]);
 
 var ErrorWrapper = _styledComponents2.default.div(_templateObject2, _colors2.default.error);
 
 var Label = _styledComponents2.default.label(_templateObject3, _colors2.default.shadesOfGray[1]);
 
-var Input = function (_PureComponent) {
-    _inherits(Input, _PureComponent);
+var Input = function (_Component) {
+    _inherits(Input, _Component);
 
     function Input(props) {
         _classCallCheck(this, Input);
 
         var _this = _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).call(this, props));
-
-        _this.setError = function (errorMessage) {
-            var onValidate = _this.props.formProps.onValidate;
-
-            if (errorMessage !== _this.props.errorMessage && onValidate) {
-                onValidate(errorMessage);
-            }
-        };
-
-        _this.validateValues = function (value, initial) {
-            var errorMessage = false;
-            var propValidators = (0, _lodash2.default)(_this.props.validators);
-            propValidators.every(function (validator) {
-                if (!validator) return true;
-                var validate = validator(value, _this);
-                if (typeof validate === 'string' || validate === true) {
-                    errorMessage = initial ? true : validate;
-                    return false;
-                }
-                return true;
-            });
-            return errorMessage;
-        };
-
-        _this.validate = function (value) {
-            _this.setError(_this.validateValues(value));
-        };
-
-        _this.setValue = function (value) {
-            if (_this.props.formProps.onChangeValue) {
-                _this.props.formProps.onChangeValue(value);
-            }
-        };
-
-        _this.onChange = function (e) {
-            var value = e.target.value;
-
-            _this.setValue(value);
-            if (_this.props.onChange) {
-                _this.props.onChange(value);
-            }
-        };
 
         _this.togglePassword = function (e, r, value) {
             if (_this.props.type === 'password') {
@@ -5617,13 +7497,11 @@ var Input = function (_PureComponent) {
         };
 
         _this.onBlur = function (e) {
-            _this.validate(e.target.value);
             if (_this.props.focusedLabel) {
                 _this.setState({
                     label: _this.props.label
                 });
             }
-
             if (_this.props.onBlur) _this.props.onBlur(e);
         };
 
@@ -5640,73 +7518,27 @@ var Input = function (_PureComponent) {
             label: _this.props.label,
             type: props.type
         };
-        _this.validate = (0, _lodash4.default)(_this.validate, props.debounce);
         return _this;
     }
 
     _createClass(Input, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            if (this.props.focused) {
-                this.input.focus();
-            }
-            if (this.props.inputRef) {
-                this.props.inputRef();
-            }
-        }
-    }, {
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            var _props = this.props,
-                value = _props.value,
-                formProps = _props.formProps,
-                defaultValue = _props.defaultValue;
-            var onValidate = formProps.onValidate;
-
-            var valueToSet = defaultValue || value;
-            this.setValue(valueToSet);
-            if (onValidate) {
-                onValidate(this.validateValues(valueToSet, true));
-            }
-        }
-    }, {
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            if (nextProps.formProps.beforeSubmit && this.props.type === 'password' && this.state.type !== 'password') {
-                this.togglePassword(null, null, 'password');
-                return false;
-            }
-            if (!nextProps.value && this.props.defaultValue !== nextProps.defaultValue) {
-                this.setValue(nextProps.defaultValue);
-            } else if (this.props.value !== nextProps.value) {
-                this.validate(nextProps.value);
-                return false;
-            }
-            return true;
-        }
-    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
-            var _props2 = this.props,
-                focused = _props2.focused,
-                children = _props2.children,
-                type = _props2.type,
-                label = _props2.label,
-                validators = _props2.validators,
-                inputIcon = _props2.icon,
-                onChange = _props2.onChange,
-                focusedLabel = _props2.focusedLabel,
-                formProps = _props2.formProps,
-                errorMessage = _props2.errorMessage,
-                defaultValue = _props2.defaultValue,
-                showPassword = _props2.showPassword,
-                dbnc = _props2.debounce,
-                inputRef = _props2.inputRef,
-                inputOptions = _objectWithoutProperties(_props2, ['focused', 'children', 'type', 'label', 'validators', 'icon', 'onChange', 'focusedLabel', 'formProps', 'errorMessage', 'defaultValue', 'showPassword', 'debounce', 'inputRef']);
+            var _props = this.props,
+                children = _props.children,
+                type = _props.type,
+                label = _props.label,
+                inputIcon = _props.icon,
+                focusedLabel = _props.focusedLabel,
+                formProps = _props.formProps,
+                smartForm = _props.smartForm,
+                showPassword = _props.showPassword,
+                dbnc = _props.debounce,
+                inputOptions = _objectWithoutProperties(_props, ['children', 'type', 'label', 'icon', 'focusedLabel', 'formProps', 'smartForm', 'showPassword', 'debounce']);
 
-            var hasError = typeof errorMessage === 'string';
+            var showError = typeof smartForm.error === 'string';
             var icon = this.props.icon;
 
             if (!icon && type === 'password' && showPassword) {
@@ -5715,24 +7547,20 @@ var Input = function (_PureComponent) {
             }
             var Field = type === 'textarea' ? 'textarea' : 'input';
             var inputClassName = (0, _classnames2.default)({
-                hasError: hasError,
+                hasError: showError,
                 hasValue: !!this.props.value || children,
-                focusedElement: focused,
                 widthIcon: !!icon
             });
             var inputProps = _extends({}, inputOptions, {
-                value: this.props.value,
-                onInput: this.onInput,
                 onFocus: this.onFocus,
-                onChange: this.onChange,
                 type: this.state.type,
                 onBlur: this.onBlur,
                 readOnly: this.props.readOnly || this.props.disabled,
                 className: inputClassName + ' smart-form-inputField',
                 ref: function ref(input) {
                     _this2.input = input;
-                    if (inputRef) {
-                        inputRef(input);
+                    if (inputOptions.ref) {
+                        inputOptions.ref(input);
                     }
                 }
             });
@@ -5746,7 +7574,7 @@ var Input = function (_PureComponent) {
             return _react2.default.createElement(
                 InputOuter,
                 { className: (0, _classnames2.default)({
-                        withError: hasError
+                        withError: showError
                     }, type, 'input') },
                 children ? _react2.default.cloneElement(children, _extends({}, inputProps, {
                     className: inputClassName
@@ -5765,16 +7593,14 @@ var Input = function (_PureComponent) {
                 _react2.default.createElement(
                     ErrorWrapper,
                     { className: 'smart-form-errorMessage' },
-                    errorMessage || formProps.requestError
+                    smartForm.error
                 )
             );
         }
     }]);
 
     return Input;
-}(_react.PureComponent);
-
-Input.displayName = 'Input';
+}(_react.Component);
 
 Input.defaultProps = {
     value: '',
@@ -5810,13 +7636,102 @@ Input.propTypes = {
         onValidate: _propTypes2.default.func,
         onChangeValue: _propTypes2.default.func,
         requestError: _propTypes2.default.string
-    })
+    }),
+    smartForm: _propTypes3.smartInputShape
 };
 
-exports.default = Input;
+exports.default = (0, _smartInput2.default)()(Input);
 
 /***/ }),
-/* 22 */
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var EyeIcon = function EyeIcon(_ref) {
+  var _ref$width = _ref.width,
+      width = _ref$width === undefined ? 24 : _ref$width,
+      _ref$height = _ref.height,
+      height = _ref$height === undefined ? 24 : _ref$height,
+      _ref$viewBox = _ref.viewBox,
+      viewBox = _ref$viewBox === undefined ? '0 0 24 24' : _ref$viewBox,
+      className = _ref.className,
+      children = _ref.children,
+      props = _objectWithoutProperties(_ref, ['width', 'height', 'viewBox', 'className', 'children']);
+
+  var classes = 'mdi-icon';
+  if (className) classes += ' ' + className;
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({}, props, { width: width, height: height, viewBox: viewBox, className: classes }),
+    _react2.default.createElement('path', { d: 'M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9M12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z' })
+  );
+};
+
+exports.default = EyeIcon;
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var EyeOffIcon = function EyeOffIcon(_ref) {
+  var _ref$width = _ref.width,
+      width = _ref$width === undefined ? 24 : _ref$width,
+      _ref$height = _ref.height,
+      height = _ref$height === undefined ? 24 : _ref$height,
+      _ref$viewBox = _ref.viewBox,
+      viewBox = _ref$viewBox === undefined ? '0 0 24 24' : _ref$viewBox,
+      className = _ref.className,
+      children = _ref.children,
+      props = _objectWithoutProperties(_ref, ['width', 'height', 'viewBox', 'className', 'children']);
+
+  var classes = 'mdi-icon';
+  if (className) classes += ' ' + className;
+
+  return _react2.default.createElement(
+    'svg',
+    _extends({}, props, { width: width, height: height, viewBox: viewBox, className: classes }),
+    _react2.default.createElement('path', { d: 'M11.83,9L15,12.16C15,12.11 15,12.05 15,12C15,10.34 13.66,9 12,9C11.94,9 11.89,9 11.83,9M7.53,9.8L9.08,11.35C9.03,11.56 9,11.77 9,12C9,13.66 10.34,15 12,15C12.22,15 12.44,14.97 12.65,14.92L14.2,16.47C13.53,16.8 12.79,17 12,17C9.24,17 7,14.76 7,12C7,11.21 7.2,10.47 7.53,9.8M2,4.27L4.28,6.55L4.73,7C3.08,8.3 1.78,10 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15.03,19.2 16.38,18.66L16.81,19.08L19.73,22L21,20.73L3.27,3M12,7C14.76,7 17,9.24 17,12C17,12.64 16.87,13.26 16.64,13.82L19.57,16.75C21.07,15.5 22.27,13.86 23,12C21.27,7.61 17,4.5 12,4.5C10.6,4.5 9.26,4.75 8,5.2L10.17,7.35C10.74,7.13 11.35,7 12,7Z' })
+  );
+};
+
+exports.default = EyeOffIcon;
+
+/***/ }),
+/* 51 */
 /***/ (function(module, exports) {
 
 /**
@@ -5897,7 +7812,7 @@ module.exports = castArray;
 
 
 /***/ }),
-/* 23 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -6278,125 +8193,10 @@ function toNumber(value) {
 
 module.exports = debounce;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 24 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var EyeIcon = function EyeIcon(_ref) {
-  var _ref$width = _ref.width,
-      width = _ref$width === undefined ? 24 : _ref$width,
-      _ref$height = _ref.height,
-      height = _ref$height === undefined ? 24 : _ref$height,
-      _ref$viewBox = _ref.viewBox,
-      viewBox = _ref$viewBox === undefined ? '0 0 24 24' : _ref$viewBox,
-      className = _ref.className,
-      children = _ref.children,
-      props = _objectWithoutProperties(_ref, ['width', 'height', 'viewBox', 'className', 'children']);
-
-  var classes = 'mdi-icon';
-  if (className) classes += ' ' + className;
-
-  return _react2.default.createElement(
-    'svg',
-    _extends({}, props, { width: width, height: height, viewBox: viewBox, className: classes }),
-    _react2.default.createElement('path', { d: 'M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9M12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z' })
-  );
-};
-
-exports.default = EyeIcon;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var EyeOffIcon = function EyeOffIcon(_ref) {
-  var _ref$width = _ref.width,
-      width = _ref$width === undefined ? 24 : _ref$width,
-      _ref$height = _ref.height,
-      height = _ref$height === undefined ? 24 : _ref$height,
-      _ref$viewBox = _ref.viewBox,
-      viewBox = _ref$viewBox === undefined ? '0 0 24 24' : _ref$viewBox,
-      className = _ref.className,
-      children = _ref.children,
-      props = _objectWithoutProperties(_ref, ['width', 'height', 'viewBox', 'className', 'children']);
-
-  var classes = 'mdi-icon';
-  if (className) classes += ' ' + className;
-
-  return _react2.default.createElement(
-    'svg',
-    _extends({}, props, { width: width, height: height, viewBox: viewBox, className: classes }),
-    _react2.default.createElement('path', { d: 'M11.83,9L15,12.16C15,12.11 15,12.05 15,12C15,10.34 13.66,9 12,9C11.94,9 11.89,9 11.83,9M7.53,9.8L9.08,11.35C9.03,11.56 9,11.77 9,12C9,13.66 10.34,15 12,15C12.22,15 12.44,14.97 12.65,14.92L14.2,16.47C13.53,16.8 12.79,17 12,17C9.24,17 7,14.76 7,12C7,11.21 7.2,10.47 7.53,9.8M2,4.27L4.28,6.55L4.73,7C3.08,8.3 1.78,10 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15.03,19.2 16.38,18.66L16.81,19.08L19.73,22L21,20.73L3.27,3M12,7C14.76,7 17,9.24 17,12C17,12.64 16.87,13.26 16.64,13.82L19.57,16.75C21.07,15.5 22.27,13.86 23,12C21.27,7.61 17,4.5 12,4.5C10.6,4.5 9.26,4.75 8,5.2L10.17,7.35C10.74,7.13 11.35,7 12,7Z' })
-  );
-};
-
-exports.default = EyeOffIcon;
-
-/***/ }),
-/* 27 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6421,13 +8221,19 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _Spinner = __webpack_require__(28);
+var _Spinner = __webpack_require__(54);
 
 var _Spinner2 = _interopRequireDefault(_Spinner);
 
-var _colors = __webpack_require__(6);
+var _colors = __webpack_require__(12);
 
 var _colors2 = _interopRequireDefault(_colors);
+
+var _withFormState = __webpack_require__(11);
+
+var _withFormState2 = _interopRequireDefault(_withFormState);
+
+var _propTypes3 = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6453,7 +8259,7 @@ var Submit = function Submit(props) {
         color = props.color,
         size = props.size,
         disabled = props.disabled,
-        formProps = props.formProps,
+        smartForm = props.smartForm,
         loading = props.loading;
 
     return _react2.default.createElement(
@@ -6461,17 +8267,15 @@ var Submit = function Submit(props) {
         {
             size: size,
             color: color,
-            disabled: formProps.disabled || disabled || loading,
+            disabled: smartForm.disabled || disabled || loading,
             className: 'button submitButton' },
         _react2.default.createElement(
             ButtonContent,
             null,
-            loading || formProps.loading ? _react2.default.createElement(_Spinner2.default, { className: 'spinner', size: size }) : children
+            loading || smartForm.loading ? _react2.default.createElement(_Spinner2.default, { className: 'spinner', size: size }) : children
         )
     );
 };
-
-Submit.displayName = 'Submit';
 
 Submit.defaultProps = {
     color: _colors2.default.main,
@@ -6484,14 +8288,12 @@ Submit.propTypes = {
     disabled: _propTypes2.default.bool,
     loading: _propTypes2.default.bool,
     children: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.string]),
-    formProps: _propTypes2.default.shape({
-        disabled: _propTypes2.default.bool
-    })
+    smartForm: _propTypes3.formStateShape
 };
-exports.default = Submit;
+exports.default = (0, _withFormState2.default)()(Submit);
 
 /***/ }),
-/* 28 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6512,7 +8314,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(8);
+var _classnames = __webpack_require__(20);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -6520,7 +8322,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _colors = __webpack_require__(6);
+var _colors = __webpack_require__(12);
 
 var _colors2 = _interopRequireDefault(_colors);
 
