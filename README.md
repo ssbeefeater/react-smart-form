@@ -89,14 +89,14 @@ class MyComponent extends Component {
                 <Input 
                     name="username" 
                     label="Username" 
-                    validator={[required('Email is required'),email('This is not correct email.')]}
+                    validators={[required('Email is required'),email('This is not correct email.')]}
                 />
                 <Input 
                     name="password" 
                     label="Password" 
                     type="password" 
                     // silent validation
-                    validator={[required(),numberCustomValidator('This must be a number')]}
+                    validators={[required(),numberCustomValidator('This must be a number')]}
 
                     />
                 <Submit>
@@ -253,7 +253,7 @@ let CustomField = (props)=>{
         <div>
              <label>Custom field: {label}</label>
              <input {...inputProps} />
-             <div>{smartForm.error}</div>
+             <div>{error}</div>
         </div>
   )};
 
@@ -337,14 +337,14 @@ class MyComponent extends Component {
                     label="Password" 
                     type="password" 
                     // silent validation
-                    validator={[required()]}
+                    validators={[required()]}
                     />
                 <Input 
                     showPassword={false}
                     name="repassword" 
                     label="Re enter password" 
                     type="password" 
-                    validator={[required(),this.matchPasswordValidator('Password does not match')]}
+                    validators={[required(),this.matchPasswordValidator('Password does not match')]}
                     />
                     
                 <Submit>
