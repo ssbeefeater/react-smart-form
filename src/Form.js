@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import smartForm from './lib/smartForm';
+import { formStateShape } from './lib/propTypes';
 
 const FormWrapper = styled.div`
     width:100%;
@@ -39,6 +40,7 @@ Form.propTypes = {
     loading: PropTypes.bool,
     onChange: PropTypes.func,
     formRef: PropTypes.func,
+    smartForm: formStateShape,
 };
 export default smartForm()(Form);
 

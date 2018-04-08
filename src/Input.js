@@ -6,6 +6,7 @@ import EyeOff from 'mdi-react/EyeOffIcon';
 import classNames from 'classnames';
 import colors from './lib/theme/colors';
 import smartInput from './lib/smartInput';
+import { smartInputShape } from './lib/propTypes';
 
 const InputOuter = styled.div`
     font-family: 'Roboto', sans-serif;
@@ -285,6 +286,7 @@ Input.propTypes = {
         onChangeValue: PropTypes.func,
         requestError: PropTypes.string,
     }),
+    smartForm: smartInputShape,
 };
 
 export default smartInput()(Input);
