@@ -17,7 +17,7 @@ const FormWrapper = styled.div`
 class Form extends Component {
     render() {
         const {
-            smartForm,
+            smartForm: smartFormProp,
             ...formProps
         } = this.props;
         return (
@@ -42,5 +42,5 @@ Form.propTypes = {
     formRef: PropTypes.func,
     smartForm: formStateShape,
 };
-export default smartForm()(Form);
+export default smartForm(Form);
 

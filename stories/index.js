@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import '@storybook/addon-knobs/register';
 import {Form,Input,Submit} from '../src/';
-import makeMeSmart from '../src/lib/smartInput'
+import smartInput from '../src/lib/smartInput'
 import smartForm from '../src/lib/smartForm'
 import { email, required,length } from '../src/lib/validators';
 import { withInfo } from '@storybook/addon-info';
@@ -11,15 +11,15 @@ import { withInfo } from '@storybook/addon-info';
 const descriptions = {
     loadingState:`
         If you return a promise in onSubmit function rect-smart-form can handle the loading state of the form
-        
-        
-        
+
+
+
     `,
     errorHandling:`
             If you return a promise in onSubmit function and throw an error, the react-smart-form will catch it and display it in the error area
             of each field. Also you can throw an object and specify the desired field that you want the message to be displayed
-            
-            
+
+
             &lt;Form onSubmit={()=&gt;{
                     return fakeRequest().catch(()=&gt;{
                         throw {
@@ -29,7 +29,7 @@ const descriptions = {
              }}&gt;
             ...
             &lt;/Form&gt;
-    
+
     `
 
 };
@@ -123,14 +123,13 @@ storiesOf('react-smart-form', module)
                     smartForm,
                     ...restProps
                 } = this.props;
-                console.log(smartForm)
                 return         <div>
                     <form {...restProps} />
                 </div>
             }
         }
-    const CustomForm = smartForm()(Forma);
-    const CustomField = makeMeSmart()(Field);
+    const CustomForm = smartForm(Forma);
+    const CustomField = smartInput(Field);
     return <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
         <div style={{width:400}}>
             <CustomForm>

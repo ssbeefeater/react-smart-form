@@ -78,4 +78,4 @@ Submit.propTypes = {
     ]),
     smartForm: formStateShape,
 };
-export default withFormState()(Submit);
+export default withFormState(Submit);

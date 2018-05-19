@@ -1,23 +1,19 @@
-import React, { Component } from 'react';
-import defaultFormStorage from './formStorage';
+import React, { PureComponent } from 'react';
+import smartFormContext from './smartFormContext';
 
-const withFormStates = (formStorage = defaultFormStorage) => (CustomButton) => {
-    class SmartButton extends Component {
-        constructor() {
-            super();
-            this.subscription = formStorage.onChangeProps.subscribe(() => {
-                this.forceUpdate();
-            });
-        }
-        componentWillUnmount() {
-            this.subscription.unsubscribe();
-        }
+const withFormState = (CustomButton) => {
+    class SmartButton extends PureComponent {
         render() {
-            const { disabled, loading } = formStorage;
-            return <CustomButton {...this.props} smartForm={{ disabled, loading }}/>;
+            return (
+                <smartFormContext.Consumer>
+                    {context => <CustomButton {...this.props}
+                        smartForm={{ disabled: context.disabled, loading: context.loading }}
+                    />}
+                </smartFormContext.Consumer>
+            );
         }
     }
     return SmartButton;
 };
 
-export default withFormStates;
+export default withFormState;

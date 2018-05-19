@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 
 const withValidator = (CustomComponent) => {
-    class SmartInput extends Component {
+    class Validator extends Component {
         constructor(props) {
             super(props);
             this.validate = debounce(this.validate, props.debounce);
@@ -106,11 +106,11 @@ const withValidator = (CustomComponent) => {
         }
     }
 
-    SmartInput.defaultProps = {
+    Validator.defaultProps = {
         defaultValue: '',
         debounce: 300,
     };
-    SmartInput.propTypes = {
+    Validator.propTypes = {
         value: PropTypes.string,
         validators: PropTypes.oneOfType([
             PropTypes.arrayOf(PropTypes.func),
@@ -127,7 +127,7 @@ const withValidator = (CustomComponent) => {
         ]),
     };
 
-    return SmartInput;
+    return Validator;
 };
 
 

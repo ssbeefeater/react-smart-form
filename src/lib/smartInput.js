@@ -1,58 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import defaultFormStorage from './formStorage';
 import withValidator from './withValidator';
+import smartFormContext from './smartFormContext';
 
 const Validator = withValidator('input');
 
-const makeMeSmart = (formStorage = defaultFormStorage) => (CustomComponent) => {
+const makeMeSmart = (CustomComponent) => {
     class SmartInput extends Validator {
-        constructor(props) {
-            super(props);
-            this.state = {
-                value: props.defaultValue,
-                error: this.generateErrorMessage(props.defaultValue),
-            };
-            this.subscription = formStorage.onChange.subscribe(() => {
-                const value = formStorage.getValues(this.props.name);
-                const error = formStorage.getErrors(this.props.name);
-
-                if (value !== this.state.value || error !== this.state.error) {
-                    this.setState({
-                        value,
-                        error,
-                    });
-                }
-            });
-        }
         setError = (errorMessage) => {
             if (errorMessage !== this.state.error) {
-                formStorage.setErrors({ [this.props.name]: errorMessage });
+                this.props.smartFormContextValues.setErrors({ [this.props.name]: errorMessage });
             }
         };
 
         setValue = (value) => {
-            const currentValue = formStorage.getValues(this.props.name);
+            const currentValue = this.props.smartFormContextValues.getValues(this.props.name);
             if (value !== currentValue) {
-                formStorage.setValues({ [this.props.name]: value });
+                this.props.smartFormContextValues.setValues({ [this.props.name]: value });
             }
         };
 
         onChange = (e) => {
             const { value } = e.target;
             this.setValue(value);
+            this.validate(value);
             if (this.props.onChange) {
                 this.props.onChange(value);
             }
         };
-        componentWillUnmount() {
-            this.subscription.unsubscribe();
-        }
         componentWillMount() {
             const { defaultValue } = this.props;
             const valueToSet = defaultValue || '';
-            formStorage.setValues({ [this.props.name]: valueToSet });
-            formStorage.setErrors({ [this.props.name]: this.generateErrorMessage(valueToSet, true) });
+            this.props.smartFormContextValues.setValues({ [this.props.name]: valueToSet });
+            this.props.smartFormContextValues.setErrors({
+                [this.props.name]: this.generateErrorMessage(valueToSet, true),
+            });
         }
         componentDidMount() {
             if (this.props.focused) {
@@ -64,16 +46,19 @@ const makeMeSmart = (formStorage = defaultFormStorage) => (CustomComponent) => {
                 validators,
                 defaultValue,
                 onValidate,
+                smartFormContextValues,
+                name,
                 ...restProps
             } = this.props;
             const props = {
                 ...restProps,
-                value: this.state.value,
+                value: smartFormContextValues.getValues(name),
+                name,
                 onFocus: this.onFocus,
                 onChange: this.onChange,
                 onBlur: this.onBlur,
                 smartForm: {
-                    error: this.state.error,
+                    error: smartFormContextValues.getErrors(name),
                 },
                 ref: (input) => {
                     this.input = input;
@@ -82,7 +67,7 @@ const makeMeSmart = (formStorage = defaultFormStorage) => (CustomComponent) => {
                     }
                 },
             };
-            return (<CustomComponent {...props}/>);
+            return (<CustomComponent {...props} />);
         }
     }
 
@@ -102,8 +87,12 @@ const makeMeSmart = (formStorage = defaultFormStorage) => (CustomComponent) => {
         name: PropTypes.string,
         defaultValue: PropTypes.string,
         debounce: PropTypes.number,
+        smartForm: PropTypes.object,
     };
-    return SmartInput;
+    return props => (
+        <smartFormContext.Consumer>
+            {context => (<SmartInput {...props} smartFormContextValues={context} />)}
+        </smartFormContext.Consumer>);
 };
 
 

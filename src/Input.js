@@ -289,4 +289,4 @@ Input.propTypes = {
     smartForm: smartInputShape,
 };
 
-export default smartInput()(Input);
+export default smartInput(Input);
