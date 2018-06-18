@@ -28,11 +28,25 @@ const makeMeSmart = (CustomComponent) => {
                 this.props.onChange(value);
             }
         };
+        componentDidUpdate = (PrevProps) => {
+            const {
+                smartFormContextValues,
+                name,
+            } = this.props;
+            if (smartFormContextValues && !smartFormContextValues.getValues(name) &&
+                !PrevProps.defaultValue &&
+                PrevProps.defaultValue !== this.props.defaultValue) {
+                smartFormContextValues.setDefaultValues(this.props.defaultValue);
+            }
+        }
         componentWillMount() {
-            const { defaultValue } = this.props;
+            const { defaultValue, smartFormContextValues } = this.props;
+            if (!smartFormContextValues) { return; }
+
             const valueToSet = defaultValue || '';
-            this.props.smartFormContextValues.setValues({ [this.props.name]: valueToSet });
-            this.props.smartFormContextValues.setErrors({
+            smartFormContextValues.setValues({ [this.props.name]: valueToSet });
+            smartFormContextValues.setDefaultValues({ [this.props.name]: valueToSet });
+            smartFormContextValues.setErrors({
                 [this.props.name]: this.generateErrorMessage(valueToSet, true),
             });
         }
@@ -50,24 +64,29 @@ const makeMeSmart = (CustomComponent) => {
                 name,
                 ...restProps
             } = this.props;
-            const props = {
+
+            const newProps = {
                 ...restProps,
-                value: smartFormContextValues.getValues(name),
                 name,
-                onFocus: this.onFocus,
-                onChange: this.onChange,
-                onBlur: this.onBlur,
-                smartForm: {
-                    error: smartFormContextValues.getErrors(name),
-                },
-                ref: (input) => {
-                    this.input = input;
-                    if (restProps.ref) {
-                        restProps.ref(input);
-                    }
-                },
             };
-            return (<CustomComponent {...props} />);
+            if (smartFormContextValues) {
+                Object.assign(newProps, {
+                    value: smartFormContextValues.getValues(name),
+                    onFocus: this.onFocus,
+                    onChange: this.onChange,
+                    onBlur: this.onBlur,
+                    smartForm: {
+                        error: smartFormContextValues.getErrors(name),
+                    },
+                    ref: (input) => {
+                        this.input = input;
+                        if (restProps.ref) {
+                            restProps.ref(input);
+                        }
+                    },
+                });
+            }
+            return (<CustomComponent {...newProps} />);
         }
     }
 

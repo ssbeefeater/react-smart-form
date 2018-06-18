@@ -70,12 +70,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 35:
+/***/ 37:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -94,6 +94,16 @@ var email = exports.email = function email() {
     var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
     return function (value) {
         if (!validateEmail(value)) {
+            return message;
+        }
+        return false;
+    };
+};
+
+var number = exports.number = function number() {
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+    return function (value) {
+        if (!Number(value)) {
             return message;
         }
         return false;

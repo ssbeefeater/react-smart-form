@@ -11,6 +11,13 @@ export const email = (message = true) => (value) => {
     return false;
 };
 
+export const number = (message = true) => (value) => {
+    if (!Number(value)) {
+        return message;
+    }
+    return false;
+};
+
 export const required = (message = true) => (value) => {
     if (!value) {
         return message;

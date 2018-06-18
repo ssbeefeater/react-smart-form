@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash.isequal';
 import smartFormContext from './smartFormContext';
 
 const smartForm = (CustomForm) => {
     class SmartForm extends Component {
+        defaultValues = {};
         constructor() {
             super();
             this.state = {
@@ -16,6 +18,11 @@ const smartForm = (CustomForm) => {
             this.setState({
                 values: Object.assign(this.state.values, newValues),
             });
+            return this;
+        };
+        hasChange = () => !isEqual(this.state.values, this.defaultValues)
+        setDefaultValues = (newValues = {}) => {
+            this.defaultValues = Object.assign(this.defaultValues, newValues);
             return this;
         };
         setErrors = (newErrors = {}) => {
@@ -69,7 +76,7 @@ const smartForm = (CustomForm) => {
             e.stopPropagation();
             if (!this.hasError() && !this.state.loading) {
                 if (this.props.onSubmit) {
-                    const onSubmitValue = this.props.onSubmit(this.getValues());
+                    const onSubmitValue = this.props.onSubmit(this.getValues(), this.hasChange);
                     if (onSubmitValue instanceof Promise) {
                         this.setState({
                             loading: true,
@@ -83,15 +90,6 @@ const smartForm = (CustomForm) => {
                 }
             }
         };
-        componentWillReceiveProps(nextProps) {
-            const { loading, disabled } = nextProps;
-            if (loading !== this.props.loading || disabled !== this.props.disabled) {
-                this.setState({
-                    loading,
-                    disabled,
-                });
-            }
-        }
         handleRequestError = (error) => {
             if (!error) {
                 return;
@@ -100,7 +98,10 @@ const smartForm = (CustomForm) => {
             if (error instanceof Error) {
                 errors = error.message;
             } else if (typeof error === 'string') {
-                errors = error;
+                errors = Object.keys(this.state.errors).reduce((accum, val) => {
+                    accum[val] = error;
+                    return accum;
+                }, {});
             } else if (typeof error === 'object') {
                 errors = error;
             }
@@ -124,6 +125,8 @@ const smartForm = (CustomForm) => {
         render() {
             const {
                 formRef,
+                loading,
+                disabled,
                 ...restProps
             } = this.props;
             const smartFormData = {
@@ -131,10 +134,12 @@ const smartForm = (CustomForm) => {
                 getValues: this.getValues,
                 getErrors: this.getErrors,
                 setValues: this.setValues,
+                setDefaultValues: this.setDefaultValues,
                 values: this.state.values,
                 errors: this.state.errors,
-                disabled: this.hasError(),
-                loading: this.state.loading,
+                hasChange: this.hasChange,
+                disabled: disabled || this.hasError(),
+                loading: loading || this.state.loading,
             };
             return (
                 <smartFormContext.Provider value={smartFormData}>

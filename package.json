@@ -64,6 +64,7 @@
     "classnames": "^2.2.5",
     "lodash.castarray": "^4.4.0",
     "lodash.debounce": "^4.0.8",
+    "lodash.isequal": "^4.5.0",
     "mdi-react": "^2.1.19",
     "prop-types": "^15.6.0",
     "rxjs": "^5.5.6",

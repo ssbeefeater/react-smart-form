@@ -7,7 +7,11 @@ const withFormState = (CustomButton) => {
             return (
                 <smartFormContext.Consumer>
                     {context => <CustomButton {...this.props}
-                        smartForm={{ disabled: context.disabled, loading: context.loading }}
+                        smartForm={{
+                            disabled: context.disabled,
+                            loading: context.loading,
+                            hasChange: context.hasChange,
+                        }}
                     />}
                 </smartFormContext.Consumer>
             );
