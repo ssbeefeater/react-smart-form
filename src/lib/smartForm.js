@@ -15,9 +15,18 @@ const smartForm = (CustomForm) => {
             };
         }
         setValues = (newValues = {}) => {
+            const values = Object.assign(this.state.values, newValues)
+            const {
+             onChange   
+            } = this.props;
+            
+            if(onChange){
+                onChange(values);
+            }
             this.setState({
-                values: Object.assign(this.state.values, newValues),
+                values,
             });
+
             return this;
         };
         hasChange = () => !isEqual(this.state.values, this.defaultValues)
