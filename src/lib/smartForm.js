@@ -15,18 +15,17 @@ const smartForm = (CustomForm) => {
             };
         }
         setValues = (newValues = {}) => {
-            const values = Object.assign(this.state.values, newValues)
-            const {
-             onChange   
-            } = this.props;
-            
-            if(onChange){
-                onChange(values);
-            }
+            const values = Object.assign(this.state.values, newValues);
             this.setState({
                 values,
+            }, () => {
+                const {
+                    onChange,
+                } = this.props;
+                if (onChange) {
+                    onChange(values, this.hasChange);
+                }
             });
-
             return this;
         };
         hasChange = () => !isEqual(this.state.values, this.defaultValues)
@@ -37,6 +36,14 @@ const smartForm = (CustomForm) => {
         setErrors = (newErrors = {}) => {
             this.setState({
                 errors: Object.assign(this.state.errors, newErrors),
+            }, () => {
+                const {
+                    onValidate,
+                } = this.props;
+
+                if (onValidate) {
+                    onValidate({ hasError: this.hasError(), hasChange: this.hasChange });
+                }
             });
             return this;
         };
@@ -53,7 +60,6 @@ const smartForm = (CustomForm) => {
                     return (typeof error === 'string' || error === true);
                 }));
         };
-
         reset = (inputName) => {
             const { values, errors } = this.state;
             const newState = { values: {}, errors: {} };
@@ -108,6 +114,7 @@ const smartForm = (CustomForm) => {
                 errors = error.message;
             } else if (typeof error === 'string') {
                 errors = Object.keys(this.state.errors).reduce((accum, val) => {
+                    // eslint-disable-next-line
                     accum[val] = error;
                     return accum;
                 }, {});
@@ -128,6 +135,7 @@ const smartForm = (CustomForm) => {
                     setValues: this.setValues,
                     getValues: this.getValues,
                     getErrors: this.getErrors,
+                    hasError: this.hasError,
                 });
             }
         }
@@ -149,12 +157,14 @@ const smartForm = (CustomForm) => {
                 hasChange: this.hasChange,
                 disabled: disabled || this.hasError(),
                 loading: loading || this.state.loading,
+                submit: this.onSubmit,
             };
             return (
                 <smartFormContext.Provider value={smartFormData}>
                     <CustomForm
                         {...restProps}
                         onSubmit={this.onSubmit}
+                        onChange={this.onChange}
                     />
                 </smartFormContext.Provider>
             );

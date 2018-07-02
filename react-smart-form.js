@@ -2374,6 +2374,27 @@ var styled = _styled(StyledComponent, constructWithOptions);
 
 
 Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var smartFormContext = _react2.default.createContext();
+
+exports.default = smartFormContext;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.smartInputShape = exports.formStateShape = undefined;
@@ -2395,7 +2416,7 @@ var smartInputShape = exports.smartInputShape = _propTypes2.default.shape({
 });
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2437,7 +2458,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2496,7 +2517,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2513,27 +2534,6 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var smartFormContext = _react2.default.createContext();
-
-exports.default = smartFormContext;
 
 /***/ }),
 /* 8 */
@@ -2566,7 +2566,7 @@ exports.default = {
 
 
 
-var emptyFunction = __webpack_require__(4);
+var emptyFunction = __webpack_require__(5);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -2648,7 +2648,7 @@ var _lodash = __webpack_require__(28);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _smartFormContext = __webpack_require__(7);
+var _smartFormContext = __webpack_require__(3);
 
 var _smartFormContext2 = _interopRequireDefault(_smartFormContext);
 
@@ -2678,8 +2678,15 @@ var smartForm = function smartForm(CustomForm) {
             _this.setValues = function () {
                 var newValues = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
+                var values = Object.assign(_this.state.values, newValues);
                 _this.setState({
-                    values: Object.assign(_this.state.values, newValues)
+                    values: values
+                }, function () {
+                    var onChange = _this.props.onChange;
+
+                    if (onChange) {
+                        onChange(values, _this.hasChange);
+                    }
                 });
                 return _this;
             };
@@ -2700,6 +2707,13 @@ var smartForm = function smartForm(CustomForm) {
 
                 _this.setState({
                     errors: Object.assign(_this.state.errors, newErrors)
+                }, function () {
+                    var onValidate = _this.props.onValidate;
+
+
+                    if (onValidate) {
+                        onValidate({ hasError: _this.hasError(), hasChange: _this.hasChange });
+                    }
                 });
                 return _this;
             };
@@ -2776,6 +2790,7 @@ var smartForm = function smartForm(CustomForm) {
                     errors = error.message;
                 } else if (typeof error === 'string') {
                     errors = Object.keys(_this.state.errors).reduce(function (accum, val) {
+                        // eslint-disable-next-line
                         accum[val] = error;
                         return accum;
                     }, {});
@@ -2807,7 +2822,8 @@ var smartForm = function smartForm(CustomForm) {
                         setErrors: this.setErrors,
                         setValues: this.setValues,
                         getValues: this.getValues,
-                        getErrors: this.getErrors
+                        getErrors: this.getErrors,
+                        hasError: this.hasError
                     });
                 }
             }
@@ -2830,13 +2846,15 @@ var smartForm = function smartForm(CustomForm) {
                     errors: this.state.errors,
                     hasChange: this.hasChange,
                     disabled: disabled || this.hasError(),
-                    loading: loading || this.state.loading
+                    loading: loading || this.state.loading,
+                    submit: this.onSubmit
                 };
                 return _react2.default.createElement(
                     _smartFormContext2.default.Provider,
                     { value: smartFormData },
                     _react2.default.createElement(CustomForm, _extends({}, restProps, {
-                        onSubmit: this.onSubmit
+                        onSubmit: this.onSubmit,
+                        onChange: this.onChange
                     }))
                 );
             }
@@ -2969,7 +2987,7 @@ var _withValidator = __webpack_require__(14);
 
 var _withValidator2 = _interopRequireDefault(_withValidator);
 
-var _smartFormContext = __webpack_require__(7);
+var _smartFormContext = __webpack_require__(3);
 
 var _smartFormContext2 = _interopRequireDefault(_smartFormContext);
 
@@ -3003,8 +3021,13 @@ var makeMeSmart = function makeMeSmart(CustomComponent) {
             }
 
             return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = SmartInput.__proto__ || Object.getPrototypeOf(SmartInput)).call.apply(_ref, [this].concat(args))), _this), _this.setError = function (errorMessage) {
-                if (errorMessage !== _this.state.error) {
-                    _this.props.smartFormContextValues.setErrors(_defineProperty({}, _this.props.name, errorMessage));
+                var _this$props$smartForm = _this.props.smartFormContextValues,
+                    setErrors = _this$props$smartForm.setErrors,
+                    getErrors = _this$props$smartForm.getErrors,
+                    name = _this$props$smartForm.name;
+
+                if (errorMessage !== getErrors(name)) {
+                    setErrors(_defineProperty({}, _this.props.name, errorMessage));
                 }
             }, _this.setValue = function (value) {
                 var currentValue = _this.props.smartFormContextValues.getValues(_this.props.name);
@@ -3019,23 +3042,45 @@ var makeMeSmart = function makeMeSmart(CustomComponent) {
                 if (_this.props.onChange) {
                     _this.props.onChange(value);
                 }
-            }, _this.componentDidUpdate = function (PrevProps) {
+            }, _this.onBlur = function (e) {
                 var _this$props = _this.props,
                     smartFormContextValues = _this$props.smartFormContextValues,
-                    name = _this$props.name;
+                    name = _this$props.name,
+                    onBlur = _this$props.onBlur,
+                    validateOnBlur = _this$props.validateOnBlur;
 
-                if (smartFormContextValues && !smartFormContextValues.getValues(name) && !PrevProps.defaultValue && PrevProps.defaultValue !== _this.props.defaultValue) {
-                    smartFormContextValues.setDefaultValues(_this.props.defaultValue);
+                if (validateOnBlur) {
+                    _this.validate(smartFormContextValues.getValues(name));
+                    if (onBlur) {
+                        onBlur(e);
+                    }
                 }
             }, _temp), _possibleConstructorReturn(_this, _ret);
         }
 
         _createClass(SmartInput, [{
+            key: 'shouldComponentUpdate',
+            value: function shouldComponentUpdate(nextProps) {
+                var prevProps = this.props;
+                var _props = this.props,
+                    smartFormContextValues = _props.smartFormContextValues,
+                    name = _props.name;
+
+
+                if (prevProps.defaultValue !== nextProps.defaultValue) {
+                    var valueToSet = nextProps.defaultValue || '';
+                    smartFormContextValues.setValues(_defineProperty({}, name, valueToSet));
+                    smartFormContextValues.setDefaultValues(_defineProperty({}, name, valueToSet));
+                    smartFormContextValues.setErrors(_defineProperty({}, nextProps.name, this.generateErrorMessage(valueToSet, true)));
+                }
+                return true;
+            }
+        }, {
             key: 'componentWillMount',
             value: function componentWillMount() {
-                var _props = this.props,
-                    defaultValue = _props.defaultValue,
-                    smartFormContextValues = _props.smartFormContextValues;
+                var _props2 = this.props,
+                    defaultValue = _props2.defaultValue,
+                    smartFormContextValues = _props2.smartFormContextValues;
 
                 if (!smartFormContextValues) {
                     return;
@@ -3058,20 +3103,20 @@ var makeMeSmart = function makeMeSmart(CustomComponent) {
             value: function render() {
                 var _this2 = this;
 
-                var _props2 = this.props,
-                    validators = _props2.validators,
-                    defaultValue = _props2.defaultValue,
-                    onValidate = _props2.onValidate,
-                    smartFormContextValues = _props2.smartFormContextValues,
-                    name = _props2.name,
-                    restProps = _objectWithoutProperties(_props2, ['validators', 'defaultValue', 'onValidate', 'smartFormContextValues', 'name']);
+                var _props3 = this.props,
+                    validators = _props3.validators,
+                    defaultValue = _props3.defaultValue,
+                    onValidate = _props3.onValidate,
+                    smartFormContextValues = _props3.smartFormContextValues,
+                    name = _props3.name,
+                    restProps = _objectWithoutProperties(_props3, ['validators', 'defaultValue', 'onValidate', 'smartFormContextValues', 'name']);
 
                 var newProps = _extends({}, restProps, {
                     name: name
                 });
                 if (smartFormContextValues) {
                     Object.assign(newProps, {
-                        value: smartFormContextValues.getValues(name),
+                        value: smartFormContextValues.getValues(name) || '',
                         onFocus: this.onFocus,
                         onChange: this.onChange,
                         onBlur: this.onBlur,
@@ -3106,6 +3151,7 @@ var makeMeSmart = function makeMeSmart(CustomComponent) {
         name: _propTypes2.default.string,
         defaultValue: _propTypes2.default.string,
         debounce: _propTypes2.default.number,
+        validateOnBlur: _propTypes2.default.bool,
         smartForm: _propTypes2.default.object
     };
     return function (props) {
@@ -3223,7 +3269,9 @@ var withValidator = function withValidator(CustomComponent) {
             };
 
             _this.onBlur = function (e) {
-                _this.validate(e.target.value);
+                setTimeout(function () {
+                    _this.validate(_this.stete.value);
+                }, 100);
                 if (_this.props.onBlur) {
                     _this.props.onBlur(e);
                 }
@@ -3266,9 +3314,8 @@ var withValidator = function withValidator(CustomComponent) {
 
                 var _props = this.props,
                     validators = _props.validators,
-                    defaultValue = _props.defaultValue,
                     onValidate = _props.onValidate,
-                    restProps = _objectWithoutProperties(_props, ['validators', 'defaultValue', 'onValidate']);
+                    restProps = _objectWithoutProperties(_props, ['validators', 'onValidate']);
 
                 var props = _extends({}, restProps, {
                     onChange: this.onChange,
@@ -3327,7 +3374,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _smartFormContext = __webpack_require__(7);
+var _smartFormContext = __webpack_require__(3);
 
 var _smartFormContext2 = _interopRequireDefault(_smartFormContext);
 
@@ -3359,7 +3406,7 @@ var withFormState = function withFormState(CustomButton) {
                     null,
                     function (context) {
                         return _react2.default.createElement(CustomButton, _extends({}, _this2.props, {
-                            smartForm: { disabled: context.disabled, loading: context.loading, hasChange: context.hasChange }
+                            smartForm: context
                         }));
                     }
                 );
@@ -3384,7 +3431,7 @@ exports.default = withFormState;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.smartInputShape = exports.formStateShape = exports.withFormState = exports.withValidator = exports.smartInput = exports.smartForm = exports.Submit = exports.Input = exports.Form = undefined;
+exports.smartFormContext = exports.smartInputShape = exports.formStateShape = exports.withFormState = exports.withValidator = exports.smartInput = exports.smartForm = exports.Submit = exports.Input = exports.Form = undefined;
 
 var _Form = __webpack_require__(17);
 
@@ -3414,7 +3461,11 @@ var _withFormState = __webpack_require__(15);
 
 var _withFormState2 = _interopRequireDefault(_withFormState);
 
-var _propTypes = __webpack_require__(3);
+var _propTypes = __webpack_require__(4);
+
+var _smartFormContext = __webpack_require__(3);
+
+var _smartFormContext2 = _interopRequireDefault(_smartFormContext);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3427,6 +3478,7 @@ exports.withValidator = _withValidator2.default;
 exports.withFormState = _withFormState2.default;
 exports.formStateShape = _propTypes.formStateShape;
 exports.smartInputShape = _propTypes.smartInputShape;
+exports.smartFormContext = _smartFormContext2.default;
 
 /***/ }),
 /* 17 */
@@ -3459,7 +3511,7 @@ var _smartForm = __webpack_require__(10);
 
 var _smartForm2 = _interopRequireDefault(_smartForm);
 
-var _propTypes3 = __webpack_require__(3);
+var _propTypes3 = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3532,12 +3584,12 @@ exports.default = (0, _smartForm2.default)(Form);
 
 
 
-var emptyFunction = __webpack_require__(4);
-var invariant = __webpack_require__(5);
+var emptyFunction = __webpack_require__(5);
+var invariant = __webpack_require__(6);
 var warning = __webpack_require__(9);
 var assign = __webpack_require__(19);
 
-var ReactPropTypesSecret = __webpack_require__(6);
+var ReactPropTypesSecret = __webpack_require__(7);
 var checkPropTypes = __webpack_require__(20);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
@@ -4179,9 +4231,9 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 if (undefined !== 'production') {
-  var invariant = __webpack_require__(5);
+  var invariant = __webpack_require__(6);
   var warning = __webpack_require__(9);
-  var ReactPropTypesSecret = __webpack_require__(6);
+  var ReactPropTypesSecret = __webpack_require__(7);
   var loggedTypeFailures = {};
 }
 
@@ -4244,9 +4296,9 @@ module.exports = checkPropTypes;
 
 
 
-var emptyFunction = __webpack_require__(4);
-var invariant = __webpack_require__(5);
-var ReactPropTypesSecret = __webpack_require__(6);
+var emptyFunction = __webpack_require__(5);
+var invariant = __webpack_require__(6);
+var ReactPropTypesSecret = __webpack_require__(7);
 
 module.exports = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -8014,7 +8066,7 @@ var _smartInput = __webpack_require__(13);
 
 var _smartInput2 = _interopRequireDefault(_smartInput);
 
-var _propTypes3 = __webpack_require__(3);
+var _propTypes3 = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8787,7 +8839,7 @@ var _withFormState = __webpack_require__(15);
 
 var _withFormState2 = _interopRequireDefault(_withFormState);
 
-var _propTypes3 = __webpack_require__(3);
+var _propTypes3 = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

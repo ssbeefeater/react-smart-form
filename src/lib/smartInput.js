@@ -8,8 +8,13 @@ const Validator = withValidator('input');
 const makeMeSmart = (CustomComponent) => {
     class SmartInput extends Validator {
         setError = (errorMessage) => {
-            if (errorMessage !== this.state.error) {
-                this.props.smartFormContextValues.setErrors({ [this.props.name]: errorMessage });
+            const {
+                setErrors,
+                getErrors,
+                name,
+            } = this.props.smartFormContextValues;
+            if (errorMessage !== getErrors(name)) {
+                setErrors({ [this.props.name]: errorMessage });
             }
         };
 
@@ -28,15 +33,37 @@ const makeMeSmart = (CustomComponent) => {
                 this.props.onChange(value);
             }
         };
-        componentDidUpdate = (PrevProps) => {
+
+        shouldComponentUpdate(nextProps) {
+            const prevProps = this.props;
             const {
                 smartFormContextValues,
                 name,
             } = this.props;
-            if (smartFormContextValues && !smartFormContextValues.getValues(name) &&
-                !PrevProps.defaultValue &&
-                PrevProps.defaultValue !== this.props.defaultValue) {
-                smartFormContextValues.setDefaultValues(this.props.defaultValue);
+
+            if (prevProps.defaultValue !== nextProps.defaultValue) {
+                const valueToSet = nextProps.defaultValue || '';
+                smartFormContextValues.setValues({ [name]: valueToSet });
+                smartFormContextValues.setDefaultValues({ [name]: valueToSet });
+                smartFormContextValues.setErrors({
+                    [nextProps.name]: this.generateErrorMessage(valueToSet, true),
+                });
+            }
+            return true;
+        }
+
+        onBlur = (e) => {
+            const {
+                smartFormContextValues,
+                name,
+                onBlur,
+                validateOnBlur,
+            } = this.props;
+            if (validateOnBlur) {
+                this.validate(smartFormContextValues.getValues(name));
+                if (onBlur) {
+                    onBlur(e);
+                }
             }
         }
         componentWillMount() {
@@ -71,7 +98,7 @@ const makeMeSmart = (CustomComponent) => {
             };
             if (smartFormContextValues) {
                 Object.assign(newProps, {
-                    value: smartFormContextValues.getValues(name),
+                    value: smartFormContextValues.getValues(name) || '',
                     onFocus: this.onFocus,
                     onChange: this.onChange,
                     onBlur: this.onBlur,
@@ -106,6 +133,7 @@ const makeMeSmart = (CustomComponent) => {
         name: PropTypes.string,
         defaultValue: PropTypes.string,
         debounce: PropTypes.number,
+        validateOnBlur: PropTypes.bool,
         smartForm: PropTypes.object,
     };
     return props => (

@@ -61,12 +61,12 @@ const withValidator = (CustomComponent) => {
             }
         };
         onBlur = (e) => {
-            this.validate(e.target.value);
+            setTimeout(() => { this.validate(this.stete.value); }, 100);
             if (this.props.onBlur) {
                 this.props.onBlur(e);
             }
         };
-        onValidate=(error) => {
+        onValidate = (error) => {
             const { onValidate } = this.props;
             if (onValidate) {
                 onValidate(error);
@@ -86,7 +86,6 @@ const withValidator = (CustomComponent) => {
         render() {
             const {
                 validators,
-                defaultValue,
                 onValidate,
                 ...restProps
             } = this.props;
@@ -102,7 +101,7 @@ const withValidator = (CustomComponent) => {
                     }
                 },
             };
-            return (<CustomComponent {...props}/>);
+            return (<CustomComponent {...props} />);
         }
     }
 
