@@ -1,9 +1,10 @@
 {
   "name": "react-smart-form",
-  "version": "2.0.14-beta",
+  "version": "2.0.15-beta",
   "description": "A form component that contains all the functionality you will need.",
   "main": "./react-smart-form.js",
   "scripts": {
+    "prepublish": "yarn build && npm version patch",
     "build": "webpack",
     "start": "start-storybook -p 6006",
     "test": "jest --coverage",

@@ -2766,7 +2766,7 @@ var smartForm = function smartForm(CustomForm) {
                 e.stopPropagation();
                 if (!_this.hasError() && !_this.state.loading) {
                     if (_this.props.onSubmit) {
-                        var onSubmitValue = _this.props.onSubmit(_this.getValues(), _this.hasChange);
+                        var onSubmitValue = _this.props.onSubmit(_this.getValues(), { hasChange: _this.hasChange, reset: _this.reset });
                         if (onSubmitValue instanceof Promise) {
                             _this.setState({
                                 loading: true
@@ -2837,6 +2837,7 @@ var smartForm = function smartForm(CustomForm) {
                     restProps = _objectWithoutProperties(_props, ['formRef', 'loading', 'disabled']);
 
                 var smartFormData = {
+                    reset: this.reset,
                     setErrors: this.setErrors,
                     getValues: this.getValues,
                     getErrors: this.getErrors,
