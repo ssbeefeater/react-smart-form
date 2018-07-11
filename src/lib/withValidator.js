@@ -53,7 +53,7 @@ const withValidator = (CustomComponent) => {
 
         onChange = (e) => {
             if (typeof this.props.value !== 'string') {
-                const { value } = e.target;
+                const value = typeof e === 'string' ? e : e.target.value;
                 this.setValue(value);
             }
             if (this.props.onChange) {

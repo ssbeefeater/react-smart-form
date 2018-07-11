@@ -26,7 +26,7 @@ const makeMeSmart = (CustomComponent) => {
         };
 
         onChange = (e) => {
-            const { value } = e.target;
+            const value = typeof e === 'string' ? e : e.target.value;
             this.setValue(value);
             this.validate(value);
             if (this.props.onChange) {
