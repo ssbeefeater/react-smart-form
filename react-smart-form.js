@@ -3035,8 +3035,10 @@ var makeMeSmart = function makeMeSmart(CustomComponent) {
                 if (value !== currentValue) {
                     _this.props.smartFormContextValues.setValues(_defineProperty({}, _this.props.name, value));
                 }
-            }, _this.onChange = function (e) {
-                var value = typeof e === 'string' ? e : e.target.value;
+            }, _this.onChange = function (e, v) {
+                console.log('​SmartInput -> onChange -> v', v);
+                console.log('​SmartInput -> onChange -> value', e);
+                var value = e && (typeof e === 'string' ? e : e.target.value);
                 _this.setValue(value);
                 _this.validate(value);
                 if (_this.props.onChange) {
@@ -3259,7 +3261,7 @@ var withValidator = function withValidator(CustomComponent) {
 
             _this.onChange = function (e) {
                 if (typeof _this.props.value !== 'string') {
-                    var value = typeof e === 'string' ? e : e.target.value;
+                    var value = e && typeof e === 'string' ? e : e.target.value;
                     _this.setValue(value);
                 }
                 if (_this.props.onChange) {
