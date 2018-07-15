@@ -91,7 +91,10 @@ const smartForm = (CustomForm) => {
             e.stopPropagation();
             if (!this.hasError() && !this.state.loading) {
                 if (this.props.onSubmit) {
-                    const onSubmitValue = this.props.onSubmit(this.getValues(), { hasChange: this.hasChange, reset: this.reset });
+                    const onSubmitValue = this.props.onSubmit(
+                        this.getValues(),
+                        { hasChange: this.hasChange, reset: this.reset },
+                    );
                     if (onSubmitValue instanceof Promise) {
                         this.setState({
                             loading: true,

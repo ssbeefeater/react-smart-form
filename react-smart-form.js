@@ -2974,6 +2974,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -3035,12 +3037,17 @@ var makeMeSmart = function makeMeSmart(CustomComponent) {
                 if (value !== currentValue) {
                     _this.props.smartFormContextValues.setValues(_defineProperty({}, _this.props.name, value));
                 }
-            }, _this.onChange = function (e) {
-                var value = e && (typeof e === 'string' ? e : e.target.value);
-                _this.setValue(value);
-                _this.validate(value);
+            }, _this.onChange = function (value) {
+                var val = value;
+
+                if (value && value.target && _typeof(value.target.value) !== 'object') {
+                    val = value.target.value;
+                }
+
+                _this.setValue(val);
+                _this.validate(val);
                 if (_this.props.onChange) {
-                    _this.props.onChange(value);
+                    _this.props.onChange(val);
                 }
             }, _this.onBlur = function (e) {
                 var _this$props = _this.props,
@@ -3180,6 +3187,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -3257,19 +3266,23 @@ var withValidator = function withValidator(CustomComponent) {
                 }
             };
 
-            _this.onChange = function (e) {
+            _this.onChange = function (value) {
                 if (typeof _this.props.value !== 'string') {
-                    var value = e && (typeof e === 'string' ? e : e.target.value);
-                    _this.setValue(value);
+                    var val = value;
+
+                    if (value && value.target && _typeof(value.target.value) !== 'object') {
+                        val = value.target.value;
+                    }
+                    _this.setValue(val);
                 }
                 if (_this.props.onChange) {
-                    _this.props.onChange(e);
+                    _this.props.onChange(value);
                 }
             };
 
             _this.onBlur = function (e) {
                 setTimeout(function () {
-                    _this.validate(_this.stete.value);
+                    _this.validate(_this.state.value);
                 }, 100);
                 if (_this.props.onBlur) {
                     _this.props.onBlur(e);

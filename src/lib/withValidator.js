@@ -51,17 +51,21 @@ const withValidator = (CustomComponent) => {
             }
         };
 
-        onChange = (e) => {
+        onChange = (value) => {
             if (typeof this.props.value !== 'string') {
-                const value = e && (typeof e === 'string' ? e : e.target.value);
-                this.setValue(value);
+                let val = value;
+
+                if (value && value.target && typeof value.target.value !== 'object') {
+                    val = value.target.value;
+                }
+                this.setValue(val);
             }
             if (this.props.onChange) {
-                this.props.onChange(e);
+                this.props.onChange(value);
             }
         };
         onBlur = (e) => {
-            setTimeout(() => { this.validate(this.stete.value); }, 100);
+            setTimeout(() => { this.validate(this.state.value); }, 100);
             if (this.props.onBlur) {
                 this.props.onBlur(e);
             }

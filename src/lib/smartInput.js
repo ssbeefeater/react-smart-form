@@ -25,12 +25,17 @@ const makeMeSmart = (CustomComponent) => {
             }
         };
 
-        onChange = (e) => {
-            const value = e && (typeof e === 'string' ? e : e.target.value);
-            this.setValue(value);
-            this.validate(value);
+        onChange = (value) => {
+            let val = value;
+
+            if (value && value.target && typeof value.target.value !== 'object') {
+                val = value.target.value;
+            }
+
+            this.setValue(val);
+            this.validate(val);
             if (this.props.onChange) {
-                this.props.onChange(value);
+                this.props.onChange(val);
             }
         };
 
