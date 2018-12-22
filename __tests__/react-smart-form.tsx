@@ -1,12 +1,6 @@
 import 'raf/polyfill';
 import React from 'react';
-import {Form, Input, Submit} from '../src';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-Enzyme.configure({adapter: new Adapter()});
-
-const {mount} = Enzyme;
+import { Form, FormInput } from '../src';
 
 describe('<Typed />',
     () => {
@@ -14,10 +8,11 @@ describe('<Typed />',
             () => {
                 const component = mount(
                     <Form>
-                        <Input name="test"/>
-                        <Submit>Submit</Submit>
+                        <FormInput name='test1' />
+                        <FormInput name='test2' />
+                        <FormInput name='test3' />
                     </Form>
-                    );
+                );
                 expect(component).toHaveLength(1);
             }
         );

@@ -1,12 +1,28 @@
-const webpack = require('webpack');
 const path = require('path');
+const { CheckerPlugin } = require('awesome-typescript-loader');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
-const { UglifyJsPlugin } = webpack.optimize;
 
-module.exports = {
+module.exports = ({
+    mode: 'development',
+    output: {
+        path: path.join(__dirname, 'dist'),
+        publicPath: '/dist',
+    },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx']
+    },
+    module: {
+        rules: [{
+            exclude: /node_modules/,
+            test: /\.(tsx?|jsx?)$/,
+            loader: 'awesome-typescript-loader',
+        }]
+    },
+    devtool: 'eval',
     entry: {
-        'react-smart-form': './src/index.js',
-        validators: './src/lib/validators.js',
+        'index': './src/index.ts',
+        validators: './src/lib/validators.ts',
     },
     externals: {
         react: {
@@ -22,38 +38,16 @@ module.exports = {
             amd: 'react-dom',
         },
     },
-
     output: {
         filename: '[name].js',
         chunkFilename: '[id].chunk.js',
-        path: __dirname,
+        path: path.resolve(__dirname,'./dist'),
         publicPath: '/',
         libraryTarget: 'umd',
         library: 'react-smart-form',
     },
-
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        }),
-        new UglifyJsPlugin({
-            include: /\.min\.js$/,
-            minimize: true,
-            compress: {
-                warnings: false,
-            },
-        }),
+        new HardSourceWebpackPlugin(),
+        new CheckerPlugin(),
     ],
-
-    module: {
-        rules: [
-            {
-                test: /\.js?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                },
-            },
-        ],
-    },
-};
+})

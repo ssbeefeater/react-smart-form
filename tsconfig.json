@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es5",
+        "lib": [
+            "es5",
+            "es6",
+            "dom",
+            "esnext"
+        ],
+        "jsx": "react",
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "node_modules/*",
+                "types/*"
+            ]
+        }
+    },
+    "include": [
+        "./src/**/*", "stories/form.stories.tsx", ".storybook/addons.js",
+    ],
+    "exclude": [
+        "./src/**/*.test.tsx",
+        "./stories/**/*.stories.tsx",
+    ]
+}
