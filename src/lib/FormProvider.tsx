@@ -56,7 +56,7 @@ interface Props<V> {
     loading?: boolean;
     disabled?: boolean;
     defaultValues?: Partial<V>;
-    onValidate?: (errorInfo: { errors: Errors<V>, hasError: boolean }) => void;
+    onValidate?: (errorInfo: { errors: Errors<V>, hasError: boolean, hasChange: FormState['hasChange'] }) => void;
     formRef?: (formState: FormState<V>) => void;
 }
 const parseValidatorKey = (val: string): string | Function => {
@@ -145,7 +145,7 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
             return occum;
         }, {});
         if (onValidate) {
-            onValidate({ errors: this.temp.errors, hasError: this.hasError({ ...(this.state && this.state.errors || {}), ...newErrors }), });
+            onValidate({ errors: this.temp.errors, hasChange: this.hasChange, hasError: this.hasError({ ...(this.state && this.state.errors || {}), ...newErrors }), });
         }
         return newErrors;
     }
