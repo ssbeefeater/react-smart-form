@@ -9,8 +9,7 @@ module.exports = {
         "\\.(svg|woff2|png)$": "<rootDir>/__tests__/__mocks__/fileMock.js"
     },
     "setupFiles": [
-        "./jestsetup.js",
-        "jest-localstorage-mock",
+        "./jestSetup.js",
     ],
     "transform": {
         "\\.[jt]sx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"

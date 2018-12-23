@@ -1,0 +1,1070 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for react-smart-form/src/lib/FormProvider.tsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">react-smart-form/src/lib</a> FormProvider.tsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">48.8% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>81/166</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">31.48% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>34/108</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">39.39% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>13/33</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">49.06% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>78/159</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import * as React from 'react';
+import isEqual = require('lodash.isequal');
+import debounce = require('lodash.debounce');
+import castArray = require('lodash.castarray');
+&nbsp;
+export const FormContext = React.createContext({});
+&nbsp;
+type AnyObject = { [i: string]: any };
+&nbsp;
+&nbsp;
+const removeNullValues = <span class="fstat-no" title="function not covered" >(</span>obj: AnyObject) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return Object.keys(obj).reduce(<span class="fstat-no" title="function not covered" >(</span>occum: any, key: string) =&gt; {</span>
+        const currentValue = <span class="cstat-no" title="statement not covered" >obj[key];</span>
+<span class="cstat-no" title="statement not covered" >        if (currentValue !== null &amp;&amp; currentValue !== undefined &amp;&amp; currentValue !== '') {</span>
+<span class="cstat-no" title="statement not covered" >            occum[key] = currentValue;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return occum;</span>
+    }, {});
+};
+&nbsp;
+export type FormState&lt;V= AnyObject, P= AnyObject&gt; = {
+    hasChange: () =&gt; boolean;
+    reset: (inputNames?: string | string[]) =&gt; void;
+    getErrors: (name?: string) =&gt; Errors&lt;V&gt;;
+    getValues: (name?: string) =&gt; V | any;
+    setErrors: (errors: Errors&lt;V&gt;) =&gt; void;
+    setValues: (values: V) =&gt; void;
+    submit: () =&gt; void;
+    props: P &amp; Props&lt;V&gt;,
+} &amp; State&lt;V&gt;;
+export type WithFormState = { formState: FormState };
+&nbsp;
+type Errors&lt;V= AnyObject&gt; = {
+    [T in keyof V]?: string | boolean;
+};
+&nbsp;
+type Validator = (value: any) =&gt; string | boolean;
+&nbsp;
+type Validators&lt;V= AnyObject&gt; = {
+    [T in keyof V]?: Validator | Validator[];
+};
+&nbsp;
+interface State&lt;V= AnyObject&gt; {
+    values: Partial&lt;V&gt;;
+    errors: AnyObject;
+    loading: boolean;
+    disabled: boolean;
+}
+&nbsp;
+&nbsp;
+interface Props&lt;V&gt; {
+    onChange?: (values: Partial&lt;V&gt;, hasChange: () =&gt; boolean) =&gt; void;
+    onSubmit?: (values: V, formState: FormState) =&gt; any | Promise&lt;any&gt;;
+    values?: V;
+    validators?: Validators&lt;V&gt;;
+    loading?: boolean;
+    disabled?: boolean;
+    defaultValues?: Partial&lt;V&gt;;
+    onValidate?: (errorInfo: { errors: Errors&lt;V&gt;, hasError: boolean }) =&gt; void;
+    formRef?: (formState: FormState&lt;V&gt;) =&gt; void;
+}
+const parseValidatorKey = (val: string): string | Function =&gt; {
+    try {
+        const fn = eval(`(${val})`);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof fn === 'function') {
+            return fn;
+        }
+    } catch (err) {
+    }
+    return val;
+};
+export class Form&lt;V= AnyObject&gt; extends React.PureComponent&lt;Props&lt;V&gt;, State&lt;V&gt;&gt; {
+&nbsp;
+    constructor(props: Props&lt;V&gt;) {
+        super(props);
+        this.validators = Form.parseValidators(props.validators);
+    }
+&nbsp;
+    validators: Validators&lt;V&gt;;
+&nbsp;
+    static parseValidators = (validators: any) =&gt; {
+        if (validators) {
+           return Object.keys(validators).reduce((accum: any, key: string) =&gt; {
+                const validatorValue = validators[key];
+                const parsedKey = parseValidatorKey(key);
+                if (typeof parsedKey === 'function') {
+                    const castValidatorValue = castArray(validatorValue);
+                    castValidatorValue.forEach((field: string) =&gt; {
+                        <span class="missing-if-branch" title="if path not taken" >I</span>if (accum[field]) {
+                            const current = <span class="cstat-no" title="statement not covered" >castArray(accum[field]);</span>
+<span class="cstat-no" title="statement not covered" >                            accum[field] = [...current, parsedKey];</span>
+                        } else {
+                            accum[field] = parsedKey;
+                        }
+                    });
+                } else {
+                    if (accum[key]) {
+                        const current = castArray(accum[key]);
+                        accum[key] = [...current, validatorValue];
+                    } else {
+                        accum[key] = validatorValue;
+                    }
+                }
+                return accum;
+            }, {});
+        }
+        return {};
+    }
+&nbsp;
+    defaultValues = this.props.defaultValues || this.props.values || {};
+&nbsp;
+    temp: any = {
+        values: this.defaultValues || <span class="branch-1 cbranch-no" title="branch not covered" >{},</span>
+        errors: {},
+    };
+&nbsp;
+    hasError = (errors?: Errors&lt;V&gt;) =&gt; {
+        const {
+<span class="branch-1 cbranch-no" title="branch not covered" >            errors: stateErrors</span>
+        } = this.state || {} as any;
+&nbsp;
+        const errorKeys = Object.keys(errors || stateErrors || <span class="branch-2 cbranch-no" title="branch not covered" >{})</span>;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!errorKeys) {
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+        return (
+            errorKeys.some(<span class="fstat-no" title="function not covered" >(</span>name) =&gt; {
+                const error = <span class="cstat-no" title="statement not covered" >(errors || stateErrors)[name];</span>
+<span class="cstat-no" title="statement not covered" >                return (typeof error === 'string' || error === true);</span>
+            }));
+    }
+&nbsp;
+    private validate = (values: any, initialCheck?: boolean) =&gt; {
+        const {
+            onValidate
+        } = this.props;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!values &amp;&amp; this.validators) {
+<span class="cstat-no" title="statement not covered" >            values = Object.keys(this.validators).reduce(<span class="fstat-no" title="function not covered" >(</span>occum: any, key: string) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                occum[key] = null;</span>
+<span class="cstat-no" title="statement not covered" >                return occum;</span>
+            }, {});
+        } else <span class="missing-if-branch" title="else path not taken" >E</span>if (!values) {
+            return {};
+        }
+        const newErrors = <span class="cstat-no" title="statement not covered" >Object.keys(values).reduce(<span class="fstat-no" title="function not covered" >(</span>occum: AnyObject, key: any) =&gt; {</span>
+            const currentValue = <span class="cstat-no" title="statement not covered" >values[key];</span>
+            const currentValidator = <span class="cstat-no" title="statement not covered" >this.validators &amp;&amp; (this.validators as any)[key];</span>
+<span class="cstat-no" title="statement not covered" >            occum[key] = Form.errorChecker(currentValidator, currentValue, initialCheck);</span>
+<span class="cstat-no" title="statement not covered" >            return occum;</span>
+        }, {});
+<span class="cstat-no" title="statement not covered" >        if (onValidate) {</span>
+<span class="cstat-no" title="statement not covered" >            onValidate({ errors: this.temp.errors, hasError: this.hasError({ ...(this.state &amp;&amp; this.state.errors || {}), ...newErrors }), });</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return newErrors;</span>
+    }
+&nbsp;
+    state: State&lt;V&gt; = {
+        values: this.props.values || this.props.defaultValues || {},
+        errors: this.validate(this.props.values, true),
+        loading: false,
+        disabled: false,
+    };
+    private static errorChecker = <span class="fstat-no" title="function not covered" >(</span>validators: Validator, value: any, initialCheck: boolean): string | boolean =&gt; {
+        let errorMessage: boolean | string = <span class="cstat-no" title="statement not covered" >false;</span>
+        const propValidators = <span class="cstat-no" title="statement not covered" >validators &amp;&amp; castArray(validators);</span>
+<span class="cstat-no" title="statement not covered" >        if (!propValidators) {</span>
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        propValidators.every(<span class="fstat-no" title="function not covered" >(</span>validator) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            if (!validator) <span class="cstat-no" title="statement not covered" >return true;</span></span>
+            const validate = <span class="cstat-no" title="statement not covered" >validator(value);</span>
+<span class="cstat-no" title="statement not covered" >            if (validate !== false) {</span>
+<span class="cstat-no" title="statement not covered" >                errorMessage = initialCheck ? true : validate;</span>
+<span class="cstat-no" title="statement not covered" >                return false;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return true;</span>
+        });
+<span class="cstat-no" title="statement not covered" >        return errorMessage;</span>
+    }
+&nbsp;
+&nbsp;
+    setErrors = <span class="fstat-no" title="function not covered" >(</span>errors: Errors&lt;V&gt;) =&gt; {
+<span class="cstat-no" title="statement not covered" >        if (!errors || !Object.keys(errors).length) {</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+        const newErrors = <span class="cstat-no" title="statement not covered" >Object.assign({}, this.state.errors, errors);</span>
+<span class="cstat-no" title="statement not covered" >        this.setState({</span>
+            errors: newErrors
+        });
+    }
+    setValues = <span class="fstat-no" title="function not covered" >(<span class="cstat-no" title="statement not covered" ></span>newValues = {})</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >        this.temp.values = Object.assign({}, this.state.values, this.temp.values, newValues);</span>
+        const initial = <span class="cstat-no" title="statement not covered" >Object.keys(newValues).some(<span class="fstat-no" title="function not covered" >(</span>val) =&gt; <span class="cstat-no" title="statement not covered" >!Object.keys(this.temp.errors).includes(val))</span>;</span>
+<span class="cstat-no" title="statement not covered" >        this.temp.errors = Object.assign({}, this.state.errors, this.temp.errors, this.validate(newValues, initial));</span>
+<span class="cstat-no" title="statement not covered" >        this.setState(this.temp, <span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+            const {
+<span class="cstat-no" title="statement not covered" >                onChange,</span>
+            } = this.props;
+<span class="cstat-no" title="statement not covered" >            if (onChange) {</span>
+<span class="cstat-no" title="statement not covered" >                onChange(this.temp.values, this.hasChange);</span>
+            }
+        });
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    componentWillUpdate(</span>nextProps: Props&lt;V&gt;) {
+<span class="cstat-no" title="statement not covered" >        if (nextProps.defaultValues !== this.props.defaultValues) {</span>
+<span class="cstat-no" title="statement not covered" >            this.defaultValues = nextProps.defaultValues;</span>
+<span class="cstat-no" title="statement not covered" >            this.setValues(this.defaultValues);</span>
+        }
+    }
+    componentDidMount() {
+        const {
+            formRef
+        } = this.props;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (formRef) {
+<span class="cstat-no" title="statement not covered" >            formRef(this.getFormState());</span>
+        }
+    }
+    hasChange = <span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>!isEqual(removeNullValues(this.state.values), removeNullValues(this.props.defaultValues || this.defaultValues || {}));</span>
+    getValues = (fieldName?: string): V | any =&gt; {
+        return (fieldName ? (this.state.values as any)[fieldName] : <span class="branch-1 cbranch-no" title="branch not covered" >this.state.values)</span>;
+    }
+    getErrors = (fieldName?: string): V | any =&gt; this.state.errors &amp;&amp; (fieldName ? this.state.errors[fieldName] : <span class="branch-1 cbranch-no" title="branch not covered" >this.state.errors)</span>;
+&nbsp;
+    onSubmit = <span class="fstat-no" title="function not covered" >(</span>e?: React.SyntheticEvent) =&gt; {
+<span class="cstat-no" title="statement not covered" >        if (e) {</span>
+<span class="cstat-no" title="statement not covered" >            e.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >            e.stopPropagation();</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!this.hasError() &amp;&amp; !this.state.loading) {</span>
+<span class="cstat-no" title="statement not covered" >            if (this.props.onSubmit) {</span>
+                const onSubmitValue = <span class="cstat-no" title="statement not covered" >this.props.onSubmit(</span>
+                    this.getValues() as V,
+                    this.getFormState()
+                );
+<span class="cstat-no" title="statement not covered" >                if (onSubmitValue instanceof Promise) {</span>
+<span class="cstat-no" title="statement not covered" >                    this.setState({</span>
+                        loading: true,
+                    });
+<span class="cstat-no" title="statement not covered" >                    onSubmitValue.then(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >                        this.setState({</span>
+                            loading: false,
+                        });
+                    }).catch(this.handleRequestError);
+                }
+            }
+        }
+    }
+&nbsp;
+    handleRequestError = <span class="fstat-no" title="function not covered" >(</span>error: Error | string) =&gt; {
+<span class="cstat-no" title="statement not covered" >        if (!error) {</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+        let errors;
+<span class="cstat-no" title="statement not covered" >        if (error instanceof Error) {</span>
+<span class="cstat-no" title="statement not covered" >            errors = error.message;</span>
+        } else <span class="cstat-no" title="statement not covered" >if (typeof error === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >            errors = Object.keys(this.state.errors).reduce(<span class="fstat-no" title="function not covered" >(</span>accum: any, val) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                accum[val] = error;</span>
+<span class="cstat-no" title="statement not covered" >                return accum;</span>
+            }, {});
+        } else <span class="cstat-no" title="statement not covered" >if (typeof error === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >            errors = error;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.setState({ loading: false });</span>
+<span class="cstat-no" title="statement not covered" >        if (errors) {</span>
+<span class="cstat-no" title="statement not covered" >            this.setErrors(errors);</span>
+        }
+    }
+&nbsp;
+    reset = <span class="fstat-no" title="function not covered" >(</span>inputName: string | string[]) =&gt; {
+        const { <span class="cstat-no" title="statement not covered" >values </span>} = this.state;
+        const newState = <span class="cstat-no" title="statement not covered" >{ values: {}, errors: {} };</span>
+        const names = <span class="cstat-no" title="statement not covered" >inputName &amp;&amp; castArray(inputName);</span>
+<span class="cstat-no" title="statement not covered" >        if (names) {</span>
+<span class="cstat-no" title="statement not covered" >            names.forEach(<span class="fstat-no" title="function not covered" >(</span>name: string) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                newState.values = Object.assign({}, values, {</span>
+                    [name]: '',
+                });
+            });
+        } else {
+<span class="cstat-no" title="statement not covered" >            newState.values = Object.keys(values).reduce(<span class="fstat-no" title="function not covered" >(</span>accum: any, val) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                accum[val] = '';</span>
+<span class="cstat-no" title="statement not covered" >                return accum;</span>
+            }, {});
+        }
+<span class="cstat-no" title="statement not covered" >        this.setValues(newState.values);</span>
+    }
+&nbsp;
+    getFormState = (): FormState&lt;V&gt; =&gt; {
+        const {
+            disabled,
+            loading
+        } = this.props;
+&nbsp;
+        return ({
+            reset: this.reset,
+            setErrors: this.setErrors,
+            getValues: this.getValues,
+            getErrors: this.getErrors,
+            setValues: this.setValues,
+            values: this.state.values,
+            errors: this.state.errors,
+            hasChange: this.hasChange,
+            disabled: disabled || this.hasError(),
+            loading: loading || this.state.loading,
+            submit: this.onSubmit,
+            props: this.props,
+        });
+    }
+    render() {
+        const {
+            children,
+            onChange,
+            onSubmit,
+            onValidate,
+            values,
+            validators,
+            loading,
+            disabled,
+            defaultValues,
+            formRef,
+            ...props
+        } = this.props;
+        return (
+            &lt;FormContext.Provider value={this.getFormState()}&gt;
+                &lt;form onSubmit={this.onSubmit} {...props}&gt;
+                    {children}
+                &lt;/form&gt;
+            &lt;/FormContext.Provider&gt;
+        );
+    }
+}
+&nbsp;
+export default Form;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Dec 22 2018 22:02:54 GMT+0200 (EET)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

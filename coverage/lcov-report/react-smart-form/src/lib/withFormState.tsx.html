@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for react-smart-form/src/lib/withFormState.tsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">react-smart-form/src/lib</a> withFormState.tsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">71.05% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>27/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">40% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>6/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">60% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">72.73% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>24/33</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as React from 'react';
+import { FormContext, FormState, WithFormState } from './FormProvider';
+export type FormInputProps = { component?: React.ComponentType&lt;any&gt;, name: string, onChange?: Function };
+&nbsp;
+class FormInputComponent extends React.Component&lt;FormInputProps &amp; WithFormState, { value: any, error: any }&gt; {
+    state: { value: any, error: any } = {
+        value: null,
+        error: null
+    };
+&nbsp;
+<span class="fstat-no" title="function not covered" >    shouldComponentUpdate(</span>nextProps: any, nextState: any) {
+<span class="cstat-no" title="statement not covered" >        return this.state.value !== nextState.value || this.state.error !== nextState.error;</span>
+    }
+&nbsp;
+    static getDerivedStateFromProps(props: FormInputProps &amp; WithFormState) {
+        const value = props.formState.getValues(props.name) || '';
+        const error = props.formState.getErrors(props.name);
+        return {
+            value,
+            error,
+        };
+    }
+    private onChange = <span class="fstat-no" title="function not covered" >(</span>val: React.ChangeEvent | any) =&gt; {
+        const <span class="cstat-no" title="statement not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            formState,</span>
+<span class="cstat-no" title="statement not covered" >            name,</span>
+<span class="cstat-no" title="statement not covered" >            onChange,</span>
+        } = this.props;
+&nbsp;
+        const value = <span class="cstat-no" title="statement not covered" >typeof val === 'object' &amp;&amp; val.target ? val.target.value : val;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        formState.setValues({ [name]: value });</span>
+<span class="cstat-no" title="statement not covered" >        if (onChange) {</span>
+<span class="cstat-no" title="statement not covered" >            onChange(val);</span>
+        }
+    }
+    render() {
+&nbsp;
+        const {
+<span class="branch-1 cbranch-no" title="branch not covered" >            component: Component = 'input',</span>
+            name,
+            formState,
+            ...restProps
+        } = this.props;
+&nbsp;
+        const props = {
+            name,
+            formState: { error: this.state.error },
+            ...restProps
+        };
+        return (
+            &lt;Component  {...props} value={this.state.value} onChange={this.onChange} /&gt;
+        );
+    }
+}
+&nbsp;
+&nbsp;
+&nbsp;
+export const withFormState: &lt;PROPS= any, V= any&gt;(Component: React.ComponentType&lt;PROPS &amp; { name: string, formState: FormState&lt;V&gt; }&gt;) =&gt;
+    (props: PROPS &amp; { name: string }) =&gt; React.ReactElement&lt;PROPS&gt; = (Component) =&gt; (props) =&gt; (
+        &lt;FormContext.Consumer&gt;
+            {
+                (ctx: any) =&gt; &lt;Component {...props} formState={ctx} /&gt;
+            }
+        &lt;/FormContext.Consumer&gt;
+    );
+&nbsp;
+export const FormInput = withFormState(FormInputComponent) as React.ComponentType&lt;FormInputProps&gt;;
+&nbsp;
+export const transformInput = <span class="fstat-no" title="function not covered" >(</span>Component: React.ComponentType) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>props: any) =&gt; <span class="cstat-no" title="statement not covered" >&lt;FormInput {...props} component={Component} /&gt;;</span></span>
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Dec 22 2018 22:02:54 GMT+0200 (EET)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

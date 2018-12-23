@@ -37,7 +37,7 @@ type Errors<V= AnyObject> = {
 type Validator = (value: any) => string | boolean;
 
 type Validators<V= AnyObject> = {
-    [T in keyof V]?: Validator | Validator[]
+    [T in keyof V]?: Validator | Validator[];
 };
 
 interface State<V= AnyObject> {
@@ -71,20 +71,16 @@ const parseValidatorKey = (val: string): string | Function => {
 };
 export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> {
 
-    constructor(props: Props<V>) {
-        super(props);
-        this.validators = Form.parseValidators(props.validators);
-    }
-
-    validators: Validators<V>;
+    validators: Validators<V> = Form.parseValidators(this.props.validators);
 
     static parseValidators = (validators: any) => {
         if (validators) {
            return Object.keys(validators).reduce((accum: any, key: string) => {
                 const validatorValue = validators[key];
                 const parsedKey = parseValidatorKey(key);
-                if (typeof parsedKey === 'function' && Array.isArray(validatorValue)) {
-                    validatorValue.forEach((field: string) => {
+                if (typeof parsedKey === 'function') {
+                    const castValidatorValue = castArray(validatorValue);
+                    castValidatorValue.forEach((field: string) => {
                         if (accum[field]) {
                             const current = castArray(accum[field]);
                             accum[field] = [...current, parsedKey];
@@ -131,11 +127,11 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
 
     private validate = (values: any, initialCheck?: boolean) => {
         const {
-            validators,
             onValidate
         } = this.props;
-        if (!values && validators) {
-            values = Object.keys(validators).reduce((occum: any, key: string) => {
+        console.log(this.validators);
+        if (!values && this.validators) {
+            values = Object.keys(this.validators).reduce((occum: any, key: string) => {
                 occum[key] = null;
                 return occum;
             }, {});
@@ -144,7 +140,7 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
         }
         const newErrors = Object.keys(values).reduce((occum: AnyObject, key: any) => {
             const currentValue = values[key];
-            const currentValidator = validators && (validators as any)[key];
+            const currentValidator = this.validators && (this.validators as any)[key];
             occum[key] = Form.errorChecker(currentValidator, currentValue, initialCheck);
             return occum;
         }, {});

@@ -4,7 +4,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Form, FormInput, withFormState, WithFormState } from '../src';
 import * as validators from '../src/lib/validators';
-import { Object } from 'es6-shim';
 
 const Button = (props: WithFormState) => {
   const {
@@ -12,16 +11,6 @@ const Button = (props: WithFormState) => {
     loading,
     hasChange,
   } = props.formState;
-  const a = () => { console.log(1); };
-  const tst = {
-    // @ts-ignore
-    [a]: 'aa'
-  };
-  const a2 = Object.keys(tst)[0];
-  console.log('​a -> a2', a2);
-
-  // @ts-ignore
-  console.log('​a -> Object.keys(tst)');
   return (
     <div>
       <button disabled={disabled}>
@@ -40,18 +29,17 @@ storiesOf('React-smart-form', module)
   .add('Basic', () => (
     <Form onChange={action('onChange')} onSubmit={action('onSubmit')}
       validators={{
-        test1: validators.required('is required'),
-        test2: validators.required('is required'),
+        username: validators.required('is required'),
+        password: validators.required('is required'),
         test3: validators.required('is required'),
-
       }}>
-      <FormInput name='test1' />
-      <FormInput name='test2' />
+      <FormInput name='username' />
+      <FormInput name='password' />
       <FormInput name='test3' />
       <Submit />
     </Form>
   )).add('default values', () => (
-    <Form values={{ mike: 'sdas', ant: 'asas' }} onChange={action('onChange')} onSubmit={action('onSubmit')} validators={{ mike: validators.required('is required') }}>
+    <Form values={{ test1: 'sdas', test2: 'asas' }} onChange={action('onChange')} onSubmit={action('onSubmit')} validators={{ test1: validators.required('is required') }}>
       <FormInput name='test1' />
       <FormInput name='test2' />
       <Submit />
@@ -60,7 +48,7 @@ storiesOf('React-smart-form', module)
     <Form
       onChange={action('onChange')}
       onSubmit={PromiseSubmit}
-      validators={{ mike: validators.required('is required') }}>
+      validators={{ test1: validators.required('is required') }}>
       <FormInput name='test1' />
       <FormInput name='test2' />
       <Submit />
@@ -70,7 +58,7 @@ storiesOf('React-smart-form', module)
     <Form
       onChange={action('onChange')}
       onSubmit={PromiseSubmitReject}
-      validators={{ mike: validators.required('is required') }}>
+      validators={{ test1: validators.required('is required') }}>
       <FormInput name='test1' />
       <FormInput name='test2' />
       <Submit />
