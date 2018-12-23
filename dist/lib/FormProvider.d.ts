@@ -45,6 +45,7 @@ interface Props<V> {
     formRef?: (formState: FormState<V>) => void;
 }
 export declare class Form<V = AnyObject> extends React.PureComponent<Props<V>, State<V>> {
+    constructor(props: Props<V>);
     validators: Validators<V>;
     static parseValidators: (validators: any) => any;
     defaultValues: Partial<V>;
@@ -52,7 +53,6 @@ export declare class Form<V = AnyObject> extends React.PureComponent<Props<V>, S
     hasChange: () => boolean;
     hasError: (errors?: Errors<V>) => boolean;
     private validate;
-    state: State<V>;
     private static errorChecker;
     setErrors: (errors: Errors<V>) => void;
     setValues: (newValues?: {}) => void;

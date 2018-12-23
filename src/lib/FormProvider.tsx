@@ -71,6 +71,16 @@ const parseValidatorKey = (val: string): string | Function => {
 };
 export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> {
 
+    constructor(props: Props<V>) {
+        super(props);
+        this.state = {
+            values: this.props.values || this.props.defaultValues || {},
+            errors: this.validate(this.props.values, true),
+            loading: false,
+            disabled: false,
+        };
+    }
+
     validators: Validators<V> = Form.parseValidators(this.props.validators);
 
     static parseValidators = (validators: any) => {
@@ -145,17 +155,14 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
             return occum;
         }, {});
         if (onValidate) {
-            onValidate({ errors: this.temp.errors, hasChange: this.hasChange, hasError: this.hasError({ ...(this.state && this.state.errors || {}), ...newErrors }), });
+            onValidate({
+                errors: this.temp.errors,
+                hasChange: this.hasChange,
+                hasError: this.hasError({ ...(this.state && this.state.errors || {}), ...newErrors }), });
         }
         return newErrors;
     }
 
-    state: State<V> = {
-        values: this.props.values || this.props.defaultValues || {},
-        errors: this.validate(this.props.values, true),
-        loading: false,
-        disabled: false,
-    };
     private static errorChecker = (validators: Validator, value: any, initialCheck: boolean): string | boolean => {
         let errorMessage: boolean | string = false;
         const propValidators = validators && castArray(validators);
