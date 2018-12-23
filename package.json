@@ -1,6 +1,6 @@
 {
   "name": "react-smart-form",
-  "version": "3.1.4beta",
+  "version": "3.1.5beta",
   "description": "A form component that contains all the functionality you will need.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

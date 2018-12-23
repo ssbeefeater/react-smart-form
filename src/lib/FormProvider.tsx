@@ -73,11 +73,17 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
 
     constructor(props: Props<V>) {
         super(props);
+
         this.state = {
             values: this.props.values || this.props.defaultValues || {},
-            errors: this.validate(this.props.values, true),
             loading: false,
             disabled: false,
+            errors: {},
+        };
+
+        this.state = {
+            ...this.state,
+            errors: this.validate(this.props.values, true)
         };
     }
 
