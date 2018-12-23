@@ -108,6 +108,7 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
         values: this.defaultValues || {},
         errors: {},
     };
+    hasChange = () => !isEqual(removeNullValues(this.state.values), removeNullValues(this.props.defaultValues || this.defaultValues || {}));
 
     hasError = (errors?: Errors<V>) => {
         const {
@@ -129,7 +130,6 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
         const {
             onValidate
         } = this.props;
-        console.log(this.validators);
         if (!values && this.validators) {
             values = Object.keys(this.validators).reduce((occum: any, key: string) => {
                 occum[key] = null;
@@ -212,7 +212,6 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
             formRef(this.getFormState());
         }
     }
-    hasChange = () => !isEqual(removeNullValues(this.state.values), removeNullValues(this.props.defaultValues || this.defaultValues || {}));
     getValues = (fieldName?: string): V | any => {
         return (fieldName ? (this.state.values as any)[fieldName] : this.state.values);
     }

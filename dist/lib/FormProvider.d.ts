@@ -40,6 +40,7 @@ interface Props<V> {
     onValidate?: (errorInfo: {
         errors: Errors<V>;
         hasError: boolean;
+        hasChange: FormState['hasChange'];
     }) => void;
     formRef?: (formState: FormState<V>) => void;
 }
@@ -48,6 +49,7 @@ export declare class Form<V = AnyObject> extends React.PureComponent<Props<V>, S
     static parseValidators: (validators: any) => any;
     defaultValues: Partial<V>;
     temp: any;
+    hasChange: () => boolean;
     hasError: (errors?: Errors<V>) => boolean;
     private validate;
     state: State<V>;
@@ -56,7 +58,6 @@ export declare class Form<V = AnyObject> extends React.PureComponent<Props<V>, S
     setValues: (newValues?: {}) => void;
     componentWillUpdate(nextProps: Props<V>): void;
     componentDidMount(): void;
-    hasChange: () => boolean;
     getValues: (fieldName?: string) => any;
     getErrors: (fieldName?: string) => any;
     onSubmit: (e?: React.SyntheticEvent<Element, Event>) => void;

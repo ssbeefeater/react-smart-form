@@ -28,6 +28,7 @@ const Submit = withFormState<any>(Button);
 storiesOf('React-smart-form', module)
   .add('Basic', () => (
     <Form onChange={action('onChange')} onSubmit={action('onSubmit')}
+    onValidate={action('onValidate')}
       validators={{
         username: validators.required('is required'),
         password: validators.required('is required'),
