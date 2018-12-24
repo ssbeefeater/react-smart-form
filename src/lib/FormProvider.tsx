@@ -80,14 +80,14 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
             disabled: false,
             errors: {},
         };
-
+        this.validators = Form.parseValidators(props.validators);
         this.state = {
             ...this.state,
             errors: this.validate(this.state.values, true)
         };
     }
 
-    validators: Validators<V> = Form.parseValidators(this.props.validators);
+    validators: Validators<V>;
 
     static parseValidators = (validators: any) => {
         if (validators) {
@@ -149,7 +149,7 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
         const {
             onValidate
         } = this.props;
-        if (!values && this.validators) {
+        if ((!values || !Object.keys(values).length) && this.validators) {
             values = Object.keys(this.validators).reduce((occum: any, key: string) => {
                 occum[key] = null;
                 return occum;
