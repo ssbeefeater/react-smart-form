@@ -55,7 +55,7 @@ export declare class Form<V = AnyObject> extends React.PureComponent<Props<V>, S
     private validate;
     private static errorChecker;
     setErrors: (errors: Errors<V>) => void;
-    setValues: (newValues?: {}) => void;
+    setValues: (newValues?: {}, defaults?: boolean) => void;
     componentWillUpdate(nextProps: Props<V>): void;
     componentDidMount(): void;
     getValues: (fieldName?: string) => any;

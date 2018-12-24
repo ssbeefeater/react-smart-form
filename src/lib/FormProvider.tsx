@@ -83,7 +83,7 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
 
         this.state = {
             ...this.state,
-            errors: this.validate(this.props.values, true)
+            errors: this.validate(this.state.values, true)
         };
     }
 
@@ -124,7 +124,10 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
         values: this.defaultValues || {},
         errors: {},
     };
-    hasChange = () => !isEqual(removeNullValues(this.state.values), removeNullValues(this.props.defaultValues || this.defaultValues || {}));
+
+    hasChange = () => {
+        return !isEqual(removeNullValues(this.temp.values), removeNullValues(this.defaultValues));
+    }
 
     hasError = (errors?: Errors<V>) => {
         const {
@@ -197,7 +200,7 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
             errors: newErrors
         });
     }
-    setValues = (newValues = {}) => {
+     setValues = (newValues = {}, defaults?: boolean) => {
         this.temp.values = Object.assign({}, this.state.values, this.temp.values, newValues);
         const initial = Object.keys(newValues).some((val) => !Object.keys(this.temp.errors).includes(val));
         this.temp.errors = Object.assign({}, this.state.errors, this.temp.errors, this.validate(newValues, initial));
@@ -205,7 +208,7 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
             const {
                 onChange,
             } = this.props;
-            if (onChange) {
+            if (onChange && !defaults) {
                 onChange(this.temp.values, this.hasChange);
             }
         });
