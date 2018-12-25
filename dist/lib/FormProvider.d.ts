@@ -11,7 +11,7 @@ export declare type FormState<V = AnyObject, P = AnyObject> = {
     setErrors: (errors: Errors<V>) => void;
     setValues: (values: V) => void;
     submit: () => void;
-    props: P & Props<V>;
+    props: P & FormProps<V>;
 } & State<V>;
 export declare type WithFormState = {
     formState: FormState;
@@ -29,13 +29,14 @@ interface State<V = AnyObject> {
     loading: boolean;
     disabled: boolean;
 }
-interface Props<V> {
+export interface FormProps<V> {
     onChange?: (values: Partial<V>, hasChange: () => boolean) => void;
     onSubmit?: (values: V, formState: FormState) => any | Promise<any>;
     values?: V;
     validators?: Validators<V>;
     loading?: boolean;
     disabled?: boolean;
+    component?: any;
     defaultValues?: Partial<V>;
     onValidate?: (errorInfo: {
         errors: Errors<V>;
@@ -44,8 +45,8 @@ interface Props<V> {
     }) => void;
     formRef?: (formState: FormState<V>) => void;
 }
-export declare class Form<V = AnyObject> extends React.PureComponent<Props<V>, State<V>> {
-    constructor(props: Props<V>);
+export declare class Form<V = AnyObject> extends React.PureComponent<FormProps<V>, State<V>> {
+    constructor(props: FormProps<V>);
     validators: Validators<V>;
     static parseValidators: (validators: any) => any;
     defaultValues: Partial<V>;
@@ -56,7 +57,7 @@ export declare class Form<V = AnyObject> extends React.PureComponent<Props<V>, S
     private static errorChecker;
     setErrors: (errors: Errors<V>) => void;
     setValues: (newValues?: {}, defaults?: boolean) => void;
-    componentWillUpdate(nextProps: Props<V>): void;
+    componentWillUpdate(nextProps: FormProps<V>): void;
     componentDidMount(): void;
     getValues: (fieldName?: string) => any;
     getErrors: (fieldName?: string) => any;

@@ -26,7 +26,7 @@ export type FormState<V= AnyObject, P= AnyObject> = {
     setErrors: (errors: Errors<V>) => void;
     setValues: (values: V) => void;
     submit: () => void;
-    props: P & Props<V>,
+    props: P & FormProps<V>,
 } & State<V>;
 export type WithFormState = { formState: FormState };
 
@@ -48,13 +48,14 @@ interface State<V= AnyObject> {
 }
 
 
-interface Props<V> {
+export interface FormProps<V> {
     onChange?: (values: Partial<V>, hasChange: () => boolean) => void;
     onSubmit?: (values: V, formState: FormState) => any | Promise<any>;
     values?: V;
     validators?: Validators<V>;
     loading?: boolean;
     disabled?: boolean;
+    component?: any;
     defaultValues?: Partial<V>;
     onValidate?: (errorInfo: { errors: Errors<V>, hasError: boolean, hasChange: FormState['hasChange'] }) => void;
     formRef?: (formState: FormState<V>) => void;
@@ -69,9 +70,9 @@ const parseValidatorKey = (val: string): string | Function => {
     }
     return val;
 };
-export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> {
+export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<V>> {
 
-    constructor(props: Props<V>) {
+    constructor(props: FormProps<V>) {
         super(props);
 
         this.state = {
@@ -214,7 +215,7 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
         });
     }
 
-    componentWillUpdate(nextProps: Props<V>) {
+    componentWillUpdate(nextProps: FormProps<V>) {
         if (nextProps.defaultValues !== this.props.defaultValues) {
             this.defaultValues = nextProps.defaultValues;
             this.setValues(this.defaultValues);
@@ -332,13 +333,14 @@ export class Form<V= AnyObject> extends React.PureComponent<Props<V>, State<V>> 
             disabled,
             defaultValues,
             formRef,
+            component: Component = 'form',
             ...props
         } = this.props;
         return (
             <FormContext.Provider value={this.getFormState()}>
-                <form onSubmit={this.onSubmit} {...props}>
+                <Component onSubmit={this.onSubmit} {...props}>
                     {children}
-                </form>
+                </Component>
             </FormContext.Provider>
         );
     }

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Form, FormInput, withFormState, WithFormState } from '../src';
+import { Form, FormInput, withFormState, WithFormState, ObjectType } from '../src';
 import * as validators from '../src/lib/validators';
 
 const Button = (props: WithFormState) => {
@@ -64,18 +64,34 @@ storiesOf('React-smart-form', module)
       <FormInput name='test2' />
       <Submit />
     </Form>
+  ))
+  .add('Object input', () => (
+    <Form
+      onChange={action('onChange')}
+      onSubmit={PromiseSubmitReject}
+      >
+      <ObjectType name='objectTest'>
+        <FormInput name='test1' />
+        <FormInput name='test2' />
+      </ObjectType>
+      <Submit />
+    </Form>
+  ))
+  .add('Object input default values', () => (
+    <Form
+    values={{ test0: '0', objectTest: {test2: '2', test1: '1'} }}
+      onChange={action('onChange')}
+      onSubmit={PromiseSubmitReject}
+      validators={{ test0: validators.required('is required')}}>
+      <FormInput name='test0' />
+      <ObjectType name='objectTest'>
+        <FormInput name='test1' />
+        <FormInput name='test2' />
+      </ObjectType>
+      <Submit />
+    </Form>
   ));
-  // .add('Object input', () => (
-  //   <Form
-  //     onChange={action('onChange')}
-  //     onSubmit={PromiseSubmitReject}
-  //     validators={{ mike: validators.required('is required') }}>
-  //     <ObjectInput name='object'>
-  //       <FormInput name='test1' />
-  //       <FormInput name='test2' />
-  //     </ObjectInput>
-  //     <Submit />
-  //   </Form>
-  // ));
+
+
 
 
