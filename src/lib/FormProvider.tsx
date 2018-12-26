@@ -336,9 +336,13 @@ export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<
             component: Component = 'form',
             ...props
         } = this.props;
+        if (onSubmit || Component === 'form') {
+            // @ts-ignore
+            props.onSubmit = this.onSubmit;
+        }
         return (
             <FormContext.Provider value={this.getFormState()}>
-                <Component onSubmit={this.onSubmit} {...props}>
+                <Component {...props}>
                     {children}
                 </Component>
             </FormContext.Provider>

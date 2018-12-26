@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Form, FormInput, withFormState, WithFormState, ObjectType } from '../src';
+import { Form, FormInput, withFormState, WithFormState, ObjectType, ArrayType } from '../src';
 import * as validators from '../src/lib/validators';
 
 const Button = (props: WithFormState) => {
@@ -90,7 +90,33 @@ storiesOf('React-smart-form', module)
       </ObjectType>
       <Submit />
     </Form>
+  ))
+  .add('Array type', () => (
+    <Form
+      onChange={action('onChange')}>
+      <ArrayType name='arrayTest' type='number' />
+      <Submit />
+    </Form>
+  ))
+  .add('Array type default value', () => (
+    <Form
+    values={{ arrayTest: [1, 2, 3]}}
+      onChange={action('onChange')}>
+      <ArrayType name='arrayTest' type='number' />
+      <Submit />
+    </Form>
+  ))
+  .add('Array object', () => (
+    <Form
+      onChange={action('onChange')}>
+      <ArrayType name='arrayTest'>
+        <FormInput name='test1' />
+        <FormInput name='test2' />
+      </ArrayType>
+      <Submit />
+    </Form>
   ));
+
 
 
 
