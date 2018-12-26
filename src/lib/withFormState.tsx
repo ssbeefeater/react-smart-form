@@ -2,7 +2,11 @@ import * as React from 'react';
 import { FormContext, FormState, WithFormState } from './FormProvider';
 export type FormInputProps = { component?: React.ComponentType<any>, name: string, onChange?: Function };
 
-class FormInputComponent extends React.Component<FormInputProps & WithFormState, { value: any, error: any }> {
+const typeToConstructor: any = {
+    number: Number,
+};
+
+class FormInputComponent extends React.Component<FormInputProps & WithFormState & { type?: HTMLInputElement['type'] }, { value: any, error: any }> {
     state: { value: any, error: any } = {
         value: null,
         error: null
@@ -25,14 +29,19 @@ class FormInputComponent extends React.Component<FormInputProps & WithFormState,
             formState,
             name,
             onChange,
+            type,
         } = this.props;
-
-        const value = typeof val === 'object' && val.target ? val.target.value : val;
-
-        formState.setValues({ [name]: value });
         if (onChange) {
-            onChange(val);
+           const changeValue = onChange(val);
+           if ( typeof changeValue !== 'undefined') {
+                val = changeValue;
+           }
         }
+        let value = typeof val === 'object' && val.target ? val.target.value : val;
+        if (type && typeof value === 'string'  && typeToConstructor[type]) {
+            value  = typeToConstructor[type](value);
+        }
+        formState.setValues({ [name]: value });
     }
     render() {
 
