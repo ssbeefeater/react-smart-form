@@ -5,6 +5,11 @@ export declare type FormInputProps = {
     name?: string;
     onChange?: Function;
 };
+export interface InputFormState {
+    index: number;
+    setError: (error: string | boolean) => void;
+    error: string | boolean;
+}
 export declare const withFormState: <PROPS = any, V = any>(Component: React.ComponentType<PROPS & {
     name: string;
     formState: FormState<V>;
@@ -12,4 +17,8 @@ export declare const withFormState: <PROPS = any, V = any>(Component: React.Comp
     name: string;
 }) => React.ReactElement<PROPS>;
 export declare const FormInput: React.ComponentType<FormInputProps>;
-export declare const transformInput: (Component: React.ComponentType<{}>) => (props: any) => JSX.Element;
+export declare const transformInput: <PROPS = any>(Component: React.ComponentType<PROPS & {
+    formState: InputFormState;
+}>) => (props: PROPS & {
+    name: string;
+}) => React.ReactElement<PROPS>;

@@ -32,6 +32,10 @@ interface State<V = AnyObject> {
 export interface FormProps<V> {
     onChange?: (values: Partial<V>, hasChange: () => boolean) => void;
     onSubmit?: (values: V, formState: FormState) => any | Promise<any>;
+    onChangeErrorState?: (errorInfo: {
+        errors: Errors<V>;
+        hasError: boolean;
+    }) => void;
     values?: V;
     validators?: Validators<V>;
     loading?: boolean;
