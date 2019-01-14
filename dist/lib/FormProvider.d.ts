@@ -6,8 +6,8 @@ declare type AnyObject = {
 export declare type FormState<V = AnyObject, P = AnyObject> = {
     hasChange: () => boolean;
     reset: (inputNames?: string | string[]) => void;
-    getErrors: (name?: string) => Errors<V>;
-    getValues: (name?: string) => V | any;
+    getErrors: (name?: string | number) => Errors<V>;
+    getValues: (name?: string | number) => V | any;
     setErrors: (errors: Errors<V>) => void;
     setValues: (values: V) => void;
     submit: () => void;
@@ -36,6 +36,7 @@ export interface FormProps<V> {
     validators?: Validators<V>;
     loading?: boolean;
     disabled?: boolean;
+    singleValue?: boolean;
     component?: any;
     defaultValues?: Partial<V>;
     onValidate?: (errorInfo: {
@@ -51,6 +52,10 @@ export declare class Form<V = AnyObject> extends React.PureComponent<FormProps<V
     static parseValidators: (validators: any) => any;
     defaultValues: Partial<V>;
     temp: any;
+    inputs: {
+        [i: string]: any;
+    };
+    registerInput: (name: string, type: string) => number;
     hasChange: () => boolean;
     hasError: (errors?: Errors<V>) => boolean;
     private validate;
@@ -58,13 +63,25 @@ export declare class Form<V = AnyObject> extends React.PureComponent<FormProps<V
     setErrors: (errors: Errors<V>) => void;
     setValues: (newValues?: {}, defaults?: boolean) => void;
     componentWillUpdate(nextProps: FormProps<V>): void;
+    setInitialNullValues: () => void;
     componentDidMount(): void;
     getValues: (fieldName?: string) => any;
     getErrors: (fieldName?: string) => any;
     onSubmit: (e?: React.SyntheticEvent<Element, Event>) => void;
     handleRequestError: (error: string | Error) => void;
     reset: (inputName: string | string[]) => void;
-    getFormState: () => FormState<V, AnyObject>;
+    getFormState: () => {
+        hasChange: () => boolean;
+        reset: (inputNames?: string | string[]) => void;
+        getErrors: (name?: React.ReactText) => Errors<V>;
+        getValues: (name?: React.ReactText) => any;
+        setErrors: (errors: Errors<V>) => void;
+        setValues: (values: V) => void;
+        submit: () => void;
+        props: AnyObject & FormProps<V>;
+    } & State<V> & {
+        registerInput: (name: string, type: string) => void;
+    };
     render(): JSX.Element;
 }
 export default Form;

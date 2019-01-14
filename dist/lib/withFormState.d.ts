@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormState } from './FormProvider';
 export declare type FormInputProps = {
     component?: React.ComponentType<any>;
-    name: string;
+    name?: string;
     onChange?: Function;
 };
 export declare const withFormState: <PROPS = any, V = any>(Component: React.ComponentType<PROPS & {

@@ -1,28 +1,48 @@
 import * as React from 'react';
 import { FormContext, FormState, WithFormState } from './FormProvider';
-export type FormInputProps = { component?: React.ComponentType<any>, name: string, onChange?: Function };
+import { bool } from 'prop-types';
+export type FormInputProps = { component?: React.ComponentType<any>, name?: string, onChange?: Function };
 
 const typeToConstructor: any = {
     number: Number,
 };
-
-class FormInputComponent extends React.Component<FormInputProps & WithFormState & { type?: HTMLInputElement['type'] }, { value: any, error: any }> {
-    state: { value: any, error: any } = {
-        value: null,
-        error: null
-    };
-
-    shouldComponentUpdate(nextProps: any, nextState: any) {
+interface State { value: any; index: number; error: any; }
+export interface InputFormState {
+    index: number;
+    setError: (error: string | boolean) => void;
+    error: string | boolean;
+}
+class FormInputComponent extends React.Component<FormInputProps & WithFormState & { type?: HTMLInputElement['type'] }, State> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            value: null,
+            error: null,
+            // @ts-ignore
+            index: this.props.formState.registerInput(this.props.name, this.props.type),
+        };
+    }
+    shouldComponentUpdate(_: any, nextState: any) {
         return this.state.value !== nextState.value || this.state.error !== nextState.error;
     }
 
-    static getDerivedStateFromProps(props: FormInputProps & WithFormState) {
-        const value = props.formState.getValues(props.name) || '';
-        const error = props.formState.getErrors(props.name);
+    static getDerivedStateFromProps(props: FormInputProps & WithFormState, state: State) {
+        const value = props.formState.getValues(props.name || state.index) || '';
+        const error = props.formState.getErrors(props.name || state.index);
         return {
             value,
             error,
         };
+    }
+
+    setError = (error: string | boolean) => {
+        const {
+            formState,
+            name
+        } = this.props;
+        formState.setErrors({
+            [name || this.state.index]: error
+        });
     }
     private onChange = (val: React.ChangeEvent | any) => {
         const {
@@ -32,31 +52,37 @@ class FormInputComponent extends React.Component<FormInputProps & WithFormState 
             type,
         } = this.props;
         if (onChange) {
-           const changeValue = onChange(val);
-           if ( typeof changeValue !== 'undefined') {
+            const changeValue = onChange(val);
+            if (typeof changeValue !== 'undefined') {
                 val = changeValue;
-           }
+            }
         }
         let value = typeof val === 'object' && val.target ? val.target.value : val;
-        if (type && typeof value === 'string'  && typeToConstructor[type]) {
-            value  = typeToConstructor[type](value);
+        if (type && typeof value === 'string' && typeToConstructor[type]) {
+            value = typeToConstructor[type](value);
         }
-        formState.setValues({ [name]: value });
+        formState.setValues({ [name || this.state.index]: value });
     }
+    index: number;
     render() {
-
         const {
-            component: Component = 'input',
+            component,
             name,
             formState,
             ...restProps
         } = this.props;
 
-        const props = {
+        const props: any = {
             name,
-            formState: { error: this.state.error },
             ...restProps
         };
+        let Component = component;
+        if (Component) {
+            props.formState = { error: this.state.error, index: this.state.index, setError: this.setError };
+        } else {
+            // @ts-ignore
+            Component = 'input';
+        }
         return (
             <Component  {...props} value={this.state.value} onChange={this.onChange} />
         );
@@ -76,4 +102,5 @@ export const withFormState: <PROPS= any, V= any>(Component: React.ComponentType<
 
 export const FormInput = withFormState(FormInputComponent) as React.ComponentType<FormInputProps>;
 
-export const transformInput = (Component: React.ComponentType) => (props: any) => <FormInput {...props} component={Component} />;
+export const transformInput: <PROPS= any>(Component: React.ComponentType<PROPS & { formState: InputFormState }>) =>
+    (props: PROPS & { name: string }) => React.ReactElement<PROPS> = (Component: React.ComponentType<{ formState: InputFormState }>) => (props: any) => <FormInput {...props} component={Component} />;

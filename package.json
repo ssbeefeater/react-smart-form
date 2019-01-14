@@ -1,6 +1,6 @@
 {
   "name": "react-smart-form",
-  "version": "3.4.0beta",
+  "version": "3.6.0beta",
   "description": "A form component that contains all the functionality you will need.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -32,6 +32,7 @@
     "@types/lodash.isequal": "^4.5.3",
     "@types/node": "^10.12.18",
     "@types/react": "^16.7.11",
+    "@types/react-dom": "^16.0.11",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.4",
     "enzyme": "^3.8.0",
