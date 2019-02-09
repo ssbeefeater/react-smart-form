@@ -4,6 +4,7 @@ export declare type FormInputProps = {
     component?: React.ComponentType<any>;
     name?: string;
     onChange?: Function;
+    shouldUpdate?: (val: any) => boolean;
 };
 export interface InputFormState {
     index: number;

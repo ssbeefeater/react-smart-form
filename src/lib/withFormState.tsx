@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormContext, FormState, WithFormState } from './FormProvider';
 import { bool } from 'prop-types';
-export type FormInputProps = { component?: React.ComponentType<any>, name?: string, onChange?: Function };
+export type FormInputProps = { component?: React.ComponentType<any>, name?: string, onChange?: Function, shouldUpdate?: (val: any) => boolean };
 
 const typeToConstructor: any = {
     number: Number,
@@ -23,7 +23,9 @@ class FormInputComponent extends React.Component<FormInputProps & WithFormState 
         };
     }
     shouldComponentUpdate(_: any, nextState: any) {
-        return this.state.value !== nextState.value || this.state.error !== nextState.error;
+        return this.state.value !== nextState.value ||
+            this.state.error !== nextState.error ||
+            !!(this.props.shouldUpdate && this.props.shouldUpdate(nextState.value));
     }
 
     static getDerivedStateFromProps(props: FormInputProps & WithFormState, state: State) {

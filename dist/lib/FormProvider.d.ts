@@ -19,7 +19,7 @@ export declare type WithFormState = {
 declare type Errors<V = AnyObject> = {
     [T in keyof V]?: string | boolean;
 };
-declare type Validator = (value: any) => string | boolean;
+declare type Validator<V = AnyObject> = (value: any, values: V) => string | boolean;
 declare type Validators<V = AnyObject> = {
     [T in keyof V]?: Validator | Validator[];
 };

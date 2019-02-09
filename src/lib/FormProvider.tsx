@@ -33,7 +33,7 @@ type Errors<V= AnyObject> = {
     [T in keyof V]?: string | boolean;
 };
 
-type Validator = (value: any) => string | boolean;
+type Validator<V= AnyObject> = (value: any, values: V) => string | boolean;
 
 type Validators<V= AnyObject> = {
     [T in keyof V]?: Validator | Validator[];
@@ -169,7 +169,7 @@ export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<
         const newErrors = Object.keys(values).reduce((occum: AnyObject, key: any) => {
             const currentValue = values[key];
             const currentValidator = this.validators && (this.validators as any)[key];
-            occum[key] = Form.errorChecker(currentValidator, currentValue, initialCheck);
+            occum[key] = Form.errorChecker(currentValidator, currentValue, initialCheck, this.state.values);
             return occum;
         }, {});
 
@@ -186,7 +186,7 @@ export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<
         return newErrors;
     }
 
-    private static errorChecker = (validators: Validator, value: any, initialCheck: boolean): string | boolean => {
+    private static errorChecker = (validators: Validator, value: any, initialCheck: boolean, values: AnyObject): string | boolean => {
         let errorMessage: boolean | string = false;
         const propValidators = validators && castArray(validators);
         if (!propValidators) {
@@ -194,7 +194,7 @@ export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<
         }
         propValidators.every((validator) => {
             if (!validator) return true;
-            const validate = validator(value);
+            const validate = validator(value, values);
             if (validate !== false) {
                 errorMessage = initialCheck ? true : validate;
                 return false;
