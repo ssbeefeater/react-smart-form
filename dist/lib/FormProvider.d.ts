@@ -67,7 +67,7 @@ export declare class Form<V = AnyObject> extends React.PureComponent<FormProps<V
     setErrors: (errors: Errors<V>) => void;
     setValues: (newValues?: {}, defaults?: boolean) => void;
     componentWillUpdate(nextProps: FormProps<V>): void;
-    setInitialNullValues: () => void;
+    setInitialNullValues: () => any;
     componentDidMount(): void;
     getValues: (fieldName?: string) => any;
     getErrors: (fieldName?: string) => any;

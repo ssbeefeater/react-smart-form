@@ -262,13 +262,14 @@ export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<
             return accum;
         }, {});
 
-        Object.assign(nullValues, this.state.values);
+      return  Object.assign(nullValues, this.state.values);
     }
     componentDidMount() {
         const {
             formRef
         } = this.props;
-        this.setInitialNullValues();
+        this.setValues(this.setInitialNullValues());
+
         if (formRef) {
             formRef(this.getFormState());
         }
