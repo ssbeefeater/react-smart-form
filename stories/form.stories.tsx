@@ -153,7 +153,7 @@ storiesOf('React-smart-form', module)
         onChange={action('onChange')}>
         <ArrayType name='arrayTest'>
           <ArrayInput>
-            <FormInput name='2121' />
+            <FormInput type='number' />
             <RemoveButton>-</RemoveButton>
           </ArrayInput>
           <AddButton>+</AddButton>
@@ -221,7 +221,7 @@ storiesOf('React-smart-form', module)
       </ArrayType>
       <Submit />
     </Form>
-  ) );
+  ));
 
 
 

@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { FormContext, FormState, WithFormState } from './FormProvider';
-import { bool } from 'prop-types';
-export type FormInputProps = { component?: React.ComponentType<any>, name?: string, onChange?: Function, shouldUpdate?: (val: any) => boolean };
+export interface FormInputProps extends React.AllHTMLAttributes<HTMLInputElement> {
+    component?: React.ComponentType<any>;
+    name?: string;
+    shouldUpdate?: (val: any) => boolean;
+}
 
 const typeToConstructor: any = {
     number: Number,
@@ -19,7 +22,7 @@ class FormInputComponent extends React.Component<FormInputProps & WithFormState 
             value: null,
             error: null,
             // @ts-ignore
-            index: this.props.formState.registerInput(this.props.name, this.props.type),
+            index: props.formState.registerInput(this.props.name, this.props.type),
         };
     }
     shouldComponentUpdate(_: any, nextState: any) {
@@ -59,7 +62,7 @@ class FormInputComponent extends React.Component<FormInputProps & WithFormState 
                 val = changeValue;
             }
         }
-        let value = typeof val === 'object' && val.target ? val.target.value : val;
+        let value = val && typeof val === 'object' && val.target ? val.target.value : val;
         if (type && typeof value === 'string' && typeToConstructor[type]) {
             value = typeToConstructor[type](value);
         }
@@ -93,7 +96,7 @@ class FormInputComponent extends React.Component<FormInputProps & WithFormState 
 
 
 
-export const withFormState: <PROPS= any, V= any>(Component: React.ComponentType<PROPS & { name: string, formState: FormState<V> }>) =>
+export const withFormState: <PROPS = any, V = any>(Component: React.ComponentType<PROPS & { name: string, formState: FormState<V> }>) =>
     (props: PROPS & { name: string }) => React.ReactElement<PROPS> = (Component) => (props) => (
         <FormContext.Consumer>
             {
@@ -104,5 +107,5 @@ export const withFormState: <PROPS= any, V= any>(Component: React.ComponentType<
 
 export const FormInput = withFormState(FormInputComponent) as React.ComponentType<FormInputProps>;
 
-export const transformInput: <PROPS= any>(Component: React.ComponentType<PROPS & { formState: InputFormState }>) =>
+export const transformInput: <PROPS = any>(Component: React.ComponentType<PROPS & { formState: InputFormState }>) =>
     (props: PROPS & { name: string }) => React.ReactElement<PROPS> = (Component: React.ComponentType<{ formState: InputFormState }>) => (props: any) => <FormInput {...props} component={Component} />;

@@ -23,7 +23,7 @@ class ArrayTypeBase extends React.PureComponent<any, State> {
 
     values: any = {};
     setDefaultState = () => {
-        const values = Array.isArray(this.props.value) && this.props.value || [null];
+        const values = Array.isArray(this.props.value) && this.props.value || (this.props.empty ? [] : [null]);
         const inputs = values.map((val: any) => {
             const input = { id: this.uid };
             this.values[this.uid] = { 0: val };
@@ -73,7 +73,6 @@ class ArrayTypeBase extends React.PureComponent<any, State> {
         });
     }
     onValidate = ({ hasError }: any) => {
-        console.log('​ArrayTypeBase -> onValidate -> hasError', hasError);
         const {
             formState
         } = this.props;
@@ -86,7 +85,7 @@ class ArrayTypeBase extends React.PureComponent<any, State> {
     }
     render() {
         return (
-            <ArrayTypeProvider value={{ onValidate: this.onValidate, values: this.values, onChange: this.props.onChange, remove: this.onRemove, add: this.onAdd, inputs: this.state.inputs }}>
+            <ArrayTypeProvider value={{ empty: this.props.empty, onValidate: this.onValidate, values: this.values, onChange: this.props.onChange, remove: this.onRemove, add: this.onAdd, inputs: this.state.inputs }}>
                 {this.props.children}
             </ArrayTypeProvider>
         );
@@ -107,11 +106,14 @@ class ArrayInputBase extends React.PureComponent<Props & HTMLFormElement, State>
                 {
                     (ctx: { [i: string]: any }) => {
                         return ctx.inputs.map((input: any, index: number) => {
-                            const isFirst = index === 0;
+                            const isFirst = ctx.empty ? false : index === 0;
                             const onChange = (newValue: any) => {
                                 ctx.values[input.id] = newValue;
                                 if (ctx.onChange) {
                                     ctx.onChange(ArrayTypeBase.formatValues(ctx.values));
+                                }
+                                if (this.props.onChange) {
+                                    this.props.onChange(ArrayTypeBase.formatValues(ctx.values));
                                 }
                             };
                             return (
