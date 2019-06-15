@@ -10,7 +10,7 @@ interface Props extends React.HTMLAttributes<HTMLFormElement> {
 
 }
 
-const ObjectType: React.SFC<Props & { formState: InputFormState }> = ({ value, name, children, validators, onChange, formState }) => {
+const ObjectType: React.SFC<Props & { formState: InputFormState }> = React.memo(({ value, name, children, validators, onChange, formState }) => {
     const onVal = ({ hasError }: any) => {
         if (hasError) {
             formState.setError(true);
@@ -19,11 +19,17 @@ const ObjectType: React.SFC<Props & { formState: InputFormState }> = ({ value, n
         }
     };
     return (
-        <Form onValidate={onVal} onChangeErrorState={onVal} component={React.Fragment} onChange={(val) => onChange(Object.assign({}, val))} values={value} validators={validators}>
+        <Form
+            onValidate={onVal}
+            onChangeErrorState={onVal}
+            component={React.Fragment}
+            onChange={(val) => onChange(Object.assign({}, val))}
+            values={value}
+            validators={validators}>
             {children}
         </Form>
     );
-};
+});
 
 const ObjectFormType = transformInput<Props>(ObjectType);
 

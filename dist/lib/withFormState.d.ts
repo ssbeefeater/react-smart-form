@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { FormState } from './FormProvider';
-export declare type FormInputProps = {
+export interface FormInputProps extends React.AllHTMLAttributes<HTMLInputElement> {
     component?: React.ComponentType<any>;
     name?: string;
-    onChange?: Function;
     shouldUpdate?: (val: any) => boolean;
-};
+}
 export interface InputFormState {
     index: number;
     setError: (error: string | boolean) => void;

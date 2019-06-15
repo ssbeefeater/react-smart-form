@@ -62,7 +62,8 @@ storiesOf('React-smart-form', module)
     <Form
       onChange={action('onChange')}
       onSubmit={action('onSubmit')}
-      validators={{ test1: validators.required('is required') }}>
+    // validators={{ test1: validators.required('is required') }}
+    >
       <Input name='test1' />
       <Input name='test2' />
       <Submit />
@@ -122,7 +123,7 @@ storiesOf('React-smart-form', module)
       <Input name='test0' />
       <ObjectType
         name='objectTest'
-        validators={{ test1: validators.required('is required') }}
+        validators={{ test1: validators.required('is required'), test2: validators.required('is required') }}
       >
         <Input name='test1' />
         <Input name='test2' />
@@ -183,16 +184,20 @@ storiesOf('React-smart-form', module)
   .add('Array object', () => (
     <Form
       onSubmit={action('onSubmit')}
-      values={{ arrayTest: [{ test1: 1, test2: 2, objectTest: { test1: 3, test2: 4 } }] }}
+      values={{
+        arrayTest: [
+          { test1: 1, test2: 2, objectTest: { test1: 3, test2: 4 } }
+        ]
+      }}
       onChange={action('onChange')}>
       <ArrayType name='arrayTest'>
         <ArrayInput>
-          <ObjectType name='ObjectTestArray'>
-            <FormInput name='test1' />
-            <FormInput name='test2' />
+          <ObjectType>
+            <FormInput type='number' name='test1' />
+            <FormInput type='number' name='test2' />
             <ObjectType name='objectTest'>
-              <FormInput name='test1' />
-              <FormInput name='test2' />
+              <FormInput type='number' name='test1' />
+              <FormInput type='number' name='test2' />
             </ObjectType>
           </ObjectType>
           <RemoveButton>-</RemoveButton>

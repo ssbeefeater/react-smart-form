@@ -8,6 +8,9 @@ export interface FormInputProps extends React.AllHTMLAttributes<HTMLInputElement
 
 const typeToConstructor: any = {
     number: Number,
+    boolean: Boolean,
+    text: String,
+    string: String,
 };
 interface State { value: any; index: number; error: any; }
 export interface InputFormState {

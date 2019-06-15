@@ -2,22 +2,14 @@ import * as React from 'react';
 import isEqual = require('lodash.isequal');
 import debounce = require('lodash.debounce');
 import castArray = require('lodash.castarray');
+import removeEmptyValues from './utils/removeEmptyValues';
 
 export const FormContext = React.createContext({});
 
 type AnyObject = { [i: string]: any };
 
 
-const removeNullValues = (obj: AnyObject) => {
-    return Object.keys(obj).reduce((occum: any, key: string) => {
-        const currentValue = obj[key];
-        if (currentValue !== null && currentValue !== undefined && currentValue !== '') {
-            occum[key] = currentValue;
-        }
-        return occum;
-    }, {});
-};
-export type FormState<V= AnyObject, P= AnyObject> = {
+export type FormState<V = AnyObject, P = AnyObject> = {
     hasChange: () => boolean;
     reset: (inputNames?: string | string[]) => void;
     getErrors: (name?: string | number) => Errors<V>;
@@ -29,17 +21,17 @@ export type FormState<V= AnyObject, P= AnyObject> = {
 } & State<V>;
 export type WithFormState = { formState: FormState };
 
-type Errors<V= AnyObject> = {
+type Errors<V = AnyObject> = {
     [T in keyof V]?: string | boolean;
 };
 
-type Validator<V= AnyObject> = (value: any, values: V) => string | boolean;
+type Validator<V = AnyObject> = (value: any, values: V) => string | boolean;
 
-type Validators<V= AnyObject> = {
+type Validators<V = AnyObject> = {
     [T in keyof V]?: Validator | Validator[];
 };
 
-interface State<V= AnyObject> {
+interface State<V = AnyObject> {
     values: Partial<V>;
     errors: AnyObject;
     loading: boolean;
@@ -71,7 +63,7 @@ const parseValidatorKey = (val: string): string | Function => {
     }
     return val;
 };
-export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<V>> {
+export class Form<V = AnyObject> extends React.PureComponent<FormProps<V>, State<V>> {
 
     constructor(props: FormProps<V>) {
         super(props);
@@ -135,7 +127,7 @@ export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<
     }
 
     hasChange = () => {
-        return !isEqual(removeNullValues(this.temp.values), removeNullValues(this.defaultValues));
+        return !isEqual(removeEmptyValues(this.temp.values), removeEmptyValues(this.defaultValues));
     }
 
     hasError = (errors?: Errors<V>) => {
@@ -166,19 +158,19 @@ export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<
         } else if (!values) {
             return {};
         }
-        const newErrors = Object.keys(values).reduce((occum: AnyObject, key: any) => {
+        let newErrors = Object.keys(values).reduce((occum: AnyObject, key: any) => {
             const currentValue = values[key];
             const currentValidator = this.validators && (this.validators as any)[key];
             occum[key] = Form.errorChecker(currentValidator, currentValue, initialCheck, this.state.values);
             return occum;
         }, {});
-
+        newErrors = { ...this.state.errors, ...newErrors };
         if (onValidate && initialCheck) {
             onValidate(
                 {
                     errors: newErrors,
                     hasChange: this.hasChange,
-                    hasError: this.hasError({ ...(this.state && this.state.errors || {}), ...newErrors }),
+                    hasError: this.hasError(newErrors),
                 }
             );
         }
@@ -213,13 +205,13 @@ export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<
         this.setState({
             errors: newErrors
         }, () => {
-                const {
-                    onChangeErrorState
-                } = this.props;
+            const {
+                onChangeErrorState
+            } = this.props;
 
-                if (onChangeErrorState) {
-                    onChangeErrorState({ hasError: this.hasError(newErrors), errors: newErrors });
-                }
+            if (onChangeErrorState) {
+                onChangeErrorState({ hasError: this.hasError(newErrors), errors: newErrors });
+            }
         });
 
     }
@@ -262,7 +254,7 @@ export class Form<V= AnyObject> extends React.PureComponent<FormProps<V>, State<
             return accum;
         }, {});
 
-      return  Object.assign(nullValues, this.state.values);
+        return Object.assign(nullValues, this.state.values);
     }
     componentDidMount() {
         const {
