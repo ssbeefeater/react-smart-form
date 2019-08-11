@@ -6,6 +6,7 @@ declare type AnyObject = {
 export declare type FormState<V = AnyObject, P = AnyObject> = {
     hasChange: () => boolean;
     reset: (inputNames?: string | string[]) => void;
+    clean: (inputNames?: string | string[]) => void;
     getErrors: (name?: string | number) => Errors<V>;
     getValues: (name?: string | number) => V | any;
     setErrors: (errors: Errors<V>) => void;
@@ -54,7 +55,7 @@ export declare class Form<V = AnyObject> extends React.PureComponent<FormProps<V
     constructor(props: FormProps<V>);
     validators: Validators<V>;
     static parseValidators: (validators: any) => any;
-    defaultValues: Partial<V>;
+    defaultValues: any;
     temp: any;
     inputs: {
         [i: string]: any;
@@ -73,10 +74,13 @@ export declare class Form<V = AnyObject> extends React.PureComponent<FormProps<V
     getErrors: (fieldName?: string) => any;
     onSubmit: (e?: React.SyntheticEvent<Element, Event>) => void;
     handleRequestError: (error: string | Error) => void;
+    private cleanOrReset;
     reset: (inputName: string | string[]) => void;
+    clean: (inputName: string | string[]) => void;
     getFormState: () => {
         hasChange: () => boolean;
         reset: (inputNames?: string | string[]) => void;
+        clean: (inputNames?: string | string[]) => void;
         getErrors: (name?: React.ReactText) => Errors<V>;
         getValues: (name?: React.ReactText) => any;
         setErrors: (errors: Errors<V>) => void;
