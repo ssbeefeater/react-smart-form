@@ -20,6 +20,31 @@ const Button = (props: WithFormState) => {
     </div>
   );
 };
+
+const ResetButton = (props: WithFormState) => {
+  const {
+    disabled,
+    hasChange,
+    reset,
+  } = props.formState;
+  return (
+    <button disabled={!hasChange()} onClick={(e) => { e.preventDefault(); reset(); }}>
+      reset
+    </button>
+  );
+};
+
+const CleanButton = (props: WithFormState) => {
+  const {
+    hasChange,
+    clean,
+  } = props.formState;
+  return (
+    <button onClick={(e) => { e.preventDefault(); clean(); }}>
+      clean
+    </button>
+  );
+};
 const Input = transformInput<{}>((props) => {
   const {
     formState,
@@ -40,6 +65,8 @@ const PromiseSubmit = () => new Promise((res) => { setTimeout(res, 2000); });
 const PromiseSubmitReject = () => new Promise((res, rej) => { setTimeout(() => rej('err'), 2000); });
 
 const Submit = withFormState<any>(Button);
+const Reset = withFormState<any>(ResetButton);
+const Clean = withFormState<any>(CleanButton);
 storiesOf('React-smart-form', module)
   .add('Basic', () => (
     <Form onChange={action('onChange')} onSubmit={action('onSubmit')}
@@ -51,12 +78,15 @@ storiesOf('React-smart-form', module)
       <FormInput name='password' />
       <FormInput name='test3' />
       <Submit />
+      <Reset />
     </Form>
   )).add('default values', () => (
     <Form values={{ test1: 'sdas', test2: 'asas' }} onChange={action('onChange')} onSubmit={action('onSubmit')} validators={{ test1: validators.required('is required') }}>
       <FormInput name='test1' />
       <FormInput name='test2' />
       <Submit />
+      <Reset />
+      <Clean />
     </Form>
   )).add('custom input with error message', () => (
     <Form

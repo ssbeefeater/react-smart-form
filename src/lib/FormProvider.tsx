@@ -12,6 +12,7 @@ type AnyObject = { [i: string]: any };
 export type FormState<V = AnyObject, P = AnyObject> = {
     hasChange: () => boolean;
     reset: (inputNames?: string | string[]) => void;
+    clean: (inputNames?: string | string[]) => void;
     getErrors: (name?: string | number) => Errors<V>;
     getValues: (name?: string | number) => V | any;
     setErrors: (errors: Errors<V>) => void;
@@ -111,7 +112,7 @@ export class Form<V = AnyObject> extends React.PureComponent<FormProps<V>, State
         return {};
     }
 
-    defaultValues = this.props.defaultValues || this.props.values || {};
+    defaultValues: any = this.props.defaultValues || this.props.values || {};
 
     temp: any = {
         values: this.defaultValues || {},
@@ -325,24 +326,31 @@ export class Form<V = AnyObject> extends React.PureComponent<FormProps<V>, State
             this.setErrors(errors);
         }
     }
-
-    reset = (inputName: string | string[]) => {
+    private cleanOrReset = (inputName: string | string[], defaults?: any) => {
         const { values } = this.state;
         const newState = { values: {}, errors: {} };
         const names = inputName && castArray(inputName);
         if (names) {
             names.forEach((name: string) => {
                 newState.values = Object.assign({}, values, {
-                    [name]: '',
+                    [name]: (defaults && defaults[name]) || '',
                 });
             });
         } else {
             newState.values = Object.keys(values).reduce((accum: any, val) => {
-                accum[val] = '';
+                accum[val] = (defaults && defaults[val]) || '';
                 return accum;
             }, {});
         }
         this.setValues(newState.values);
+    }
+
+    reset = (inputName: string | string[]) => {
+        this.cleanOrReset(inputName, this.defaultValues);
+    }
+
+    clean = (inputName: string | string[]) => {
+        this.cleanOrReset(inputName);
     }
 
     getFormState = (): FormState<V> & { registerInput: (name: string, type: string) => void } => {
@@ -354,6 +362,7 @@ export class Form<V = AnyObject> extends React.PureComponent<FormProps<V>, State
         return ({
             registerInput: this.registerInput,
             reset: this.reset,
+            clean: this.clean,
             setErrors: this.setErrors,
             getValues: this.getValues,
             getErrors: this.getErrors,
