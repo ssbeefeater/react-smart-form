@@ -17,6 +17,10 @@ export interface InputFormState {
     index: number;
     setError: (error: string | boolean) => void;
     error: string | boolean;
+    reset?: FormState['reset'];
+    clean?: FormState['clean'];
+    setCallbacks?: FormState['setCallbacks'];
+    removeCallbacks?: FormState['removeCallbacks'];
 }
 class FormInputComponent extends React.Component<FormInputProps & WithFormState & { type?: HTMLInputElement['type'] }, State> {
     constructor(props: any) {
@@ -86,7 +90,14 @@ class FormInputComponent extends React.Component<FormInputProps & WithFormState 
         };
         let Component = component;
         if (Component) {
-            props.formState = { error: this.state.error, index: this.state.index, setError: this.setError };
+            props.formState = { error: this.state.error, index: this.state.index, setError: this.setError, reset: formState.reset };
+            if (props.type === 'object') {
+                props.formState.setCallbacks = formState.setCallbacks;
+                props.formState.reset = formState.reset;
+                props.formState.clean = formState.clean;
+                props.formState.removeCallbacks = formState.removeCallbacks;
+
+            }
         } else {
             // @ts-ignore
             Component = 'input';

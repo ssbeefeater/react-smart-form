@@ -8,7 +8,15 @@ export const FormContext = React.createContext({});
 
 type AnyObject = { [i: string]: any };
 
+export interface FormCallbacks {
+    onClean?: () => void;
+    onReset?: () => void;
+}
 
+export interface Callbacks {
+    id: string;
+    callbacks: FormCallbacks;
+}
 export type FormState<V = AnyObject, P = AnyObject> = {
     hasChange: () => boolean;
     reset: (inputNames?: string | string[]) => void;
@@ -18,6 +26,8 @@ export type FormState<V = AnyObject, P = AnyObject> = {
     setErrors: (errors: Errors<V>) => void;
     setValues: (values: V) => void;
     submit: () => void;
+    setCallbacks: (id: string, callbacks: FormCallbacks) => void
+    removeCallbacks: (id: string) => void
     props: P & FormProps<V>,
 } & State<V>;
 export type WithFormState = { formState: FormState };
@@ -53,6 +63,8 @@ export interface FormProps<V> {
     defaultValues?: Partial<V>;
     onValidate?: (errorInfo: { errors: Errors<V>, hasError: boolean, hasChange: FormState['hasChange'] }) => void;
     formRef?: (formState: FormState<V>) => void;
+    onReset?: FormCallbacks['onReset'];
+    onClean?: FormCallbacks['onClean'];
 }
 const parseValidatorKey = (val: string): string | Function => {
     try {
@@ -82,6 +94,7 @@ export class Form<V = AnyObject> extends React.PureComponent<FormProps<V>, State
         };
     }
     validators: Validators<V>;
+    callbacks: Callbacks[] = [];
 
     static parseValidators = (validators: any) => {
         if (validators) {
@@ -333,26 +346,41 @@ export class Form<V = AnyObject> extends React.PureComponent<FormProps<V>, State
         if (names) {
             names.forEach((name: string) => {
                 newState.values = Object.assign({}, values, {
-                    [name]: (defaults && defaults[name]) || '',
+                    [name]: (defaults && defaults[name]) || undefined,
                 });
             });
         } else {
             newState.values = Object.keys(values).reduce((accum: any, val) => {
-                accum[val] = (defaults && defaults[val]) || '';
+                accum[val] = (defaults && defaults[val]) || undefined;
                 return accum;
             }, {});
         }
         this.setValues(newState.values);
     }
-
+    private applyCallback = (callback: keyof FormCallbacks) => {
+        this.callbacks.forEach((callbackItem) => {
+            const cb = callbackItem.callbacks[callback];
+            if (cb) {
+                cb();
+            }
+        });
+    }
     reset = (inputName: string | string[]) => {
         this.cleanOrReset(inputName, this.defaultValues);
+        this.applyCallback('onReset');
     }
 
     clean = (inputName: string | string[]) => {
         this.cleanOrReset(inputName);
-    }
+        this.applyCallback('onClean');
 
+    }
+    setCallbacks = (id: string, callbacks: FormCallbacks) => {
+        this.callbacks.push({ id, callbacks });
+    }
+    removeCallbacks = (id: string) => {
+        this.callbacks = this.callbacks.filter(cl => cl.id !== id);
+    }
     getFormState = (): FormState<V> & { registerInput: (name: string, type: string) => void } => {
         const {
             disabled,
@@ -360,6 +388,8 @@ export class Form<V = AnyObject> extends React.PureComponent<FormProps<V>, State
         } = this.props;
 
         return ({
+            setCallbacks: this.setCallbacks,
+            removeCallbacks: this.removeCallbacks,
             registerInput: this.registerInput,
             reset: this.reset,
             clean: this.clean,

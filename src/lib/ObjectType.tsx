@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Form, { FormProps } from './FormProvider';
+import Form, { FormProps, FormState } from './FormProvider';
 import { transformInput, InputFormState } from './withFormState';
 
 interface Props extends React.HTMLAttributes<HTMLFormElement> {
@@ -9,27 +9,44 @@ interface Props extends React.HTMLAttributes<HTMLFormElement> {
     onChange?: (val: { [i: string]: any }) => void;
 
 }
-
-const ObjectType: React.SFC<Props & { formState: InputFormState }> = React.memo(({ value, name, children, validators, onChange, formState }) => {
-    const onVal = ({ hasError }: any) => {
+class ObjectType extends React.PureComponent<Props & { formState: InputFormState }> {
+    onVal = ({ hasError }: any) => {
         if (hasError) {
-            formState.setError(true);
+            this.props.formState.setError(true);
         } else {
-            formState.setError(false);
+            this.props.formState.setError(false);
         }
-    };
-    return (
-        <Form
-            onValidate={onVal}
-            onChangeErrorState={onVal}
-            component={React.Fragment}
-            onChange={(val) => onChange(Object.assign({}, val))}
-            values={value}
-            validators={validators}>
-            {children}
-        </Form>
-    );
-});
+    }
+    set: boolean;
+    form: FormState;
+    componentDidUpdate() {
+        if (this.form && !this.set) {
+            this.set = true;
+            this.props.formState.setCallbacks(this.props.name, {
+                onClean: this.form.clean,
+                onReset: this.form.reset,
+            });
+        }
+    }
+    componentWillUnmount() {
+        this.props.formState.removeCallbacks(this.props.name);
+    }
+    render() {
+        const { value, children, validators, onChange } = this.props;
+        return (
+            <Form
+                formRef={(formRef) => this.form = formRef}
+                onValidate={this.onVal}
+                onChangeErrorState={this.onVal}
+                component={React.Fragment}
+                onChange={(val) => onChange(Object.assign({}, val))}
+                values={value}
+                validators={validators}>
+                {children}
+            </Form>
+        );
+    }
+}
 
 const ObjectFormType = transformInput<Props>(ObjectType);
 

@@ -3,6 +3,14 @@ export declare const FormContext: React.Context<{}>;
 declare type AnyObject = {
     [i: string]: any;
 };
+export interface FormCallbacks {
+    onClean?: () => void;
+    onReset?: () => void;
+}
+export interface Callbacks {
+    id: string;
+    callbacks: FormCallbacks;
+}
 export declare type FormState<V = AnyObject, P = AnyObject> = {
     hasChange: () => boolean;
     reset: (inputNames?: string | string[]) => void;
@@ -12,6 +20,8 @@ export declare type FormState<V = AnyObject, P = AnyObject> = {
     setErrors: (errors: Errors<V>) => void;
     setValues: (values: V) => void;
     submit: () => void;
+    setCallbacks: (id: string, callbacks: FormCallbacks) => void;
+    removeCallbacks: (id: string) => void;
     props: P & FormProps<V>;
 } & State<V>;
 export declare type WithFormState = {
@@ -50,10 +60,13 @@ export interface FormProps<V> {
         hasChange: FormState['hasChange'];
     }) => void;
     formRef?: (formState: FormState<V>) => void;
+    onReset?: FormCallbacks['onReset'];
+    onClean?: FormCallbacks['onClean'];
 }
 export declare class Form<V = AnyObject> extends React.PureComponent<FormProps<V>, State<V>> {
     constructor(props: FormProps<V>);
     validators: Validators<V>;
+    callbacks: Callbacks[];
     static parseValidators: (validators: any) => any;
     defaultValues: any;
     temp: any;
@@ -75,8 +88,11 @@ export declare class Form<V = AnyObject> extends React.PureComponent<FormProps<V
     onSubmit: (e?: React.SyntheticEvent<Element, Event>) => void;
     handleRequestError: (error: string | Error) => void;
     private cleanOrReset;
+    private applyCallback;
     reset: (inputName: string | string[]) => void;
     clean: (inputName: string | string[]) => void;
+    setCallbacks: (id: string, callbacks: FormCallbacks) => void;
+    removeCallbacks: (id: string) => void;
     getFormState: () => {
         hasChange: () => boolean;
         reset: (inputNames?: string | string[]) => void;
@@ -86,6 +102,8 @@ export declare class Form<V = AnyObject> extends React.PureComponent<FormProps<V
         setErrors: (errors: Errors<V>) => void;
         setValues: (values: V) => void;
         submit: () => void;
+        setCallbacks: (id: string, callbacks: FormCallbacks) => void;
+        removeCallbacks: (id: string) => void;
         props: AnyObject & FormProps<V>;
     } & State<V> & {
         registerInput: (name: string, type: string) => void;

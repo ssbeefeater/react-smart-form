@@ -132,7 +132,7 @@ storiesOf('React-smart-form', module)
   ))
   .add('Object input default values', () => (
     <Form
-      values={{ test0: '0', objectTest: { test2: '2', test1: '1' } }}
+      values={{ test0: '0', objectTest: { test2: '2', test1: '1' }, objectTest2: { test2: '3', test1: '4' } }}
       onChange={action('onChange')}
       onSubmit={action('onSubmit')}
       validators={{ test0: validators.required('is required') }}>
@@ -141,7 +141,13 @@ storiesOf('React-smart-form', module)
         <FormInput name='test1' />
         <FormInput name='test2' />
       </ObjectType>
+      <ObjectType name='objectTest2'>
+        <FormInput name='test1' />
+        <FormInput name='test2' />
+      </ObjectType>
       <Submit />
+      <Reset />
+      <Clean />
     </Form>
   ))
   .add('Object input with validation', () => (
